@@ -1,0 +1,171 @@
+, email,telefoonnummer_speler,adres_speler, postcodeid1, telefoonnummer_moeder,email_moeder, adres_moeder,postcodeid2, email_vader, telefoonnummer_vader, adres_vader, postcodeid3, wie_eerst_te_verwittigen,medische_toelichting, toelichting 
+
+,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+
+
+
+sisissisisisiss
+
+, $adres1, $postcode1, $email1, $tel1, $contactfirst, $email2, $tel2, $adres2, $postcode2, $email3, $tel3, $adres3, $postcode3, $medische_toelichting, $toelichting
+
+
+$tel1 = $mysqli->real_escape_string($_POST['tel1']);
+          $contactfirst=$mysqli->real_escape_string($_POST['contactfirst']);
+         
+          
+          $adres2=$mysqli->real_escape_string($_POST['adres2']);
+         
+          $email3 = $mysqli->real_escape_string($_POST['email3']);
+          $tel3 = $mysqli->real_escape_string($_POST['tel3']);
+          $adres3=$mysqli->real_escape_string($_POST['adres3']);
+          $postcode3 = $mysqli->real_escape_string($_POST['postcode3']);
+          $medische_toelichting=$mysqli->real_escape_string($_POST['medische_toelichting']);
+          $toelichting = $mysqli->real_escape_string($_POST['toelichting']);
+
+
+           <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center justify-content-lg-between">
+
+      <h1 class="logo me-auto me-lg-0"><a href="index.php"><img src="assets/img/favicon.jpg"></a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.php" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="about.php">About</a></li>
+          <li><a class="nav-link scrollto" href="#services">Services</a></li>
+          <li><a class="nav-link scrollto" href="#team">Team</a></li>
+          <li class="dropdown"><a href="#"><span>COMING SOON</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">Drop Down 1</a></li>
+              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Drop Down 2</a></li>
+              <li><a href="#">Drop Down 3</a></li>
+              <li><a href="#">Drop Down 4</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="contact.php">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+      <a href="#about" class="get-started-btn scrollto">COMING SOON</a>
+
+    </div>
+  </header><!-- End Header -->
+
+
+
+  <main id="main">
+    <p>
+        <br>
+        <br>
+        <br>
+        <form id="zoeken" name="zoeken" method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
+            <h1>Zoeken naar speler</h1><br>
+            vooraam: <input type="text" name="voornaam" id="voornaam" value="<?php echo isset($_POST['voornaam']) ? htmlspecialchars($_POST['voornaam']) : ''; ?>">
+            achternaam: <input type="text" name="naam" id="naam" value="<?php echo isset($_POST['naam']) ? htmlspecialchars($_POST['naam']) : ''; ?>">
+            <input type="submit" name="zoek" id="zoek" value="zoek" width="50px">
+        </form>
+    </p>
+    <?php 
+        if(isset($_POST["zoek"])&&(isset($_POST["naam"]))&&($_POST["naam"]!="")&&(isset($_POST["voornaam"]))&&($_POST["voornaam"]!="")){
+            $mysqli = new MySQLi ("localhost","root","","voetbalclubphp");
+            if(mysqli_connect_errno()){trigger_error("Fout bij verbinding: ".$mysqli->error);}
+            $sql ="SELECT spelernr, naam, voornaam, geboortedatum, adres_speler, postcode_speler, email, telefoonnummer_speler, adres_moeder, postcode_moeder, email_moeder, telefoonnummer_moeder, adres_vader, postcode_vader, email_vader, telefoonnummer_vader, wie_eerst_te_verwittigen, medische_toelichting, bondsnummer, toelichting  
+                    FROM tblspelers
+                    WHERE voornaam LIKE ? AND naam LIKE ?
+                    ORDER BY voornaam";
+            if($stmt = $mysqli->prepare($sql)){
+                $stmt->bind_param('ss',$_POST["voornaam"], $_POST["naam"]);
+                $zoek = $_POST["voornaam"]." ".$_POST["naam"]. '%';
+                if(!$stmt->execute()){
+                    echo "het uitvoeren van de query is mislukt: ".$stmt->error." in query ". $sql;
+                }else{
+                    $stmt->bind_result($spelersnr,$naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$adres2,$postcode2,$email2, $tel2, $adres3, $postcode3, $email3,$tel3, $contactfirst,  $medische_toelichting,$bondsnummer, $toelichting);
+                    echo "<form id='zoekoverzicht' name='zoekoverzicht' method='post' action='" . $_SERVER["PHP_SELF"] . "'>";
+                    echo"<table border='1'>
+                     <tr>
+                        <th rowspan='2'>Spelernummer</th>
+                        <th rowspan='2'>Voornaam</th>
+                        <th rowspan='2'>naam</th>
+                        <th rowspan='2'>datum</th>
+                        <th rowspan='2'>adres speler</th>
+                        <th rowspan='2'>postcode speler</th>
+                        <th rowspan='2'>email speler</th>
+                        <th rowspan='2'>telefoonnummer speler</th>
+                        <th colspan='4'>moeder</th>
+                        <th colspan='4'>vader</th>
+                        <th rowspan='2'>contact persoon</th>
+                        <th rowspan='2'>medische toelichting</th>
+                        <th rowspan='2'>bondsnummer</th>
+                        <th rowspan='2'colspan='2'>toelichting</th>
+                        
+                     </tr>
+                     <tr>
+                        <th>Adres</th>
+                        <th>Postcode</th>
+                        <th>Email</th>
+                        <th>Telefoonnummer</th>
+                        <th>Adres</th>
+                        <th>Postcode</th>
+                        <th>Email</th>
+                        <th>Telefoonnummer</th>
+                     </tr>
+                     ";
+                     
+                    while($stmt->fetch()){
+                        echo "<tr>
+                                <td rowspan='2'>".$spelersnr."</td>
+                                <td rowspan='2'>".$voornaam."</td>
+                                <td rowspan='2'>".$naam."</td>
+                                <td rowspan='2'>".$datum."</td>
+                                <td rowspan='2'>".$adres1."</td>
+                                <td rowspan='2'>".$postcode1."</td>
+                                <td rowspan='2'>".$email1."</td>
+                                <td rowspan='2'>".$tel1."</td>
+                                <td>".$adres2."</td>
+                                <td>".$postcode2."</td>
+                                <td>".$email2."</td>
+                                <td>".$tel2."</td>
+                                <td rowspan='2'>".$adres3."</td>
+                                <td rowspan='2'>".$postcode3."</td>
+                                <td rowspan='2'>".$email3."</td>
+                                <td rowspan='2'>".$tel3."</td>
+                                <td rowspan='2'>".$contactfirst."</td>
+                                <td rowspan='2'>".$medische_toelichting."</td>
+                                <td rowspan='2'>".$bondsnummer."</td>
+                                <td rowspan='2'colspan='2'>".$toelichting."</td>
+                             
+                              </tr>";
+                    }
+                    echo"</table>";
+                    echo"</form>";
+                }
+                $stmt->close();
+            }else{
+                echo "Er zit een fout inde query";
+            }
+        }else if(isset($_POST["zoek"])&&(isset($_POST["naam"]))&&($_POST["naam"]=="")||(isset($_POST["voornaam"]))&&($_POST["voornaam"]=="")){
+            echo "<p id='error-message'>Voornaam of naam niet ingevuld!</p>";
+        }
+            
+        ?>
+    </main>
+
+
+
+    <th>adres moeder</th><th>poscode moeder</th><th>email moeder</th><th>telefoonnummer moeder</th><th>adres vader</th><th>poscode vader</th><th>email vader</th><th>telefoonnummer vader</th><th>contact persoon</th><th>medische toelichting</th><th>bondsnummer</th><th colspan='2'>toelichting</th>
+    
+    <td>".$adres2."</td><td>".$postcode2."</td><td>".$email2."</td><td>".$tel2."</td><td>".$adres3."</td><td>".$postcode3."</td><td>".$email3."</td><td>".$tel3."</td><td>".$contactfirst."</td><td>".$medische_toelichting."</td><td>".$bondsnummer."</td><td>".$toelichting."</td><td>
+ 					</td>

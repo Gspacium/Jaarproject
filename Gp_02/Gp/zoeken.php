@@ -1,6 +1,4 @@
 <?php
-//print_r($_POST);
-
 if (isset($_POST["verzenden"]) && isset($_POST["tezoeken"]) && ($_POST["tezoeken"] != "")) {
 
     $mysqli = new mysqli("localhost", "root", "", "voetbalclubphp");
@@ -132,163 +130,10 @@ if (isset($_POST["verzenden"]) && isset($_POST["tezoeken"]) && ($_POST["tezoeken
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-  <script type="text/javascript">
-    function openModal() {
-      var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
-      myModal.show();
-  }
 </script>
 </head>
-<?php 
-    $mysqli = new MySQLi("localhost","root","","voetbalclubphp");
-    if (mysqli_connect_errno()) 
-    {
-        trigger_error('fout bij verbinding:' . $mysqli->error);
-    }
-    $sql= "SELECT * FROM tblspelers WHERE spelernr = ?";
-    $stmt = $mysqli->prepare($sql);
-    $stmt->bind_param("i", $update);
-    $stmt->execute();
-    $stmt->bind_result($spelersnr,$naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$adres2,$postcode2,$email2, $tel2, $adres3, $postcode3, $email3,$tel3, $contactfirst,  $medische_toelichting,$bondsnummer, $toelichting);
-    $stmt->fetch();
-    $stmt->close();
-?>
-<body>
-  <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Wijzigen Gegevens</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <form id="wijzigen" name="wijzigen" method="post" action=" <?php echo $_SERVER["PHP_SELF"];?>">
-      <table class="mx-auto">
-        <!-- Persoonlijke gegevens speler -->
-        
-        <tr>
-            <th colspan="2">Persoonlijke gegevens speler</th>
-        </tr>
-        <tr>
-            <td><label>Naam:</label></td>
-            <td><input type="text" name="naam" id="naam" value="<?php echo $naam;?>" required>
-            <label id="naamVerplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>Voornaam:</label></td>
-            <td><input type="text" name="voornaam" id="voornaam" required>
-            <label id="voornaamVerplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>Geboortedatum:</label></td>
-            <td><input type="date" name="datum" id="datum" required>
-            <label id="datumVerplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>Adres speler:</label></td>
-            <td><input type="text" name="adres1" id="adres1" required>
-            <label id="adres1Verplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>postcode speler:</label></td>
-            <td><input type="text" name="postcode1" id="postcode1" required>
-            <label id="postcode1Verplicht" class="fout"></label></td>
-        </tr>
-        <!-- Contactgegevens speler -->
-        <tr>
-            <th colspan="2">Contactgegevens speler</th>
-        </tr>
-        <tr>
-            <td><label>E-mail speler:</label></td>
-            <td><input type="email" name="email1" id="email1" required>
-            <label id="email1Verplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>Telefoonnummer speler:</label></td>
-            <td><input type="tel" name="tel1" id="tel1" required>
-            <label id="tel1Verplicht" class="fout"></label></td>
-        </tr>
-        <!-- Contactgegevens ouders -->
-        <tr>
-            <th colspan="2">Contactgegevens ouders</th>
-        </tr>
-        <tr>
-            <td><label>Wie eerst contacteren:</label></td>
-            <td><input type="text" name="contactfirst" id="contactfirst" action="<?php echo $_SERVER[$contactfirst];?>"required>
-            <label id="contactVerplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <th colspan="2">Moeder</th>
-        </tr>
-        <tr>
-            <td><label>E-mail moeder:</label></td>
-            <td><input type="email" name="email2" id="email2" required>
-            <label id="email2Verplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>Telefoonnummer moeder:</label></td>
-            <td><input type="tel" name="tel2" id="tel2" required>
-            <label id="tel2Verplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>Adres moeder:</label></td>
-            <td><input type="text" name="adres2" id="adres2" required>
-            <label id="adres2Verplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>postcode moeder:</label></td>
-            <td><input type="text" name="postcode2" id="postcode2" required>
-            <label id="postcode2Verplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <th colspan="2">Vader</th>
-        </tr>
-        <tr>
-            <td><label>E-mail vader:</label></td>
-            <td><input type="email" name="email3" id="email3" required>
-            <label id="email3Verplicht" class="fout"></label></td>
-        </tr>
-        
-        <tr>
-            <td><label>Telefoonnummer vader:</label></td>
-            <td><input type="tel" name="tel3" id="tel3" required>
-            <label id="tel3Verplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>Adres vader:</label></td>
-            <td><input type="text" name="adres3" id="adres3"required >
-            <label id="adres3Verplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>postcode vader:</label></td>
-            <td><input type="text" name="postcode3" id="postcode3" required></td>
-            <label id="postcode3Verplicht" class="fout"></label>
-        </tr>
-        <!-- Voeg hier de overige velden toe -->
-        <tr>
-            <th colspan="2">Andere</th>
-        </tr>
-        <tr>
-            <td><label for="medische_toelichting">Medische toelichting:<br>Indien geen type "geen"</label></td>
-            <td><textarea class="center"id="medische_toelichting" name="medische_toelichting" rows="4" required></textarea></td>
 
-        </tr>
-        <tr>
-            <td><label for="toelichting">Toelichting:</label></td>
-            <td><textarea class="center"id="toelichting" name="toelichting" rows="4" ></textarea></td>
-        </tr>
-    </table>
-  </section>
-  </form> 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sluiten</button>
-        <input  type="submit" class="btn btn-primary" value="Wijzigen" id="wijzigen" name="wijzigen" onclick="wijzig()">
-      </div>
-    </div>
-  </div>  
-</div>
+<body>
       <!-- ======= Header ======= -->
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
@@ -364,9 +209,7 @@ if (isset($_POST["verzenden"]) && isset($_POST["tezoeken"]) && ($_POST["tezoeken
                 </tr>";
                 while ($stmt->fetch()) {
                     echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode1 . "</td><td>" . $email1 . "</td><td>" . $tel1 . "<td>".$adres2."</td><td>".$postcode2."</td><td>".$email2."</td><td>".$tel2."</td><td>".$adres3."</td><td>".$postcode3."</td><td>".$email3."</td><td>".$tel3."</td><td>".$contactfirst."</td><td>".$medische_toelichting."</td><td>".$bondsnummer."</td><td>".$toelichting."</td>
-                    <td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#staticBackdrop' style='background-color: #ffc451; border-color: black; color: black;'>
-                    Wijzigen
-                    </button></td></tr>";
+                    <td></tr>";
                 }
                 echo "</table></div>";
                 $stmt->close();
@@ -380,15 +223,10 @@ if (isset($_POST["verzenden"]) && isset($_POST["tezoeken"]) && ($_POST["tezoeken
                             echo "Het uitvoeren van de query is mislukt: ' . $stmt->error . ' in query: " . $sql;
                         } else {
                             $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting);
-                            //echo "<form id='overzicht' name='overzicht' method='post' action='" . $_SERVER['PHP_SELF'] . "'>";
-                            echo "<div style='overflow-x:auto;'><table border='1' class='table-responsive'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboorte Datum</th><th>Adres</th><th>Postcode</th><th>Email</th><th>Telefoonnummer</th><th>adres moeder</th><th>poscode moeder</th><th>email moeder</th><th>telefoonnummer moeder</th><th>adres vader</th><th>poscode vader</th><th>email vader</th><th>telefoonnummer vader</th><th>contact persoon</th><th>medische toelichting</th><th>bondsnummer</th><th colspan='2'>toelichting</th>
+                            echo "<div style='overflow-x:auto;'><table border='1' class='table-responsive'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboorte  Datum</th><th>Adres</th><th>Postcode</th><th>Email</th><th>Telefoonnummer</th><th>Meer info</th>
                             </tr>";
                             while ($stmt->fetch()) {
-                                echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode1 . "</td><td>" . $email1 . "</td><td>" . $tel1 . "<td>".$adres2."</td><td>".$postcode2."</td><td>".$email2."</td><td>".$tel2."</td><td>".$adres3."</td><td>".$postcode3."</td><td>".$email3."</td><td>".$tel3."</td><td>".$contactfirst."</td><td>".$medische_toelichting."</td><td>".$bondsnummer."</td><td>".$toelichting."</td><td>
-                              <form name='form2' method='post' action='overzicht.php?actie=verander&artikelid=<?php echo $update; ?>'>
-                                  <input type='button' class='btn btn-success' name='update' id='update' value='Update' onclick='openModal()'style='background-color: #ffc451; border-color: black; color: black;'>
-                              
-                          </td></tr>";
+                                echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode1 . "</td><td>" . $email1 . "</td><td>" . $tel1 . "</td><td><button type='button'><a href='meer_info.php?spelernr=<?php echo $spelersnr; ?>'>Meer</a></button></td></tr>";
                             }
                             echo "</table></div>";
                             echo "</form>";

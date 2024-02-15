@@ -1,178 +1,7 @@
-print_r($_POST);
-
-<?php
-$mysqli = new MySQLi("localhost", "root", "", "voetbalclubphp");
-
-if (isset($_GET["spelernr"])) {
-    $spelernr = $_GET["spelernr"];
-    $sql = "SELECT * FROM tblspelers WHERE spelernr = ?";
-    $stmt = $mysqli->prepare($sql);
-    $stmt->bind_param("i", $spelernr);
-
-    if (!$stmt->execute()) {
-        echo 'Het uitvoeren van de query is mislukt: ' . $stmt->error;
-    } else {
-        $stmt->bind_result($spelernr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting);
-
-        if ($stmt->fetch()) {
-            echo "Spelernr: $spelernr, Naam: $naam, Voornaam: $voornaam, ...";
-        } else {
-            echo "Player not found.";
-        }
-
-        $stmt->close();
-    }
-} else {
-    echo "Invalid player ID.";
-}
-
-$mysqli->close();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-<script type="text/javascript">
-  function geldigtelefoon(telefoonnummer) {
-            // Belgian phone numbers can start with +32 or 0, followed by 1 to 9 and then 8 more digits.
-            var patroon = /^(?:\+32|0)[1-9][0-9]{8}$/;
-            return patroon.test(telefoonnummer);
-        }
-        function wijzig() {
-            var ok = true;
-
-            if (document.getElementById("naam").value == "") {
-                document.getElementById("naamVerplicht").innerHTML = "Gelieve een naam in te vullen";
-                ok = false;
-            } else {
-                document.getElementById("naamVerplicht").innerHTML = "";
-            }
-
-            if (document.getElementById("voornaam").value == "") {
-                document.getElementById("voornaamVerplicht").innerHTML = "Gelieve een voornaam in te vullen";
-                ok = false;
-            } else {
-                document.getElementById("voornaamVerplicht").innerHTML = "";
-            }
-            if (document.getElementById("datum").value == "") {
-                document.getElementById("datumVerplicht").innerHTML = "Gelieve een geboortedatum in te vullen";
-                ok = false;
-            } else {
-                document.getElementById("datumVerplicht").innerHTML = "";
-            }
-
-            if (document.getElementById("adres1").value == "") {
-                document.getElementById("adres1Verplicht").innerHTML = "Gelieve een adres in te vullen";
-                ok = false;
-            } else {
-                document.getElementById("adres1Verplicht").innerHTML = "";
-            }
-            if (isNaN(document.getElementById("postcode1").value)) {
-                document.getElementById("postcode1Verplicht").innerHTML = "Gelieve een nummer in te vullen";
-                ok = false;
-            } else {
-                document.getElementById("postcode1Verplicht").innerHTML = "";
-            }
-            if (document.getElementById("email1").value != "") 
-            {
-              var string=document.getElementById("email1").value;
-              var filter= /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-              if ( filter.test(string))
-              {
-                document.getElementById("email1Verplicht").innerHTML="";
-              }
-              else
-              {
-                document.getElementById("email1Verplicht").innerHTML="Ongeldig email";
-                ok=false;
-              }
-            }
-
-            if (tel1!=""&& !geldigtelefoon(document.getElementById("tel1").value)) {
-                document.getElementById("tel1Verplicht").innerHTML = "Gelieve een telefoonnummer in te vullen in te vullen";
-                ok = false;
-            } else {
-                document.getElementById("tel1Verplicht").innerHTML = "";
-            }
-            if (document.getElementById("contactfirst").value == "") {
-                document.getElementById("contactVerplicht").innerHTML = "Gelieve een ouder in te vullen";
-                ok = false;
-            } else {
-                document.getElementById("contactVerplicht").innerHTML = "";
-            }
-            if (document.getElementById("email2").value != "") 
-            {
-              var string=document.getElementById("email2").value;
-              var filter= /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-              if ( filter.test(string))
-              {
-                document.getElementById("email2Verplicht").innerHTML="";
-              }
-              else
-              {
-                document.getElementById("email2Verplicht").innerHTML="Ongeldig email";
-                ok=false;
-              }
-            }
-            if (tel2!=""&& !geldigtelefoon(document.getElementById("tel2").value)) {
-                document.getElementById("tel2Verplicht").innerHTML = "Gelieve een telefoonnummer in te vullen in te vullen";
-                ok = false;
-            } else {
-                document.getElementById("tel2Verplicht").innerHTML = "";
-            }
-            if (document.getElementById("adres2").value == "") {
-                document.getElementById("adres2Verplicht").innerHTML = "Gelieve een adres in te vullen";
-                ok = false;
-            } else {
-                document.getElementById("adres2Verplicht").innerHTML = "";
-            }
-            if (isNaN(document.getElementById("postcode2").value)) {
-                document.getElementById("postcode2Verplicht").innerHTML = "Gelieve een postcode in te vullen";
-                ok = false;
-            } else {
-                document.getElementById("postcode2Verplicht").innerHTML = "";
-            }
-            if (document.getElementById("email3").value != "") 
-            {
-              var string=document.getElementById("email3").value;
-              var filter= /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-              if ( filter.test(string))
-              {
-                document.getElementById("email3Verplicht").innerHTML="";
-              }
-              else
-              {
-                document.getElementById("email3Verplicht").innerHTML="Ongeldig email";
-                ok=false;
-              }
-            }
-            if (tel3!=""&& !geldigtelefoon(document.getElementById("tel3").value)) {
-                document.getElementById("tel3Verplicht").innerHTML = "Gelieve een telefoonnummer in te vullen in te vullen";
-                ok = false;
-            } else {
-                document.getElementById("tel3Verplicht").innerHTML = "";
-            }
-            if (document.getElementById("adres3").value == "") {
-                document.getElementById("adres3Verplicht").innerHTML = "Gelieve een adres in te vullen";
-                ok = false;
-            } else {
-                document.getElementById("adres3Verplicht").innerHTML = "";
-            }
-            if (isNaN(document.getElementById("postcode3").value)) {
-                document.getElementById("postcode3Verplicht").innerHTML = "Gelieve een postcode in te vullen";
-                ok = false;
-            } else {
-                document.getElementById("postcode3Verplicht").innerHTML = "";
-            }
-            
-            if (ok==true) {
-                document.inschrijven.submit();
-            }
-        }
-    </script>
- 
-      
+<head>   
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -208,7 +37,6 @@ $mysqli->close();
   ======================================================== -->
 
 </head>
-
 <body>
   
   
@@ -264,27 +92,27 @@ $mysqli->close();
         </tr>
         <tr>
             <td><label>Naam:</label></td>
-            <td><input type="text" name="naam" id="naam" required>
+            <td><input type="text" name="naam" id="naam" required readonly>
             <label id="naamVerplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>Voornaam:</label></td>
-            <td><input type="text" name="voornaam" id="voornaam" required>
+            <td><input type="text" name="voornaam" id="voornaam" required readonly>
             <label id="voornaamVerplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>Geboortedatum:</label></td>
-            <td><input type="date" name="datum" id="datum" required>
+            <td><input type="date" name="datum" id="datum" required readonly>
             <label id="datumVerplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>Adres speler:</label></td>
-            <td><input type="text" name="adres1" id="adres1" required>
+            <td><input type="text" name="adres1" id="adres1" required readonly>
             <label id="adres1Verplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>postcode speler:</label></td>
-            <td><input type="text" name="postcode1" id="postcode1" required>
+            <td><input type="text" name="postcode1" id="postcode1" required readonly>
             <label id="postcode1Verplicht" class="fout"></label></td>
         </tr>
         <!-- Contactgegevens speler -->
@@ -293,12 +121,12 @@ $mysqli->close();
         </tr>
         <tr>
             <td><label>E-mail speler:</label></td>
-            <td><input type="email" name="email1" id="email1" required>
+            <td><input type="email" name="email1" id="email1" required readonly>
             <label id="email1Verplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>Telefoonnummer speler:</label></td>
-            <td><input type="tel" name="tel1" id="tel1" required>
+            <td><input type="tel" name="tel1" id="tel1" required readonly>
             <label id="tel1Verplicht" class="fout"></label></td>
         </tr>
         <!-- Contactgegevens ouders -->
@@ -307,7 +135,7 @@ $mysqli->close();
         </tr>
         <tr>
             <td><label>Wie eerst contacteren:</label></td>
-            <td><input type="text" name="contactfirst" id="contactfirst" required>
+            <td><input type="text" name="contactfirst" id="contactfirst" required readonly>
             <label id="contactVerplicht" class="fout"></label></td>
         </tr>
         <tr>
@@ -315,22 +143,22 @@ $mysqli->close();
         </tr>
         <tr>
             <td><label>E-mail moeder:</label></td>
-            <td><input type="email" name="email2" id="email2" required>
+            <td><input type="email" name="email2" id="email2" required readonly>
             <label id="email2Verplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>Telefoonnummer moeder:</label></td>
-            <td><input type="tel" name="tel2" id="tel2" required>
+            <td><input type="tel" name="tel2" id="tel2" required readonly>
             <label id="tel2Verplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>Adres moeder:</label></td>
-            <td><input type="text" name="adres2" id="adres2" required>
+            <td><input type="text" name="adres2" id="adres2" required readonly>
             <label id="adres2Verplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>postcode moeder:</label></td>
-            <td><input type="text" name="postcode2" id="postcode2" required>
+            <td><input type="text" name="postcode2" id="postcode2" required readonly>
             <label id="postcode2Verplicht" class="fout"></label></td>
         </tr>
         <tr>
@@ -338,23 +166,23 @@ $mysqli->close();
         </tr>
         <tr>
             <td><label>E-mail vader:</label></td>
-            <td><input type="email" name="email3" id="email3" required>
+            <td><input type="email" name="email3" id="email3" required readonly>
             <label id="email3Verplicht" class="fout"></label></td>
         </tr>
         
         <tr>
             <td><label>Telefoonnummer vader:</label></td>
-            <td><input type="tel" name="tel3" id="tel3" required>
+            <td><input type="tel" name="tel3" id="tel3" required readonly>
             <label id="tel3Verplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>Adres vader:</label></td>
-            <td><input type="text" name="adres3" id="adres3"required >
+            <td><input type="text" name="adres3" id="adres3"required readonly>
             <label id="adres3Verplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>postcode vader:</label></td>
-            <td><input type="text" name="postcode3" id="postcode3" required></td>
+            <td><input type="text" name="postcode3" id="postcode3" required readonly></td>
             <label id="postcode3Verplicht" class="fout"></label>
         </tr>
         <!-- Voeg hier de overige velden toe -->
@@ -363,12 +191,12 @@ $mysqli->close();
         </tr>
         <tr>
             <td><label for="medische_toelichting">Medische toelichting:<br>Indien geen type "geen"</label></td>
-            <td><textarea class="center"id="medische_toelichting" name="medische_toelichting" rows="4" required></textarea></td>
+            <td><textarea class="center"id="medische_toelichting" name="medische_toelichting" rows="4" required readonly></textarea></td>
 
         </tr>
         <tr>
             <td><label for="toelichting">Toelichting:</label></td>
-            <td><textarea class="center"id="toelichting" name="toelichting" rows="4" ></textarea></td>
+            <td><textarea class="center"id="toelichting" name="toelichting" rows="4" readonly></textarea></td>
         </tr>
     </table>
   </section>

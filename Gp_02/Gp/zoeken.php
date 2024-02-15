@@ -3,7 +3,7 @@
 <html lang="en">
 <script>
   function redirect(){
-    window.location.href ="index.php";
+    window.location.href ="meer_info.php";
   }
 </script>
 <head>

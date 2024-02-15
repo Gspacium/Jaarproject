@@ -91,7 +91,7 @@
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-bar-chart-box-line"></i>
-            <h3><a href="zoeken_v2.php">Zoeken</a></h3>
+            <h3><a href="zoeken.php">Zoeken</a></h3>
           </div>
         </div>
         <div class="col-xl-2 col-md-4">

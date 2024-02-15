@@ -1,101 +1,11 @@
-<?php
-if (isset($_POST["verzenden"]) && isset($_POST["tezoeken"]) && ($_POST["tezoeken"] != "")) {
 
-    $mysqli = new mysqli("localhost", "root", "", "voetbalclubphp");
-    
-
-    if ($mysqli->connect_errno) {
-        trigger_error('Fout bij verbinding: ' . $mysqli->error);
-    } else {
-
-        $sql = "UPDATE tblspelers
-                SET  naam=?,
-                     voornaam=?,
-                     geboortedatum=?,
-                     adres_speler=?,
-                     postcode_speler=?,
-                     email=?,
-                     telefoonnummer_speler=?,
-                     wie_eerst_te_verwittigen=?,
-                     email_moeder=?,
-                     telefoonnummer_moeder=?,
-                     adres_moeder=?,
-                     postcode_moeder=?,
-                     email_vader=?,
-                     telefoonnummer_vader=?,
-                     adres_vader=?,
-                     postcode_vader=?,
-                     medische_toelichting=?,
-                     toelichting=?
-                WHERE spelernr=?";
-
-                    if ($stmt = $mysqli->prepare($sql)) {
-                    $naam = $_POST["naam"];
-                    $voornaam = $_POST["voornaam"];
-                    $datum = $_POST["datum"];
-                    $adres1 = $_POST["adres1"];
-                    $postcode1 = $_POST["postcode1"];
-                    $email1 = $_POST["email1"];
-                    $tel1 = $_POST["tel1"];
-                    $contactfirst = $_POST["contactfirst"];
-                    $email2 = $_POST["email2"];
-                    $tel2 = $_POST["tel2"];
-                    $adres2 = $_POST["adres2"];
-                    $postcode2 = $_POST["postcode2"];
-                    $email3 = $_POST["email3"];
-                    $tel3 = $_POST["tel3"];
-                    $adres3 = $_POST["adres3"];
-                    $postcode3 = $_POST["postcode3"];
-                    $medische_toelichting = $_POST["medische_toelichting"];
-                    $toelichting = $_POST["toelichting"];
-                    $spelernr = $_POST["tezoeken"];
-                    
-
-                    $stmt->bind_param(
-                        "ssssissssssisssisss",
-                        $naam,
-                        $voornaam,
-                        $datum,
-                        $adres1,
-                        $postcode1,
-                        $email1,
-                        $tel1,
-                        $contactfirst,
-                        $email2,
-                        $tel2,
-                        $adres2,
-                        $postcode2,
-                        $email3,
-                        $tel3,
-                        $adres3,
-                        $postcode3,
-                        $medische_toelichting,
-                        $toelichting,
-                        $spelernr
-                        
-                    );
-
-            if ($stmt->execute()) {
-              echo '<script>window.location.href = "gelukt.php";</script>';
-              
-            } else {
-                echo 'Het uitvoeren van de query is mislukt: ' . $stmt->error;
-            }
-
-
-            $stmt->close();
-        } else {
-            echo 'Er zit een fout in de query';
-        }
-
-
-        $mysqli->close();
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
-
+<script>
+  function redirect(){
+    window.location.href ="index.php";
+  }
+</script>
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -172,10 +82,9 @@ if (isset($_POST["verzenden"]) && isset($_POST["tezoeken"]) && ($_POST["tezoeken
 
     </div>
   </header><!-- End Header -->
-  <div class="container">  
-
-            <p><br><br><br></p>
-            <form method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="categorie">
+    <div class="container">
+      <br><br><br>
+      <form method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="categorie">
                 <h1>Zoeken naar speler</h1><br>
                 <select id="categorie" name="categorie">
                     <option value="spelernr">Spelersnummer</option>
@@ -188,9 +97,8 @@ if (isset($_POST["verzenden"]) && isset($_POST["tezoeken"]) && ($_POST["tezoeken
                     <option value="telefoonnummer_speler">Telefoonnummer</option>
                 </select>
                 <input type="text" class="form-control" id="zoekterm" name="zoekterm" list="search" placeholder="..." value="<?php echo isset($_GET['zoekterm']) ? htmlspecialchars($_GET['zoekterm']) : ''; ?>">
-                <input type="submit" name="zoek" id="zoek" value="zoek">
+                <input type="submit" name="zoek" id="zoek" value="zoek" onclick='redirect()'>
             </form>
-
             <?php
         $mysqli = new MySQLi("localhost", "root", "", "voetbalclubphp");
         if (isset($_GET["zoek"])) {
@@ -205,11 +113,10 @@ if (isset($_POST["verzenden"]) && isset($_POST["tezoeken"]) && ($_POST["tezoeken
                 $stmt->bind_param("s", $zoekterm);
                 $stmt->execute();
                 $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting);
-                echo "<div style='overflow-x:auto;'><table border='1' class='table-responsive'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboorte Datum</th><th>Adres</th><th>Postcode</th><th>Email</th><th>Telefoonnummer</th><th>adres moeder</th><th>poscode moeder</th><th>email moeder</th><th>telefoonnummer moeder</th><th>adres vader</th><th>poscode vader</th><th>email vader</th><th>telefoonnummer vader</th><th>contact persoon</th><th>medische toelichting</th><th>bondsnummer</th><th colspan='2'>toelichting</th>
+                echo "<div style='overflow-x:auto;'><table border='1' class='table-responsive'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboorte Datum</th><th>Adres</th><th>Postcode</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th>
                 </tr>";
                 while ($stmt->fetch()) {
-                    echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode1 . "</td><td>" . $email1 . "</td><td>" . $tel1 . "<td>".$adres2."</td><td>".$postcode2."</td><td>".$email2."</td><td>".$tel2."</td><td>".$adres3."</td><td>".$postcode3."</td><td>".$email3."</td><td>".$tel3."</td><td>".$contactfirst."</td><td>".$medische_toelichting."</td><td>".$bondsnummer."</td><td>".$toelichting."</td>
-                    <td></tr>";
+                    echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode1 . "</td><td>" . $email1 . "</td><td>" . $tel1 . "</td><td><input type='submit' name='Meer' id='Meer' value='Meer' onclick='redirect()'></tr>";
                 }
                 echo "</table></div>";
                 $stmt->close();
@@ -223,10 +130,10 @@ if (isset($_POST["verzenden"]) && isset($_POST["tezoeken"]) && ($_POST["tezoeken
                             echo "Het uitvoeren van de query is mislukt: ' . $stmt->error . ' in query: " . $sql;
                         } else {
                             $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting);
-                            echo "<div style='overflow-x:auto;'><table border='1' class='table-responsive'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboorte  Datum</th><th>Adres</th><th>Postcode</th><th>Email</th><th>Telefoonnummer</th><th>Meer info</th>
+                            echo "<div style='overflow-x:auto;'><table border='1' class='table-responsive'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboorte  Datum</th><th>Adres</th><th>Postcode</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th>
                             </tr>";
                             while ($stmt->fetch()) {
-                                echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode1 . "</td><td>" . $email1 . "</td><td>" . $tel1 . "</td><td><button type='button'><a href='meer_info.php?spelernr=<?php echo $spelersnr; ?>'>Meer</a></button></td></tr>";
+                                echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode1 . "</td><td>" . $email1 . "</td><td>" . $tel1 . "</td><td><input type='submit' name='Meer' id='Meer' value='Meer' onclick='redirect()'></td></tr>";
                             }
                             echo "</table></div>";
                             echo "</form>";
@@ -236,11 +143,9 @@ if (isset($_POST["verzenden"]) && isset($_POST["tezoeken"]) && ($_POST["tezoeken
             }
         } 
         ?>
-  </div>
-
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
+    </div>
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
     <div class="footer-top">
       <div class="container">
         <div class="row">

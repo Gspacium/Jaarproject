@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
+  <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Gp Bootstrap Template - Index</title>
+  <title>KVVE home</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -26,7 +27,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
+  <link href="assets/css/stylezoeken.css" rel="stylesheet">
   <!-- =======================================================
   * Template Name: Gp
   * Updated: Nov 25 2023 with Bootstrap v5.3.2
@@ -34,9 +35,11 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+</script>
 </head>
+
 <body>
-    <!-- ======= Header ======= -->
+      <!-- ======= Header ======= -->
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
 
@@ -74,37 +77,9 @@
 
     </div>
   </header><!-- End Header -->
-
-
   
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center justify-content-center">
-    <div class="container" data-aos="fade-up">
-
-      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
-        <div class="col-xl-6 col-lg-8">
-          <h1>Welkom bij KVVE Massemen admin pagina<span>.</span></h1>
-        </div>
-      </div>
-
-      <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-bar-chart-box-line"></i>
-            <h3><a href="zoeken_v2.php">Zoeken</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-calendar-todo-line"></i>
-            <h3><a href="overzicht.php">Overzicht</a></h3>
-          </div>
-        </div>
-      </div>
-  </section>
-    
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
     <div class="footer-top">
       <div class="container">
         <div class="row">
@@ -166,20 +141,19 @@
       </div>
     </div>
   </footer><!-- End Footer -->
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
 </body>
 </html>

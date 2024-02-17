@@ -1,6 +1,6 @@
 <?php
   if(isset($_GET["spelerid"])){
-    $meer = $_GET["spelerid"];
+    $id = $_GET["spelerid"];
   }
   $mysqli = new MySQLi("localhost","root","","voetbalclubphp");
   if(mysqli_connect_errno()){
@@ -8,7 +8,7 @@
   }else{
     $sql="SELECT * FROM tblspelers WHERE spelernr = ?";
     if($stmt = $mysqli->prepare($sql)){
-      $stmt->bind_param("i",$meer);
+      $stmt->bind_param("i",$id);
       if(!$stmt->execute()){
         echo "Het uitvoeren van de query is mislukt:".$stmt->error."in query".$sql;
       }else{

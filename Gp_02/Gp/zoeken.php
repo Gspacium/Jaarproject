@@ -1,11 +1,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<script>
-  function redirect(){
-    window.location.href ="meer_info.php";
-  }
-</script>
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -113,10 +108,17 @@
                 $stmt->bind_param("s", $zoekterm);
                 $stmt->execute();
                 $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting);
-                echo "<div style='overflow-x:auto;'><table border='1' class='table-responsive'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboorte Datum</th><th>Adres</th><th>Postcode</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th>
+                echo "<div style='overflow-x:auto;'><table border='1' class='table-responsive'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboorte Datum</th><th>Adres</th><th>Postcode</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th><th>Wijzig</th>
                 </tr>";
                 while ($stmt->fetch()) {
-                    echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode1 . "</td><td>" . $email1 . "</td><td>" . $tel1 . "</td><td><input type='submit' name='Meer' id='Meer' value='Meer' onclick='redirect()'></tr>";
+                  $id = $spelersnr;
+                    echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode1 . "</td><td>" . $email1 . "</td><td>" . $tel1 . "</td><td>";
+                    ?>
+                    <form name='form1' method='post' action='meer_info.php?actiemeerinfo&spelerid=<?php echo $id;?>'><input type='submit' name='Meer' id='Meer' value='Meer'></form>
+                    <?php echo "</td><td>";
+                    ?>
+                      <form name='form1' method='post' action='updatepage.php?actieverander&spelerid=<?php echo $id;?>'><input type='submit' name='update' id='update' value='Wijzig'></form>
+                    <?php echo "</td></tr>";
                 }
                 echo "</table></div>";
                 $stmt->close();
@@ -130,10 +132,17 @@
                             echo "Het uitvoeren van de query is mislukt: ' . $stmt->error . ' in query: " . $sql;
                         } else {
                             $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting);
-                            echo "<div style='overflow-x:auto;'><table border='1' class='table-responsive'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboorte  Datum</th><th>Adres</th><th>Postcode</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th>
+                            echo "<div style='overflow-x:auto;'><table border='1' class='table-responsive'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboorte  Datum</th><th>Adres</th><th>Postcode</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th><th>Wijzig</th>
                             </tr>";
                             while ($stmt->fetch()) {
-                                echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode1 . "</td><td>" . $email1 . "</td><td>" . $tel1 . "</td><td><input type='submit' name='Meer' id='Meer' value='Meer' onclick='redirect()'></td></tr>";
+                              $id = $spelersnr;
+                                echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode1 . "</td><td>" . $email1 . "</td><td>" . $tel1 . "</td><td>";
+                                ?> 
+                                <form name='form1' method='post' action='meer_info.php?actiemeerinfo&spelerid=<?php echo $id;?>'><input type='submit' name='Meer' id='Meer' value='Meer'></form>
+                                <?php echo "</td><td>";
+                                ?>
+                                   <form name='form1' method='post' action='updatepage.php?actieverander&spelerid=<?php echo $id;?>'><input type='submit' name='update' id='update' value='Wijzig'></form>
+                                <?php "</td></tr>";
                             }
                             echo "</table></div>";
                             echo "</form>";

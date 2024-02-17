@@ -1,4 +1,27 @@
 <?php
+  if(isset($_GET["spelerid"])){
+    $id = $_GET["spelerid"];
+  }
+  $mysqli = new MySQLi("localhost","root","","voetbalclubphp");
+  if(mysqli_connect_errno()){
+    trigger_error("fout bij verbinding: ".$mysqli->error);
+  }else{
+    $sql="SELECT * FROM tblspelers WHERE spelernr = ?";
+    if($stmt = $mysqli->prepare($sql)){
+      $stmt->bind_param("i",$id);
+      if(!$stmt->execute()){
+        echo "Het uitvoeren van de query is mislukt:".$stmt->error."in query".$sql;
+      }else{
+        $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting);
+        $stmt->fetch();
+      }
+      $stmt->close();
+    }else{
+        echo"er zit een fout in de query: ".$mysqli->error();
+    }
+  }
+?>
+<?php
 //print_r($_POST);
 
   if((isset($_POST["wijzigen"]))&&(isset($_POST["naam"]))&& ($_POST["naam"]!= "")&&
@@ -44,8 +67,8 @@
         medische_toelichting =?,
         toelichting =? 
         WHERE spelernr = ?";
-        
-        
+
+
         if($stmt = $mysqli->prepare($sql)){
           $stmt ->bind_param("ssssissssssisssiss", $naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$contactfirst,$email2,$tel2, $adres2, $postcode2, $email3,$tel3, $adres3, $postcode3, $medische_toelichting, $toelichting);
           $naam = $mysqli->real_escape_string($_POST["naam"]);
@@ -71,7 +94,7 @@
               echo "het uitvoeren van de query is mislukt";
             }else{
                echo'<meta http-equiv="refresh" content="0;url=overzicht.php">';
-             
+
             }
             $stmt->close();
         }
@@ -80,9 +103,9 @@
         }
       }
   }
-  
-    
-  
+
+
+
   ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -220,14 +243,14 @@
             } else {
                 document.getElementById("postcode3Verplicht").innerHTML = "";
             }
-            
+
             if (ok==true) {
                 document.inschrijven.submit();
             }
         }
     </script>
- 
-      
+
+
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -265,8 +288,8 @@
 </head>
 
 <body>
-  
-  
+
+
              <!-- ======= Header ======= -->
              <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
@@ -307,39 +330,39 @@
 
     </div>
   </header><!-- End Header -->
- 
+
   <section>
   <div class="container">
    <form id="inschrijven" name="inschrijven" method="post" action=" <?php echo $_SERVER["PHP_SELF"];?>">
     <table class="mx-auto">
         <!-- Persoonlijke gegevens speler -->
-        
+
         <tr>
             <th colspan="2">Persoonlijke gegevens speler</th>
         </tr>
         <tr>
             <td><label>Naam:</label></td>
-            <td><input type="text" name="naam" id="naam" required>
+            <td><input type="text" name="naam" id="naam" value="<?php echo $naam;?>"required>
             <label id="naamVerplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>Voornaam:</label></td>
-            <td><input type="text" name="voornaam" id="voornaam" required>
+            <td><input type="text" name="voornaam" id="voornaam" value="<?php echo $voornaam ;?> "required>
             <label id="voornaamVerplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>Geboortedatum:</label></td>
-            <td><input type="date" name="datum" id="datum" required>
+            <td><input type="date" name="datum" id="datum" value="<?php echo $datum;?>"required>
             <label id="datumVerplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>Adres speler:</label></td>
-            <td><input type="text" name="adres1" id="adres1" required>
+            <td><input type="text" name="adres1" id="adres1" value="<?php echo $adres1;?>"required>
             <label id="adres1Verplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>postcode speler:</label></td>
-            <td><input type="text" name="postcode1" id="postcode1" required>
+            <td><input type="text" name="postcode1" id="postcode1" value="<?php echo $postcode1;?>"required>
             <label id="postcode1Verplicht" class="fout"></label></td>
         </tr>
         <!-- Contactgegevens speler -->
@@ -348,12 +371,12 @@
         </tr>
         <tr>
             <td><label>E-mail speler:</label></td>
-            <td><input type="email" name="email1" id="email1" required>
+            <td><input type="email" name="email1" id="email1" value="<?php echo $email1;?>"required>
             <label id="email1Verplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>Telefoonnummer speler:</label></td>
-            <td><input type="tel" name="tel1" id="tel1" required>
+            <td><input type="tel" name="tel1" id="tel1" value="<?php echo $tel1;?>"required>
             <label id="tel1Verplicht" class="fout"></label></td>
         </tr>
         <!-- Contactgegevens ouders -->
@@ -362,7 +385,7 @@
         </tr>
         <tr>
             <td><label>Wie eerst contacteren:</label></td>
-            <td><input type="text" name="contactfirst" id="contactfirst" required>
+            <td><input type="text" name="contactfirst" id="contactfirst" value="<?php echo $contactfirst;?>"required>
             <label id="contactVerplicht" class="fout"></label></td>
         </tr>
         <tr>
@@ -370,22 +393,22 @@
         </tr>
         <tr>
             <td><label>E-mail moeder:</label></td>
-            <td><input type="email" name="email2" id="email2" required>
+            <td><input type="email" name="email2" id="email2" value="<?php echo $email2;?>"required>
             <label id="email2Verplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>Telefoonnummer moeder:</label></td>
-            <td><input type="tel" name="tel2" id="tel2" required>
+            <td><input type="tel" name="tel2" id="tel2" value="<?php echo $tel2;?>"required>
             <label id="tel2Verplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>Adres moeder:</label></td>
-            <td><input type="text" name="adres2" id="adres2" required>
+            <td><input type="text" name="adres2" id="adres2" value="<?php echo $adres2;?>"required>
             <label id="adres2Verplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>postcode moeder:</label></td>
-            <td><input type="text" name="postcode2" id="postcode2" required>
+            <td><input type="text" name="postcode2" id="postcode2" value="<?php echo $postcode2;?>"required>
             <label id="postcode2Verplicht" class="fout"></label></td>
         </tr>
         <tr>
@@ -393,23 +416,23 @@
         </tr>
         <tr>
             <td><label>E-mail vader:</label></td>
-            <td><input type="email" name="email3" id="email3" required>
+            <td><input type="email" name="email3" id="email3" value="<?php echo $email3;?>"required>
             <label id="email3Verplicht" class="fout"></label></td>
         </tr>
-        
+
         <tr>
             <td><label>Telefoonnummer vader:</label></td>
-            <td><input type="tel" name="tel3" id="tel3" required>
+            <td><input type="tel" name="tel3" id="tel3" value="<?php echo $tel3;?>"required>
             <label id="tel3Verplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>Adres vader:</label></td>
-            <td><input type="text" name="adres3" id="adres3"required >
+            <td><input type="text" name="adres3" id="adres3" value="<?php echo $adres3;?>"required >
             <label id="adres3Verplicht" class="fout"></label></td>
         </tr>
         <tr>
             <td><label>postcode vader:</label></td>
-            <td><input type="text" name="postcode3" id="postcode3" required></td>
+            <td><input type="text" name="postcode3" id="postcode3" value="<?php echo $postcode3;?>" required></td>
             <label id="postcode3Verplicht" class="fout"></label>
         </tr>
         <!-- Voeg hier de overige velden toe -->
@@ -418,19 +441,24 @@
         </tr>
         <tr>
             <td><label for="medische_toelichting">Medische toelichting:<br>Indien geen type "geen"</label></td>
-            <td><textarea class="center"id="medische_toelichting" name="medische_toelichting" rows="4" required></textarea></td>
+            <td><textarea class="center"id="medische_toelichting" name="medische_toelichting" rows="4" required><?php echo $medische_toelichting;?></textarea></td>
 
         </tr>
         <tr>
             <td><label for="toelichting">Toelichting:</label></td>
-            <td><textarea class="center"id="toelichting" name="toelichting" rows="4" ></textarea></td>
+            <td><textarea class="center"id="toelichting" name="toelichting" rows="4" ><?php echo $toelichting;?></textarea></td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align: center;">
+            <!-- Submit knop -->
+              <input style="margin: 0;" class="" type="submit" value="Wijzigen" id="wijzigen" name="wijzigen" onclick="wijzig()">
+          </td>
         </tr>
     </table>
-    <!-- Submit knop -->
-    <input class="" type="submit" value="Wijzigen" id="wijzigen" name="wijzigen" onclick="wijzig()">
+    
   </section>
   </form> 
-  
+
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
@@ -476,7 +504,7 @@
             </ul>
           </div>
 
-          
+
 
         </div>
       </div>

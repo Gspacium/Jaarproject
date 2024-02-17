@@ -24,7 +24,7 @@ table {
 th, td {
     padding: 10px;
     border: 1px solid #ddd;
-    text-align: left;
+    text-align: center;
     margin-top:30px;
 }
 
@@ -38,7 +38,17 @@ input, textarea {
     margin-bottom: 10px;  
     padding: 8px;
 }
-
+button[type="button"]{
+    background-color: #ffc451;
+    color: black;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    
+    cursor: pointer;
+    align-items: center;
+    width: 100%
+}
 
 input[type="submit"] {
     background-color: #ffc451;
@@ -46,17 +56,13 @@ input[type="submit"] {
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
-    margin-left: 157px;
+    
     cursor: pointer;
     align-items: center;
-    width: 80%
+    width: 100%
 }
 
 input[type="submit"]:hover {
     background-color: #ffc451;
     align-items: center;
-}
-.fout{
-    color: red;
-    font-size: 10px;
 }

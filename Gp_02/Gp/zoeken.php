@@ -117,7 +117,7 @@
                     <form name='form1' method='post' action='meer_info.php?actiemeerinfo&spelerid=<?php echo $id;?>'><input type='submit' name='Meer' id='Meer' value='Meer'></form>
                     <?php echo "</td><td>";
                     ?>
-                      <form name='form1' method='post' action='update.php.php?actieverander&spelerid=<?php echo $id;?>'><input type='submit' name='update' id='update' value='Wijzig'></form>
+                      <form name='form1' method='post' action='updatepage.php?actieverander&spelerid=<?php echo $id;?>'><input type='submit' name='update' id='update' value='Wijzig'></form>
                     <?php echo "</td></tr>";
                 }
                 echo "</table></div>";

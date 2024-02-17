@@ -20,7 +20,7 @@
     (isset($_POST["toelichting"]))&&($_POST["toelichting"]!="")&&
     (isset($_POST["medische_toelichting"]))&&($_POST["medische_toelichting"]!="")
     ){
-            // moet nog veranderen naar update
+      
       $mysqli = new MySQLi ("localhost","root","","voetbalclubphp");
       if(mysqli_connect_errno()){trigger_error("fout my verbinden: ".$mysqli->error);}
       else{

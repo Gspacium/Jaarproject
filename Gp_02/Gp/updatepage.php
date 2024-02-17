@@ -441,12 +441,12 @@
         </tr>
         <tr>
             <td><label for="medische_toelichting">Medische toelichting:<br>Indien geen type "geen"</label></td>
-            <td><textarea class="center"id="medische_toelichting" name="medische_toelichting" rows="4" required>value="<?php echo $medische_toelichting;?>"</textarea></td>
+            <td><textarea class="center"id="medische_toelichting" name="medische_toelichting" rows="4" required><?php echo $medische_toelichting;?></textarea></td>
 
         </tr>
         <tr>
             <td><label for="toelichting">Toelichting:</label></td>
-            <td><textarea class="center"id="toelichting" name="toelichting" rows="4" >value="<?php echo $toelichting;?>"</textarea></td>
+            <td><textarea class="center"id="toelichting" name="toelichting" rows="4" ><?php echo $toelichting;?></textarea></td>
         </tr>
     </table>
     <!-- Submit knop -->

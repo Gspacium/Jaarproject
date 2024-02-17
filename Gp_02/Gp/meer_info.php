@@ -14,6 +14,7 @@
       }else{
         $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting);
         $stmt->fetch();
+        $id = $spelersnr;
       }
       $stmt->close();
     }else{
@@ -106,7 +107,7 @@
  
   <section>
   <div class="container">
-   <form id="inschrijven" name="inschrijven" method="post" action=" <?php echo $_SERVER["PHP_SELF"];?>">
+   <form id="inschrijven" name="inschrijven" method="post" action='updatepage.php?actieverander&spelerid=<?php echo $id;?>'>
     <table class="mx-auto">
         <!-- Persoonlijke gegevens speler -->
         
@@ -220,6 +221,9 @@
         <tr>
             <td><label for="toelichting">Toelichting:</label></td>
             <td><textarea class="center"id="toelichting" name="toelichting" rows="4" readonly><?php echo $toelichting;?></textarea></td>
+        </tr>
+        <tr>
+          <td colspan="2"><input type='submit' name='update' id='update' value='Wijzig'></td>
         </tr>
     </table>
   </section>

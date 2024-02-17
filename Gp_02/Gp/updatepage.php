@@ -47,48 +47,11 @@
       $mysqli = new MySQLi ("localhost","root","","voetbalclubphp");
       if(mysqli_connect_errno()){trigger_error("fout my verbinden: ".$mysqli->error);}
       else{
-        $sql = "UPDATE tblspelers
-        SET naam =?,
-        voornaam =?,
-        datum =?,
-        adres1 =?,
-        postcode1 =?,
-        email1 =?,
-        tel1 =?,
-        contactfirst =?,
-        email2 =?,
-        tel2 =?,
-        adres2 =?,
-        postcode2 =?,
-        email3 =?,
-        adres3 =?,
-        tel3 =?,
-        postcode3 =?,
-        medische_toelichting =?,
-        toelichting =? 
-        WHERE spelernr = ?";
+        $sql = "";
 
 
         if($stmt = $mysqli->prepare($sql)){
-          $stmt ->bind_param("ssssissssssisssiss", $naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$contactfirst,$email2,$tel2, $adres2, $postcode2, $email3,$tel3, $adres3, $postcode3, $medische_toelichting, $toelichting);
-          $naam = $mysqli->real_escape_string($_POST["naam"]);
-          $voornaam = $mysqli->real_escape_string($_POST["voornaam"]);
-          $datum = $mysqli->real_escape_string($_POST["datum"]);
-          $adres1 = $mysqli->real_escape_string($_POST["adres1"]);
-          $postcode1 = $mysqli->real_escape_string($_POST["postcode1"]);
-          $email1 = $mysqli->real_escape_string($_POST["email1"]);
-          $tel1 = $mysqli->real_escape_string($_POST["tel1"]);
-          $contactfirst = $mysqli->real_escape_string($_POST["contactfirst"]);
-          $email2 = $mysqli->real_escape_string($_POST["email2"]);
-          $tel2 = $mysqli->real_escape_string($_POST["tel2"]);
-          $adres2 = $mysqli->real_escape_string($_POST["adres2"]);
-          $postcode2 = $mysqli->real_escape_string($_POST["postcode2"]);
-          $email3 = $mysqli->real_escape_string($_POST["email3"]);
-          $tel3 = $mysqli->real_escape_string($_POST["tel3"]);
-          $adres3 = $mysqli->real_escape_string($_POST["adres3"]);
-          $postcode3 = $mysqli->real_escape_string($_POST["postcode3"]);
-          $medische_toelichting = $mysqli->real_escape_string($_POST["medische_toelichting"]);
-          $toelichting = $mysqli->real_escape_string($_POST["toelichting"]);
+          
 
             if(!$stmt->execute()){
               echo "het uitvoeren van de query is mislukt";

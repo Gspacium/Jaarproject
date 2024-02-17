@@ -1326,6 +1326,7 @@ section {
   color: #151515;
   transition: 0.4s;
   border-radius: 4px;
+  margin: auto;
 }
 
 .contact .php-email-form button[type=submit]:hover {

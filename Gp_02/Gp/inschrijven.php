@@ -403,9 +403,15 @@
             <td><label for="toelichting">Toelichting:</label></td>
             <td><textarea class="center"id="toelichting" name="toelichting" rows="4" ></textarea></td>
         </tr>
+        <tr>
+          <td colspan="2" style="text-align: center;">
+            <!-- Submit knop -->
+            <input style="margin: 0;"class="" type="submit" value="Inschrijven" id="verzenden" name="verzenden" onclick="wijzig()">
+          </td>
+
+        </tr>
     </table>
-    <!-- Submit knop -->
-    <input class="" type="submit" value="Inschrijven" id="verzenden" name="verzenden" onclick="wijzig()">
+    
   </section>
   </form> 
   

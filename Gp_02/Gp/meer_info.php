@@ -223,7 +223,9 @@
             <td><textarea class="center"id="toelichting" name="toelichting" rows="4" readonly><?php echo $toelichting;?></textarea></td>
         </tr>
         <tr>
-          <td colspan="2"><input type='submit' name='update' id='update' value='Wijzig'></td>
+          <td colspan="2" style="text-align: center;">
+            <input style="margin: 0;" type='submit' name='update' id='update' value='Wijzig'>
+          </td>
         </tr>
     </table>
   </section>

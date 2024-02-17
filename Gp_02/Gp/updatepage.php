@@ -448,9 +448,14 @@
             <td><label for="toelichting">Toelichting:</label></td>
             <td><textarea class="center"id="toelichting" name="toelichting" rows="4" ><?php echo $toelichting;?></textarea></td>
         </tr>
+        <tr>
+          <td colspan="2" style="text-align: center;">
+            <!-- Submit knop -->
+              <input style="margin: 0;" class="" type="submit" value="Wijzigen" id="wijzigen" name="wijzigen" onclick="wijzig()">
+          </td>
+        </tr>
     </table>
-    <!-- Submit knop -->
-    <input class="" type="submit" value="Wijzigen" id="wijzigen" name="wijzigen" onclick="wijzig()">
+    
   </section>
   </form> 
 

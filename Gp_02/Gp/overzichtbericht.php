@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
+
+  <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Gp Bootstrap Template - Index</title>
+  <title>KVVE home</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -16,6 +18,7 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
+
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -26,7 +29,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
+  <link href="assets/css/styleoverzicht.css" rel="stylesheet">
   <!-- =======================================================
   * Template Name: Gp
   * Updated: Nov 25 2023 with Bootstrap v5.3.2
@@ -35,9 +38,10 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
+
 <body>
-    <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top ">
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
 
       <h1 class="logo me-auto me-lg-0"><a href="index.php"><img src="assets/img/favicon.jpg"></a></h1>
@@ -46,71 +50,48 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto" href="index.php">Home</a></li>
-          <li><a class="nav-link scrollto active" href="about.php">About</a></li>
-          <li class="dropdown"><a href="#"><span>COMING SOON</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
+          <li><a class="nav-link scrollto active" href="index.php">Home</a></li>
+          <li><a class="nav-link scrollto" href="about.php">About</a></li>
           <li><a class="nav-link scrollto" href="contact.php">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="aangemeld.php" class="get-started-btn scrollto">Admin only</a>
+      <a href="aangemeld.php" class="get-started-btn scrollto">Admin Only</a>
 
     </div>
   </header><!-- End Header -->
 
+    <main id="main">
+        <div class="container">
+            <p><br><br><br></p>
+            <?php
+                $mysqli= new MySQLi ("localhost","root","","voetbalclubphp");
+                if(mysqli_connect_errno()) {trigger_error('Fout bij verbinding: '.$mysqli->error); }
+                else{
+                    $sql= "SELECT * from tblberichten";
+                    if($stmt = $mysqli->prepare($sql)){
+                        if(!$stmt->execute()){
+                            echo "Het uitvoeren van de query is mislukt: '.$stmt->error.' in query: ".$sql;
+                        }else{
+                            $stmt->bind_result($berichtId, $naam, $email, $onderwerp, $bericht);
+                            echo "<div><table border='1' style='margin-left: 150px'> <tr><th>BerichtId</th><th>Naam</th><th>email</th><th>onderwerp</th><th>Bericht</th>
+                            </tr>";
+                            while ($stmt->fetch()) {
+                                echo "<tr><td>".$berichtId."</td><td>".$naam."</td><td>".$email."</td><td>".$onderwerp."</td><td>".$bericht."</td></tr>";
+                            }
+                            echo "</table></div>"; 
 
-  
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center justify-content-center">
-    <div class="container" data-aos="fade-up">
-
-      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
-        <div class="col-xl-6 col-lg-8">
-          <h1>Welkom bij KVVE Massemen admin pagina<span>.</span></h1>
-        </div>
-      </div>
-
-      <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-bar-chart-box-line"></i>
-            <h3><a href="zoeken.php">Zoeken</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-calendar-todo-line"></i>
-            <h3><a href="overzichtspelers.php">Overzicht spelers</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-calendar-todo-line"></i>
-            <h3><a href="overzichtbericht.php">Overzicht berichten</a></h3>
-          </div>
-        </div>
-      </div>
-  </section>
+                        }
+                    }
+                }
+            ?>
     
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
+        </div>
+    </main>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
     <div class="footer-top">
       <div class="container">
         <div class="row">
@@ -187,5 +168,7 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
 </body>
+
 </html>

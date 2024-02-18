@@ -93,7 +93,7 @@ print_r($_POST);
             if(!$stmt->execute()){
               echo "het uitvoeren van de query is mislukt".$stmt->error.' in query: '.$sql;
             }else{
-               echo'<meta http-equiv="refresh" content="0;url=overzicht.php">';
+               echo'<meta http-equiv="refresh" content="0;url=overzichtspelers.php">';
 
             }
             $stmt->close();

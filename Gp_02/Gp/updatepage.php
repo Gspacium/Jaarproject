@@ -22,7 +22,7 @@
   }
 ?>
 <?php
-print_r($_POST);
+
 
   if((isset($_POST["wijzigen"]))&&(isset($_POST["naam"]))&& ($_POST["naam"]!= "")&&
     (isset($_POST["voornaam"]))&&($_POST["voornaam"]!="")&&

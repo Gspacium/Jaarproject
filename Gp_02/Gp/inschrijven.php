@@ -361,7 +361,9 @@
         </tr>
         <tr>
             <td><label>Wie eerst contacteren:</label></td>
-            <td><input type="text" name="contactfirst" id="contactfirst" required>
+            <td> <select name="contactfirst" id="contactfirst">
+                  <option value="moeder" selected>Moeder</option>
+                  <option value="vader" >Vader</option>
             <label id="contactVerplicht" class="fout"></label></td>
         </tr>
         <tr>

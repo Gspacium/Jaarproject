@@ -65,11 +65,26 @@
     <main id="main">
         <div class="container">
             <p><br><br><br></p>
+            <form method="get" name="searchForm" action="<?php echo $_SERVER['PHP_SELF']; ?>"class="mx-auto text-center">
+                Order op: <select id="sortBy" name="sortBy">
+                            <option value="BerichtID">BerichtID 1-9</option>
+                            <option value="naam">naam A-Z</option>
+                            <option value="email">email A-Z</option>
+                            <option value="onderwerp">onderwerp A-Z</option>
+                            <option value="Bericht">email A-Z</option>
+                          </select>
+                          <input type="submit" class="btn btn-primary" style="margin:0;"name="sorteer" id="sorteer" value="Sorteer">
+            </form>
             <?php
                 $mysqli= new MySQLi ("localhost","root","","voetbalclubphp");
                 if(mysqli_connect_errno()) {trigger_error('Fout bij verbinding: '.$mysqli->error); }
                 else{
-                    $sql= "SELECT * from tblberichten";
+                  if(isset($_GET['sortBy'])){
+                    $sortBy = $_GET['sortBy'];
+                  }else{
+                    $sortBy = 'BerichtID';
+                  }      
+                    $sql= "SELECT * from tblberichten ORDER BY $sortBy ASC";
                     if($stmt = $mysqli->prepare($sql)){
                         if(!$stmt->execute()){
                             echo "Het uitvoeren van de query is mislukt: '.$stmt->error.' in query: ".$sql;

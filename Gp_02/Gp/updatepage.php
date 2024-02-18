@@ -132,7 +132,7 @@ print_r($_POST);
             } else {
                 document.getElementById("voornaamVerplicht").innerHTML = "";
             }
-            if ((document.getElementById("datum").value == "")&& document.getElementById("datum").value <= curdate()) {
+            if (document.getElementById("datum").value == "") {
                 document.getElementById("datumVerplicht").innerHTML = "Gelieve een geboortedatum in te vullen";
                 ok = false;
             } else {
@@ -384,7 +384,9 @@ print_r($_POST);
         </tr>
         <tr>
             <td><label>Wie eerst contacteren:</label></td>
-            <td><input type="text" name="contactfirst" id="contactfirst" value="<?php echo $contactfirst;?>"required>
+            <td> <select name="contactfirst" id="contactfirst">
+                  <option value="moeder" selected>Moeder</option>
+                  <option value="vader" >Vader</option>
             <label id="contactVerplicht" class="fout"></label></td>
         </tr>
         <tr>

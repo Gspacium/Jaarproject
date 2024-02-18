@@ -12,7 +12,7 @@
       if(!$stmt2->execute()){
         echo "Het uitvoeren van de query is mislukt:".$stmt2->error."in query".$sql2;
       }else{
-        $stmt2->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting);
+        $stmt2->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting,$actief);
         $stmt2->fetch();
       }
       $stmt2->close();

@@ -91,7 +91,7 @@
                     <option value="telefoonnummer_speler">Telefoonnummer</option>
                 </select>
                 <input type="text" class="form-control" id="zoekterm" name="zoekterm" list="search" placeholder="..." value="<?php echo isset($_GET['zoekterm']) ? htmlspecialchars($_GET['zoekterm']) : ''; ?>">
-                
+                <input type="submit" name="zoek" id="zoek" value="zoek"><br>
             </form>
             <?php
         $mysqli = new MySQLi("localhost", "root", "", "voetbalclubphp");
@@ -101,14 +101,14 @@
                 $categorie = $_GET["categorie"];
                 $filter = $_GET["filter"];
                 
-                $sql = "SELECT * FROM tblspelers WHERE $categorie LIKE ?";
+                $sql = "SELECT * FROM tblspelers WHERE $categorie LIKE ? ORDER BY $filter";
                 $stmt = $mysqli->prepare($sql);
                 if (!$stmt) {
                     die('Error in SQL query: ' . $mysqli->error);
                 };
                 $stmt->bind_param("s", $zoekterm);
                 $stmt->execute();
-                $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting);
+                $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting,$actief);
                 echo "<div style='overflow-x:auto;'><table border='1' class='table-responsive'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboorte Datum</th><th>Adres</th><th>Postcode</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th><th>Wijzig</th>
                 </tr>";
                 while ($stmt->fetch()) {
@@ -132,7 +132,7 @@
                         if (!$stmt->execute()) {
                             echo "Het uitvoeren van de query is mislukt: ' . $stmt->error . ' in query: " . $sql;
                         } else {
-                            $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting);
+                            $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting,$actief);
                             echo "<div style='overflow-x:auto;'><table border='1' class='table-responsive'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboorte  Datum</th><th>Adres</th><th>Postcode</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th><th>Wijzig</th>
                             </tr>";
                             while ($stmt->fetch()) {

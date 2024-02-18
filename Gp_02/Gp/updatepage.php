@@ -2,27 +2,27 @@
   if(isset($_GET["spelerid"])){
     $id = $_GET["spelerid"];
   }
-  $mysqli = new MySQLi("localhost","root","","voetbalclubphp");
+  $mysqli2 = new MySQLi("localhost","root","","voetbalclubphp");
   if(mysqli_connect_errno()){
-    trigger_error("fout bij verbinding: ".$mysqli->error);
+    trigger_error("fout bij verbinding: ".$mysqli2->error);
   }else{
-    $sql="SELECT * FROM tblspelers WHERE spelernr = ?";
-    if($stmt = $mysqli->prepare($sql)){
-      $stmt->bind_param("i",$id);
-      if(!$stmt->execute()){
-        echo "Het uitvoeren van de query is mislukt:".$stmt->error."in query".$sql;
+    $sql2="SELECT * FROM tblspelers WHERE spelernr = ?";
+    if($stmt2 = $mysqli2->prepare($sql2)){
+      $stmt2->bind_param("i",$id);
+      if(!$stmt2->execute()){
+        echo "Het uitvoeren van de query is mislukt:".$stmt2->error."in query".$sql2;
       }else{
-        $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting);
-        $stmt->fetch();
+        $stmt2->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting);
+        $stmt2->fetch();
       }
-      $stmt->close();
+      $stmt2->close();
     }else{
-        echo"er zit een fout in de query: ".$mysqli->error();
+        echo"er zit een fout in de query: ".$mysqli2->error;
     }
   }
 ?>
 <?php
-//print_r($_POST);
+print_r($_POST);
 
   if((isset($_POST["wijzigen"]))&&(isset($_POST["naam"]))&& ($_POST["naam"]!= "")&&
     (isset($_POST["voornaam"]))&&($_POST["voornaam"]!="")&&
@@ -47,22 +47,61 @@
       $mysqli = new MySQLi ("localhost","root","","voetbalclubphp");
       if(mysqli_connect_errno()){trigger_error("fout my verbinden: ".$mysqli->error);}
       else{
-        $sql = "";
+        $id = $_POST["id"];
+
+        $sql = "UPDATE tblspelers
+        SET naam =?,
+        voornaam =?,
+        geboortedatum =STR_TO_DATE(?, '%Y-%m-%d'),
+        adres_speler =?,
+        postcode_speler =?,
+        email =?,
+        telefoonnummer_speler =?,
+        wie_eerst_te_verwittigen =?,
+        email_moeder =?,
+        telefoonnummer_moeder =?,
+        adres_moeder =?,
+        postcode_moeder =?,
+        email_vader =?,
+        adres_vader =?,
+        telefoonnummer_vader=?,
+        postcode_vader =?,
+        medische_toelichting =?,
+        toelichting =? 
+        WHERE spelernr = $id";
 
 
         if($stmt = $mysqli->prepare($sql)){
           
-
+          $naam = $mysqli->real_escape_string($_POST["naam"]);
+          $voornaam = $mysqli->real_escape_string($_POST["voornaam"]);
+          $datum = date('Y-m-d', strtotime(str_replace('/', '-', $_POST["datum"])));
+          $adres1 = $mysqli->real_escape_string($_POST["adres1"]);
+          $postcode1 = $mysqli->real_escape_string($_POST["postcode1"]);
+          $email1 = $mysqli->real_escape_string($_POST["email1"]);
+          $tel1 = $mysqli->real_escape_string($_POST["tel1"]);
+          $contactfirst = $mysqli->real_escape_string($_POST["contactfirst"]);
+          $email2 = $mysqli->real_escape_string($_POST["email2"]);
+          $tel2 = $mysqli->real_escape_string($_POST["tel2"]);
+          $adres2 = $mysqli->real_escape_string($_POST["adres2"]);
+          $postcode2 = $mysqli->real_escape_string($_POST["postcode2"]);
+          $email3 = $mysqli->real_escape_string($_POST["email3"]);
+          $tel3 = $mysqli->real_escape_string($_POST["tel3"]);
+          $adres3 = $mysqli->real_escape_string($_POST["adres3"]);
+          $postcode3 = $mysqli->real_escape_string($_POST["postcode3"]);
+          $medische_toelichting = $mysqli->real_escape_string($_POST["medische_toelichting"]);
+          $toelichting = $mysqli->real_escape_string($_POST["toelichting"]);
+          $stmt ->bind_param("ssisisissisissiiss", $naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$contactfirst,$email2,$tel2,$adres2,$postcode2,$email3,$adres3,$tel3,$postcode3,$medische_toelichting,$toelichting);
             if(!$stmt->execute()){
-              echo "het uitvoeren van de query is mislukt";
+              echo "het uitvoeren van de query is mislukt".$stmt->error.' in query: '.$sql;
             }else{
-               echo'<meta http-equiv="refresh" content="0;url=overzichtspelers.php">';
-
+              echo'<meta http-equiv="refresh" content="0;url=overzichtspelers.php">';
+              
             }
             $stmt->close();
         }
         else{
-          echo "er zit een fout in de query";
+          echo "er zit een fout in de query: ".$mysqli->error;
         }
       }
   }
@@ -129,8 +168,8 @@
                 ok=false;
               }
             }
-
-            if (tel1!=""&& !geldigtelefoon(document.getElementById("tel1").value)) {
+            var tel1 = document.getElementById("tel1").value;
+            if (tel1!=""&& !geldigtelefoon(tel1)) {
                 document.getElementById("tel1Verplicht").innerHTML = "Gelieve een telefoonnummer in te vullen in te vullen";
                 ok = false;
             } else {
@@ -156,7 +195,8 @@
                 ok=false;
               }
             }
-            if (tel2!=""&& !geldigtelefoon(document.getElementById("tel2").value)) {
+            var tel2 = document.getElementById("tel2").value;
+            if (tel2!=""&& !geldigtelefoon(tel2)) {
                 document.getElementById("tel2Verplicht").innerHTML = "Gelieve een telefoonnummer in te vullen in te vullen";
                 ok = false;
             } else {
@@ -188,7 +228,8 @@
                 ok=false;
               }
             }
-            if (tel3!=""&& !geldigtelefoon(document.getElementById("tel3").value)) {
+            var tel3 = document.getElementById("tel3").value;
+            if (tel3!=""&& !geldigtelefoon(tel3)) {
                 document.getElementById("tel3Verplicht").innerHTML = "Gelieve een telefoonnummer in te vullen in te vullen";
                 ok = false;
             } else {
@@ -299,7 +340,7 @@
    <form id="inschrijven" name="inschrijven" method="post" action=" <?php echo $_SERVER["PHP_SELF"];?>">
     <table class="mx-auto">
         <!-- Persoonlijke gegevens speler -->
-
+        <input type="hidden" name="id" value="<?php echo $id; ?>">
         <tr>
             <th colspan="2">Persoonlijke gegevens speler</th>
         </tr>
@@ -315,7 +356,7 @@
         </tr>
         <tr>
             <td><label>Geboortedatum:</label></td>
-            <td><input type="date" name="datum" id="datum" value="<?php echo $datum;?>"required>
+            <td><input type="date" name="datum" id="datum" value="<?php echo (new DateTime($datum))->format('Y-m-d'); ?>" required>
             <label id="datumVerplicht" class="fout"></label></td>
         </tr>
         <tr>

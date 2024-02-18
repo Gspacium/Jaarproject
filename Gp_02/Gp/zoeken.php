@@ -99,9 +99,7 @@
             if ((isset($_GET["zoekterm"])) && ($_GET["zoekterm"] != "")) {
                 $zoekterm = "%" . $_GET["zoekterm"] . "%";
                 $categorie = $_GET["categorie"];
-                $filter = $_GET["filter"];
-                
-                $sql = "SELECT * FROM tblspelers WHERE $categorie LIKE ? ORDER BY $filter";
+                $sql = "SELECT * FROM tblspelers WHERE $categorie LIKE ?";
                 $stmt = $mysqli->prepare($sql);
                 if (!$stmt) {
                     die('Error in SQL query: ' . $mysqli->error);

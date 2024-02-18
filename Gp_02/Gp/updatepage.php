@@ -94,6 +94,7 @@ print_r($_POST);
           $stmt ->bind_param("ssisisissisissiiss", $naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$contactfirst,$email2,$tel2,$adres2,$postcode2,$email3,$adres3,$tel3,$postcode3,$medische_toelichting,$toelichting);
             if(!$stmt->execute()){
               echo "het uitvoeren van de query is mislukt".$stmt->error.' in query: '.$sql;
+              echo "het uitvoeren van de query is mislukt".$stmt->error.' in query: '.$sql;
             }else{
               echo'<meta http-equiv="refresh" content="0;url=overzichtspelers.php">';
               
@@ -389,7 +390,9 @@ print_r($_POST);
         </tr>
         <tr>
             <td><label>Wie eerst contacteren:</label></td>
-            <td><input type="text" name="contactfirst" id="contactfirst" value="<?php echo $contactfirst;?>"required>
+            <td> <select name="contactfirst" id="contactfirst">
+                  <option value="moeder" selected>Moeder</option>
+                  <option value="vader" >Vader</option>
             <label id="contactVerplicht" class="fout"></label></td>
         </tr>
         <tr>
@@ -436,7 +439,28 @@ print_r($_POST);
         </tr>
         <tr>
             <td><label>postcode vader:</label></td>
-            <td><input type="text" name="postcode3" id="postcode3" value="<?php echo $postcode3;?>" required></td>
+            <td><select name="postcode3" id="postcode3" class="form-control">
+              <?php
+                $mysqli = new mysqli("localhost","root","","voetbalclubphp");
+                $sql = "SELECT postcode, gemeente FROM tblpostcode  ORDER BY postcode";
+                if ($stmt = $mysqli -> prepare($sql)) {
+                  if (!$stmt -> execute()) {
+                    echo 'Het uitvoeren van de query is mislukt: ' . $stmt -> error . ' in query: ' . $sql;
+                  } else {
+                    $stmt -> bind_result($postcode, $gemeente);
+                    while ($stmt -> fetch()) {
+                      $gem=htmlspecialchars($gemeente);
+                      $gem=stripslashes($gemeente);
+                      echo '<option value="'. $postcode .'">' . $postcode."&nbsp;".$gem .  '</option>';
+                    }
+                  }
+                    $stmt -> close();
+                } 
+                  else {
+                    echo 'Er zit een fout in de query: ' . $mysqli->error;
+                }
+              ?>
+            </select></td>
             <label id="postcode3Verplicht" class="fout"></label>
         </tr>
         <!-- Voeg hier de overige velden toe -->

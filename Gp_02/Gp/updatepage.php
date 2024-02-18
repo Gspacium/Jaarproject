@@ -433,7 +433,28 @@ print_r($_POST);
         </tr>
         <tr>
             <td><label>postcode vader:</label></td>
-            <td><input type="text" name="postcode3" id="postcode3" value="<?php echo $postcode3;?>" required></td>
+            <td><select name="postcode3" id="postcode3" class="form-control">
+              <?php
+                $mysqli = new mysqli("localhost","root","","voetbalclubphp");
+                $sql = "SELECT postcode, gemeente FROM tblpostcode  ORDER BY postcode";
+                if ($stmt = $mysqli -> prepare($sql)) {
+                  if (!$stmt -> execute()) {
+                    echo 'Het uitvoeren van de query is mislukt: ' . $stmt -> error . ' in query: ' . $sql;
+                  } else {
+                    $stmt -> bind_result($postcode, $gemeente);
+                    while ($stmt -> fetch()) {
+                      $gem=htmlspecialchars($gemeente);
+                      $gem=stripslashes($gemeente);
+                      echo '<option value="'. $postcode .'">' . $postcode."&nbsp;".$gem .  '</option>';
+                    }
+                  }
+                    $stmt -> close();
+                } 
+                  else {
+                    echo 'Er zit een fout in de query: ' . $mysqli->error;
+                }
+              ?>
+            </select></td>
             <label id="postcode3Verplicht" class="fout"></label>
         </tr>
         <!-- Voeg hier de overige velden toe -->

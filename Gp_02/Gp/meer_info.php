@@ -126,7 +126,7 @@
         </tr>
         <tr>
             <td><label>Geboortedatum:</label></td>
-            <td><input type="date" name="datum" id="datum" value="<?php echo $datum;?>"readonly>
+            <td><input type="date" name="datum" id="datum" value="<?php echo (new DateTime($datum))->format('Y-m-d'); ?>" readonly>
             <label id="datumVerplicht" class="fout"></label></td>
         </tr>
         <tr>

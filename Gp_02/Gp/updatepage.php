@@ -22,7 +22,7 @@
   }
 ?>
 <?php
-//print_r($_POST);
+print_r($_POST);
 
   if((isset($_POST["wijzigen"]))&&(isset($_POST["naam"]))&& ($_POST["naam"]!= "")&&
     (isset($_POST["voornaam"]))&&($_POST["voornaam"]!="")&&
@@ -47,14 +47,51 @@
       $mysqli = new MySQLi ("localhost","root","","voetbalclubphp");
       if(mysqli_connect_errno()){trigger_error("fout my verbinden: ".$mysqli->error);}
       else{
-        $sql = "";
+        $sql = "UPDATE tblspelers
+        SET naam =?,
+        voornaam =?,
+        geboortedatum =?,
+        adres_speler =?,
+        postcodeid1 =?,
+        email =?,
+        telefoonnummer_speler =?,
+        wie_eerst_te_verwittigen =?,
+        email_moeder =?,
+        telefoonnummer_moeder =?,
+        adres_moeder =?,
+        postcodeid2 =?,
+        email_vader =?,
+        adres_vader =?,
+        telefoonnummer_vader=?,
+        postcodeid3 =?,
+        medische_toelichting =?,
+        toelichting =? 
+        WHERE spelernr = $id";
 
 
         if($stmt = $mysqli->prepare($sql)){
-          
+          $stmt ->bind_param("ss", $naam,$voornaam);
+          $naam = $mysqli->real_escape_string($_POST["naam"]);
+          $voornaam = $mysqli->real_escape_string($_POST["voornaam"]);
+          $datum = $mysqli->real_escape_string($_POST["datum"]);
+          $adres1 = $mysqli->real_escape_string($_POST["adres1"]);
+          $postcode1 = $mysqli->real_escape_string($_POST["postcode1"]);
+          $email1 = $mysqli->real_escape_string($_POST["email1"]);
+          $tel1 = $mysqli->real_escape_string($_POST["tel1"]);
+          $contactfirst = $mysqli->real_escape_string($_POST["contactfirst"]);
+          $email2 = $mysqli->real_escape_string($_POST["email2"]);
+          $tel2 = $mysqli->real_escape_string($_POST["tel2"]);
+          $adres2 = $mysqli->real_escape_string($_POST["adres2"]);
+          $postcode2 = $mysqli->real_escape_string($_POST["postcode2"]);
+          $email3 = $mysqli->real_escape_string($_POST["email3"]);
+          $tel3 = $mysqli->real_escape_string($_POST["tel3"]);
+          $adres3 = $mysqli->real_escape_string($_POST["adres3"]);
+          $postcode3 = $mysqli->real_escape_string($_POST["postcode3"]);
+          $medische_toelichting = $mysqli->real_escape_string($_POST["medische_toelichting"]);
+          $toelichting = $mysqli->real_escape_string($_POST["toelichting"]);
 
             if(!$stmt->execute()){
-              echo "het uitvoeren van de query is mislukt";
+              echo "het uitvoeren van de query is mislukt".$stmt->error.' in query: '.$sql;
             }else{
                echo'<meta http-equiv="refresh" content="0;url=overzicht.php">';
 
@@ -62,7 +99,7 @@
             $stmt->close();
         }
         else{
-          echo "er zit een fout in de query";
+          echo "er zit een fout in de query".$mysqli->error();
         }
       }
   }

@@ -17,11 +17,10 @@
       }
       $stmt->close();
     }else{
-        echo"er zit een fout in de query: ".$mysqli->error();
+        echo"er zit een fout in de query:";
     }
   }
-?>
-<?php
+
 print_r($_POST);
 
   if((isset($_POST["wijzigen"]))&&(isset($_POST["naam"]))&& ($_POST["naam"]!= "")&&
@@ -70,7 +69,7 @@ print_r($_POST);
 
 
         if($stmt = $mysqli->prepare($sql)){
-          $stmt ->bind_param("ss", $naam,$voornaam);
+          $stmt ->bind_param("ssssissssssisssiss", $naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$contactfirst,$email2,$tel2, $adres2, $postcode2, $email3,$tel3, $adres3, $postcode3, $medische_toelichting, $toelichting);
           $naam = $mysqli->real_escape_string($_POST["naam"]);
           $voornaam = $mysqli->real_escape_string($_POST["voornaam"]);
           $datum = $mysqli->real_escape_string($_POST["datum"]);
@@ -99,7 +98,7 @@ print_r($_POST);
             $stmt->close();
         }
         else{
-          echo "er zit een fout in de query".$mysqli->error();
+          echo "er zit een fout in de query" .$mysqli->error;
         }
       }
   }
@@ -133,7 +132,7 @@ print_r($_POST);
             } else {
                 document.getElementById("voornaamVerplicht").innerHTML = "";
             }
-            if (document.getElementById("datum").value == "") {
+            if ((document.getElementById("datum").value == "")&& document.getElementById("datum").value <= curdate()) {
                 document.getElementById("datumVerplicht").innerHTML = "Gelieve een geboortedatum in te vullen";
                 ok = false;
             } else {

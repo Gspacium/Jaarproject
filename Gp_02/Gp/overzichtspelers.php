@@ -64,17 +64,37 @@
 
   <main id="main">
     <div class="container">
-    <p><br><br><br></p>
+      <p>
+      <br><br><br><br>
+      </p>
+      
+      <form method="get" name="searchForm" action="<?php echo $_SERVER['PHP_SELF']; ?>"class="mx-auto text-center">
+          Order op: <select id="sortBy" name="sortBy">
+                      <option value="spelernr">spelersnr 1-9</option>
+                      <option value="naam">naam A-Z</option>
+                      <option value="voornaam">voornaam A-Z</option>
+                      <option value="geboortedatum">geboortedatum</option>
+                      <option value="postcode_speler">postcode 1-9</option>
+                      <option value="email">email A-Z</option>
+                      <option value="telefoonnummer_speler">telefoonnummer 1-9</option>
+                    </select>
+                    <input type="submit" class="btn btn-primary" style="margin:0;"name="sorteer" id="sorteer" value="Sorteer">
+      </form>
   <?php 
     $mysqli= new MySQLi ("localhost","root","","voetbalclubphp");
     if(mysqli_connect_errno()) {trigger_error('Fout bij verbinding: '.$mysqli->error); }
-    else{      
-        $sql= "SELECT * from tblspelers";
+    else{
+        if(isset($_GET['sortBy'])){
+          $sortBy = $_GET['sortBy'];
+        }else{
+          $sortBy = 'spelernr';
+        }      
+        $sql= "SELECT * from tblspelers ORDER BY $sortBy ASC";
         if($stmt = $mysqli->prepare($sql)){
             if(!$stmt->execute()){
                 echo "Het uitvoeren van de query is mislukt: '.$stmt->error.' in query: ".$sql;
             }else{
-                $stmt->bind_result($spelersnr,$naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$adres2,$postcode2,$email2, $tel2, $adres3, $postcode3, $email3,$tel3, $contactfirst,  $medische_toelichting,$bondsnummer, $toelichting);
+                $stmt->bind_result($spelersnr,$naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$adres2,$postcode2,$email2, $tel2, $adres3, $postcode3, $email3,$tel3, $contactfirst,  $medische_toelichting,$bondsnummer, $toelichting,$actief);
 
                 echo "<div><table border='1' style='margin-left: 50px'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboorte Datum</th><th>Adres</th><th>Postcode</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th><th>Wijzig</th>
                 </tr>";

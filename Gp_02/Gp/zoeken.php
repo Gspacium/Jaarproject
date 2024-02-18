@@ -91,16 +91,7 @@
                     <option value="telefoonnummer_speler">Telefoonnummer</option>
                 </select>
                 <input type="text" class="form-control" id="zoekterm" name="zoekterm" list="search" placeholder="..." value="<?php echo isset($_GET['zoekterm']) ? htmlspecialchars($_GET['zoekterm']) : ''; ?>">
-                <input type="submit" name="zoek" id="zoek" value="zoek"'><br>
-                Order op: <select id="filter" name="filter">
-                            <option value="spelernr">spelersnr 1-9</option>
-                            <option value="voornaam">voornaam A-Z</option>
-                            <option value="naam">naam A-Z</option>
-                            <option value="geboortedatum">geboortedatum</option>
-                            <option value="postcode_speler">postcode 1-9</option>
-                            <option value="email">email A-Z</option>
-                            <option value="telefoonnummer_speler">telefoonnummer 1-9</option>
-                          </select>
+                
             </form>
             <?php
         $mysqli = new MySQLi("localhost", "root", "", "voetbalclubphp");
@@ -109,7 +100,8 @@
                 $zoekterm = "%" . $_GET["zoekterm"] . "%";
                 $categorie = $_GET["categorie"];
                 $filter = $_GET["filter"];
-                $sql = "SELECT * FROM tblspelers WHERE $categorie LIKE ? ORDER BY $filter";
+                
+                $sql = "SELECT * FROM tblspelers WHERE $categorie LIKE ?";
                 $stmt = $mysqli->prepare($sql);
                 if (!$stmt) {
                     die('Error in SQL query: ' . $mysqli->error);

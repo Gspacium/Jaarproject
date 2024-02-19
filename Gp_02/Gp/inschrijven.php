@@ -67,11 +67,7 @@
 
 <head>
 <script type="text/javascript">
-  function geldigtelefoon(telefoonnummer) {
-            // Belgian phone numbers can start with +32 or 0, followed by 1 to 9 and then 8 more digits.
-            var patroon = /^(?:\+32|0)[1-9][0-9]{8}$/;
-            return patroon.test(telefoonnummer);
-        }
+  
         function wijzig() {
             var ok = true;
 
@@ -202,6 +198,11 @@
             if (ok==true) {
                 document.inschrijven.submit();
             }
+        }
+        function geldigtelefoon(telefoonnummer) {
+            // Belgian phone numbers can start with +32 or 0, followed by 1 to 9 and then 8 more digits.
+            var patroon = /^(?:\+32|0)[1-9][0-9]{8}$/;
+            return patroon.test(telefoonnummer);
         }
     </script>
  

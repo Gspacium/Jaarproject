@@ -50,21 +50,48 @@
         <ul>
           <li><a class="nav-link scrollto" href="index.php">Home</a></li>
           <li><a class="nav-link scrollto active" href="about.php">About</a></li>
-          <li class="dropdown"><a href="#"><span>COMING SOON</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="#"><span>Ploegen</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+              <li class="dropdown"><a href="#"><span>Eerste elftallen</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
+                  <li><a href="A-ploeg.php">A-ploeg</A-ploeg></a></li>
+                  <li><a href="B-ploeg.php">B-ploeg</a></li>
                 </ul>
               </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+              <li class="dropdown"><a href="#"><span>Reserven</span> <i class="bi bi-chevron-right"></i></a>
+              <ul>
+                  <li><a href="Reserve-A.php">Reserven-A</a></li>
+                  <li><a href="Reserve-B.php">Reserven-B</a></li>
+                </ul>
+              </li>
+              <li class="dropdown"><a href="#"><span>Jeugd</span> <i class="bi bi-chevron-right"></i></a>
+              <ul>
+                  <li><a href="U6.php">U6</a></li>
+                  <li><a href="U7.php">U7</a></li>
+                  <li><a href="U8A.php">U8A</a></li>
+                  <li><a href="U8B.php">U8B</a></li>
+                  <li><a href="U9A.php">U9A</a></li>
+                  <li><a href="U9B.php">U9B</a></li>
+                  <li><a href="U10A.php">U10A</a></li>
+                  <li><a href="U10B.php">U10B</a></li>
+                  <li><a href="U11A.php">U11A</a></li>
+                  <li><a href="U11B.php">U11B</a></li>
+                  <li><a href="U12A.php">U12A</a></li>
+                  <li><a href="U12B.php">U12B</a></li>
+                  <li><a href="U13A.php">U13A</a></li>
+                  <li><a href="U13B.php">U13B</a></li>
+                  <li><a href="U15A.php">U15A</a></li>
+                  <li><a href="U15B.php">U15B</a></li>
+                  <li><a href="U17.php">U17</a></li>
+                  <li><a href="U21.php">U21</a></li>
+                </ul>
+              </li>
+              <li class="dropdown"><a href="#"><span>G-ploegen</span> <i class="bi bi-chevron-right"></i></a>
+              <ul>
+                  <li><a href="#">G-kids</a></li>
+                  <li><a href="#">G-senioren</a></li>
+                </ul>
+              </li>
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="contact.php">Contact</a></li>

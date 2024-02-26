@@ -1,5 +1,5 @@
 <?php
-//print_r($_POST);
+print_r($_POST);
 
   if((isset($_POST["verzenden"]))&&(isset($_POST["naam"]))&& ($_POST["naam"]!= "")&&
     (isset($_POST["voornaam"]))&&($_POST["voornaam"]!="")&&

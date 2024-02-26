@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 18 feb 2024 om 18:27
+-- Gegenereerd op: 26 feb 2024 om 11:09
 -- Serverversie: 5.7.17
 -- PHP-versie: 5.6.30
 
@@ -52,6 +52,47 @@ INSERT INTO `tblberichten` (`BerichtID`, `naam`, `email`, `onderwerp`, `Bericht`
 (12, 'Brigitte', 'Brigitte@gmail.com', 'Uren', 'Om hoe laat is de volgende training eigenlijk?'),
 (13, 'Julie', 'JulieLink@gmail.com', 'Blessure', 'Mijn kleinste heeft een blessure opgelopen en zal dus niet kunnen komen trainen'),
 (14, 'Julie', 'JulieLink@gmail.com', 'Blessure', 'Mijn kleinste heeft een blessure opgelopen en zal dus niet kunnen komen trainen');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `tblploegen`
+--
+
+CREATE TABLE `tblploegen` (
+  `ploegID` int(11) NOT NULL,
+  `naam` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `tblploegen`
+--
+
+INSERT INTO `tblploegen` (`ploegID`, `naam`) VALUES
+(1, 'U6'),
+(2, 'U7'),
+(3, 'U8A'),
+(4, 'U8B'),
+(5, 'U9A'),
+(6, 'U9B'),
+(7, 'U10A'),
+(8, 'U10B'),
+(9, 'U11A'),
+(10, 'U11B'),
+(11, 'U12A'),
+(12, 'U12B'),
+(13, 'U13A'),
+(14, 'U13B'),
+(15, 'U15A'),
+(16, 'U15B'),
+(17, 'U17'),
+(18, 'U21'),
+(19, 'RESERVEN A'),
+(20, 'RESERVEN B'),
+(21, 'G-KIDS'),
+(22, 'G-SENIOREN'),
+(23, 'A-PLOEG'),
+(24, 'B-PLOEG');
 
 -- --------------------------------------------------------
 
@@ -3004,15 +3045,15 @@ CREATE TABLE `tblspelers` (
   `medische_toelichting` text,
   `bondsnummer` int(11) DEFAULT NULL,
   `toelichting` text,
-  `acteif` tinyint(1) DEFAULT NULL
+  `actief` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `tblspelers`
 --
 
-INSERT INTO `tblspelers` (`spelernr`, `naam`, `voornaam`, `geboortedatum`, `adres_speler`, `postcode_speler`, `email`, `telefoonnummer_speler`, `adres_moeder`, `postcode_moeder`, `email_moeder`, `telefoonnummer_moeder`, `adres_vader`, `postcode_vader`, `email_vader`, `telefoonnummer_vader`, `wie_eerst_te_verwittigen`, `medische_toelichting`, `bondsnummer`, `toelichting`, `acteif`) VALUES
-(19, 'Claes', 'Catho', '2024-01-03', 'Zandloperlaan 67', 9000, 'catho.Claes@gmail.com', '0495600420', 'Zandloperlaan 67', 9000, 'Karien.Leymans@gmail.com', '0495600421', 'Zandloperlaan 67', 9000, 'Hans.Claes@gmail.com', '0495600422', 'moeder', 'Catho heeft last van haar voeten.', NULL, 'Geen andere toelichtingen\r\n', 1),
+INSERT INTO `tblspelers` (`spelernr`, `naam`, `voornaam`, `geboortedatum`, `adres_speler`, `postcode_speler`, `email`, `telefoonnummer_speler`, `adres_moeder`, `postcode_moeder`, `email_moeder`, `telefoonnummer_moeder`, `adres_vader`, `postcode_vader`, `email_vader`, `telefoonnummer_vader`, `wie_eerst_te_verwittigen`, `medische_toelichting`, `bondsnummer`, `toelichting`, `actief`) VALUES
+(19, 'Claes', 'Catho  ', '2023-00-00', 'Zandloperlaan 67', 1000, 'catho.Claes@gmail.com', '495600420', 'Zandloperlaan 67', 1000, 'Karien.Leymans@gmail.com', '495600421', 'Zandloperlaan 67', 1000, 'Hans.Claes@gmail.com', '495600422', 'moeder', 'Catho heeft last van haar voeten.', NULL, 'Geen andere toelichtingen\\\\r\\\\n', 1),
 (20, 'De Winne', 'Daan', '2024-01-04', 'Kristaldreef 78', 9000, 'daan.DeWinne@gmail.com', ' 0495600423\r\n', 'Kristaldreef 78', 9000, 'Leen.Gertens@gmail.com', '0495600424', 'Kristaldreef 78', 9000, 'Niels.DeWinne@gmail.com', '0495600425', 'vader', 'geen toelichting', NULL, 'geen toelichting', 1),
 (21, 'Evan', 'Erwin', '2024-01-05', 'Spiegelstraat 24', 9000, 'Evan.Erwin@gmail.com', '0495600426', 'Spiegelstraat 24', 9000, 'An.DeConinck@gmail.com', '04956004267', 'Spiegelstraat 24', 9000, 'Bart.Evan@gmail.com', '0495600428', 'moeder', 'geen toelichting', NULL, 'geen toelichting', 1),
 (22, 'Fasco', 'Fien', '2024-01-06', 'Korrelkant 23', 9000, 'fien.Fasco@gmail.com', '0492099570', 'Korrelkant 23', 9000, 'LizeLotte@gmail.com', '0492099572', 'Korrelkant 23', 9000, 'Joost.Fasco@gmail.com', '0492099573', 'vader', 'geen toelichting', NULL, 'geen toelichting', 1),
@@ -3024,6 +3065,19 @@ INSERT INTO `tblspelers` (`spelernr`, `naam`, `voornaam`, `geboortedatum`, `adre
 (31, 'Martens', 'Miel', '2024-01-04', 'Genkstraat 28', 9762, 'Martensmiel@gmail.com', '0123789456', 'Genkstraat 28', 9762, 'Brigitte@gmail.com', '1594872630', 'Hasseltlaan 13', 7854, 'Jarno@gmail.com', '0326159487', 'Moeder', 'Neen', NULL, 'Moet van ver komen ', 1),
 (33, 'Klarijns', 'Kris', '2023-01-06', 'Kasteellaan 32', 5647, 'Klarijns.Kris@gmail.com', '0492096752', 'Kasteellaan 32', 8418, 'Ninke@gmail.com', '0326159489', 'Kasteellaan 32', 8418, 'Tomas@gmail.com', '09518476237', 'moeder', 'Geen toelichting', NULL, 'Geen toelichting', 1);
 
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `tblspelersperploeg`
+--
+
+CREATE TABLE `tblspelersperploeg` (
+  `ploegID` int(11) NOT NULL,
+  `spelernr` int(11) NOT NULL,
+  `begindatum` varchar(10) NOT NULL,
+  `einddatum` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexen voor geëxporteerde tabellen
 --
@@ -3033,6 +3087,12 @@ INSERT INTO `tblspelers` (`spelernr`, `naam`, `voornaam`, `geboortedatum`, `adre
 --
 ALTER TABLE `tblberichten`
   ADD PRIMARY KEY (`BerichtID`);
+
+--
+-- Indexen voor tabel `tblploegen`
+--
+ALTER TABLE `tblploegen`
+  ADD PRIMARY KEY (`ploegID`);
 
 --
 -- Indexen voor tabel `tblpostcode`
@@ -3047,6 +3107,12 @@ ALTER TABLE `tblspelers`
   ADD PRIMARY KEY (`spelernr`);
 
 --
+-- Indexen voor tabel `tblspelersperploeg`
+--
+ALTER TABLE `tblspelersperploeg`
+  ADD PRIMARY KEY (`ploegID`,`spelernr`);
+
+--
 -- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
@@ -3055,6 +3121,11 @@ ALTER TABLE `tblspelers`
 --
 ALTER TABLE `tblberichten`
   MODIFY `BerichtID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT voor een tabel `tblploegen`
+--
+ALTER TABLE `tblploegen`
+  MODIFY `ploegID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT voor een tabel `tblpostcode`
 --

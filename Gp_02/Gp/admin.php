@@ -88,8 +88,8 @@
               </li>
               <li class="dropdown"><a href="#"><span>G-ploegen</span> <i class="bi bi-chevron-right"></i></a>
               <ul>
-                  <li><a href="#">G-kids</a></li>
-                  <li><a href="#">G-senioren</a></li>
+                  <li><a href="G-Kids.php">G-kids</a></li>
+                  <li><a href="G-senioren.php">G-senioren</a></li>
                 </ul>
               </li>
             </ul>

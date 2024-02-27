@@ -58,6 +58,11 @@
 
     </div>
   </header><!-- End Header -->
+  <label>spelernr voor speler toe te voegen:</label>
+  <input type="number" id="toevoegenspelernr" name="toevoegenspelernr">
+  <input type="submit" id="verzenden" name="verzenden" value="Toevoegen"> 
+  
+  
   <form method="get" name="searchForm" action="<?php echo $_SERVER['PHP_SELF']; ?>"class="mx-auto text-center">
           Order op: <select id="sortBy" name="sortBy">               
                         <option value="naam">naam A-Z</option>

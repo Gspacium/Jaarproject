@@ -25,7 +25,7 @@ print_r($_POST);
       else{
 
        
-        $sqlpostcode= "select postcodeid from tblpostcode where postcode=?";
+        $sqlpostcode= "SELECT postcodeid , gemeente FROM tblpostcode WHERE postcode=?";
 
         
         if($stmt1 = $mysqli->prepare($sqlpostcode)){

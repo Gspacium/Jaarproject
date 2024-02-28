@@ -43,7 +43,35 @@ print_r($_POST);
                     
                 }
                 
-        }    
+        }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         $sql = "INSERT INTO tblspelers(naam, voornaam, geboortedatum, adres_speler, postcodeid_speler, email, telefoonnummer_speler, wie_eerst_te_verwittigen,email_moeder, telefoonnummer_moeder, adres_moeder, postcodeid_moeder,email_vader,telefoonnummer_vader, adres_vader, postcodeid_vader, medische_toelichting, toelichting) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         if($stmt = $mysqli->prepare($sql)){
           $stmt ->bind_param("ssssissssssisssiss", $naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$contactfirst,$email2,$tel2, $adres2, $postcode2, $email3,$tel3, $adres3, $postcode3, $medische_toelichting, $toelichting);

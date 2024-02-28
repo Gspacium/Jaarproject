@@ -27,7 +27,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
+  <link href="assets/css/styleindex.css" rel="stylesheet">
   <!-- =======================================================
   * Template Name: Gp
   * Updated: Nov 25 2023 with Bootstrap v5.3.2

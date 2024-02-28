@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,6 +28,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/styleoverzicht.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Gp
@@ -109,7 +111,7 @@
       <p>
       <br><br><br><br>
       </p>
-      
+
       <form method="get" name="searchForm" action="<?php echo $_SERVER['PHP_SELF']; ?>"class="mx-auto text-center"> 
         Order op: <select id="sortBy" name="sortBy">
                       <option value="spelernr">spelersnr 1-9</option>
@@ -123,6 +125,7 @@
                     <input type="submit" class="btn btn-primary" style="margin:0;"name="sorteer" id="sorteer" value="Sorteer">
       </form>
   <?php 
+  print_r($_POST);
     $mysqli= new MySQLi ("localhost","root","","voetbalclubphp");
     if(mysqli_connect_errno()) {trigger_error('Fout bij verbinding: '.$mysqli->error); }
     else{
@@ -130,8 +133,8 @@
           $sortBy = $_GET['sortBy'];
         }else{
           $sortBy = 'spelernr';
-        }      
-        $sql= "SELECT * from tblspelers ORDER BY $sortBy ASC";
+        }
+        $sql= "SELECT s.* from tblspelers s , tblspelersperploeg p WHERE p.ploegID=$ploegid ORDER BY $sortBy ASC";
         if($stmt = $mysqli->prepare($sql)){
             if(!$stmt->execute()){
                 echo "Het uitvoeren van de query is mislukt: '.$stmt->error.' in query: ".$sql;

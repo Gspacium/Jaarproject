@@ -103,6 +103,7 @@
 
     </div>
   </header><!-- End Header -->
+  
   <main id="main">
     <div class="container">
       <p>
@@ -135,7 +136,7 @@
             if(!$stmt->execute()){
                 echo "Het uitvoeren van de query is mislukt: '.$stmt->error.' in query: ".$sql;
             }else{
-                $stmt->bind_result($spelersnr,$naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$adres2,$postcode2,$email2, $tel2, $adres3, $postcode3, $email3,$tel3, $contactfirst,  $medische_toelichting,$bondsnummer, $toelichting,$actief);
+                $stmt->bind_result($spelersnr,$naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$adres2,$postcode2,$email2, $tel2, $adres3, $postcode3, $email3,$tel3, $contactfirst, $medische_toelichting,$bondsnummer, $toelichting,$actief);
 
                 echo "<div><table border='1' style='margin-left: 50px'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboorte Datum</th><th>Adres</th><th>Postcode</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th><th>Wijzig</th>
                 </tr>";
@@ -158,6 +159,7 @@
     <a href="aangemeld.php"><input type="button"  value="terug" id="terug" style="background-color: #ffc451; margin: 0;"></a>
 </div>
 </div>
+
 </main>
 
 

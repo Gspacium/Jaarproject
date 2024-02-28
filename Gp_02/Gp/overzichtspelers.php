@@ -30,6 +30,7 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="assets/css/styleoverzicht.css" rel="stylesheet">
+  
   <!-- =======================================================
   * Template Name: Gp
   * Updated: Nov 25 2023 with Bootstrap v5.3.2
@@ -102,10 +103,10 @@
                   $id = $spelersnr;
                     echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode1 . "</td><td>" . $email1 . "</td><td>" . $tel1 . "</td><td style='text-align: center;'>";
                     ?>
-                    <form name='form1' method='post' action='meer_info.php?actiemeerinfo&spelerid=<?php echo $id;?>'><input style="margin: 10px;" type='submit' name='Meer' id='Meer' value='Meer'></form>
+                    <form name='form1' method='post' action='meer_info.php?actiemeerinfo&spelerid=<?php echo $id;?>'><input style="margin: auto;" type='submit' name='Meer' id='Meer' value='Meer'></form>
                     <?php echo "</td><td tyle='text-align: center;'>";
                     ?>
-                      <form name='form1' method='post' action='updatepage.php?actieverander&spelerid=<?php echo $id;?>'><input style="margin: 10px;"type='submit' name='update' id='update' value='Wijzig'></form>
+                      <form name='form1' method='post' action='updatepage.php?actieverander&spelerid=<?php echo $id;?>'><input style="margin: auto  ;"type='submit' name='update' id='update' value='Wijzig'></form>
                     <?php echo "</td></tr>";
                 }
                 echo "</table></div>"; 

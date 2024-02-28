@@ -1,0 +1,12 @@
+.icon-box {
+    height: 200px;
+   
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.icon-box {
+    flex: 1;
+}

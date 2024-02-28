@@ -58,42 +58,42 @@
             <ul>
               <li class="dropdown"><a href="#"><span>Eerste elftallen</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="A-ploeg.php">A-ploeg</A-ploeg></a></li>
-                  <li><a href="B-ploeg.php">B-ploeg</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=23 ?>">A-ploeg</A-ploeg></a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=24 ?>">B-ploeg</a></li>
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>Reserven</span> <i class="bi bi-chevron-right"></i></a>
               <ul>
-                  <li><a href="Reserve-A.php">Reserven-A</a></li>
-                  <li><a href="Reserve-B.php">Reserven-B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=19 ?>">Reserven-A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=20 ?>">Reserven-B</a></li>
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>Jeugd</span> <i class="bi bi-chevron-right"></i></a>
               <ul>
-                  <li><a href="U6.php">U6</a></li>
-                  <li><a href="U7.php">U7</a></li>
-                  <li><a href="U8A.php">U8A</a></li>
-                  <li><a href="U8B.php">U8B</a></li>
-                  <li><a href="U9A.php">U9A</a></li>
-                  <li><a href="U9B.php">U9B</a></li>
-                  <li><a href="U10A.php">U10A</a></li>
-                  <li><a href="U10B.php">U10B</a></li>
-                  <li><a href="U11A.php">U11A</a></li>
-                  <li><a href="U11B.php">U11B</a></li>
-                  <li><a href="U12A.php">U12A</a></li>
-                  <li><a href="U12B.php">U12B</a></li>
-                  <li><a href="U13A.php">U13A</a></li>
-                  <li><a href="U13B.php">U13B</a></li>
-                  <li><a href="U15A.php">U15A</a></li>
-                  <li><a href="U15B.php">U15B</a></li>
-                  <li><a href="U17.php">U17</a></li>
-                  <li><a href="U21.php">U21</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=1 ?>">U6</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=2 ?>">U7</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=3 ?>">U8A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=4 ?>">U8B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=5 ?>">U9A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=6 ?>">U9B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=7 ?>">U10A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=8 ?>">U10B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=9 ?>">U11A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=10 ?>">U11B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=11 ?>">U12A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=12 ?>">U12B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=13 ?>">U13A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=14 ?>">U13B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=15 ?>">U15A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=16 ?>">U15B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=17 ?>">U17</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=18 ?>">U21</a></li>
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>G-ploegen</span> <i class="bi bi-chevron-right"></i></a>
               <ul>
-                  <li><a href="G-Kids.php">G-kids</a></li>
-                  <li><a href="G-senioren.php">G-senioren</a></li>
+                  <li><a href="ploegen.phpp" value="<?php $ploegid=21 ?>">G-kids</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=22 ?>">G-senioren</a></li>
                 </ul>
               </li>
             </ul>
@@ -160,152 +160,196 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Services</h2>
-          <p>COMING SOON</p>
+          <h2>Ploegen</h2>
+          <p></p>
         </div>
 
         <div class="row">
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="">Lorem Ipsum</a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+              <h4><a href="ploegen.php">U6</a></h4>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
             <div class="icon-box">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">Sed ut perspiciatis</a></h4>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">U7</a></h4>
+              
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4><a href="">Magni Dolores</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">U8A</a></h4>
+              
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box">
-              <div class="icon"><i class="bx bx-world"></i></div>
-              <h4><a href="">Nemo Enim</a></h4>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-            </div>
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">U8B</a></h4>
+              </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
             <div class="icon-box">
-              <div class="icon"><i class="bx bx-slideshow"></i></div>
-              <h4><a href="">Dele cardo</a></h4>
-              <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-            </div>
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">U9A</a></h4>
+              </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
-              <div class="icon"><i class="bx bx-arch"></i></div>
-              <h4><a href="">Divera don</a></h4>
-              <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-            </div>
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">U9B</a></h4>
+              </div>
           </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">U9B</a></h4>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">U10A</a></h4>
+              </div>
+          </div>
+          
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">U10B</a></h4>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">U11A</a></h4>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">U11B</a></h4>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">U12A</a></h4>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">U12B</a></h4>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">U13A</a></h4>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">U13B</a></h4>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bbx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">U15A</a></h4>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">U15B</a></h4>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">U17</a></h4>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">U21</a></h4>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">Reserven-A</a></h4>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">Reserven-B</a></h4>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">A-ploeg</a></h4>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">B-ploeg</a></h4>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">G-Kids</a></h4>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php">G-senioren</a></h4>
+              </div>
+          </div>
+
+          
 
         </div>
 
       </div>
     </section><!-- End Services Section -->
 
-    <!-- ======= Team Section ======= -->
-    <section id="team" class="team">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Team</h2>
-          <p>COMING SOON</p>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="100">
-              <div class="member-img">
-                <img src="assets/img/800px-Cross_red_circle.jpg.png" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>RESTRICTED</h4>
-                <span>...</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="200">
-              <div class="member-img">
-                <img src="assets/img/800px-Cross_red_circle.jpg.png" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>RESTRICTED</h4>
-                <span>...</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="300">
-              <div class="member-img">
-                <img src="assets/img/800px-Cross_red_circle.jpg.png" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>RESTRICTED</h4>
-                <span>...</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="400">
-              <div class="member-img">
-                <img src="assets/img/800px-Cross_red_circle.jpg.png" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>RESTRICTED</h4>
-                <span>...</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Team Section -->
-
+    
     
   </main><!-- End #main -->
 

@@ -52,42 +52,42 @@
             <ul>
               <li class="dropdown"><a href="#"><span>Eerste elftallen</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="A-ploeg.php">A-ploeg</A-ploeg></a></li>
-                  <li><a href="B-ploeg.php">B-ploeg</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=23 ?>">A-ploeg</A-ploeg></a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=24 ?>">B-ploeg</a></li>
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>Reserven</span> <i class="bi bi-chevron-right"></i></a>
               <ul>
-                  <li><a href="Reserve-A.php">Reserven-A</a></li>
-                  <li><a href="Reserve-B.php">Reserven-B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=19 ?>">Reserven-A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=20 ?>">Reserven-B</a></li>
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>Jeugd</span> <i class="bi bi-chevron-right"></i></a>
               <ul>
-                  <li><a href="U6.php">U6</a></li>
-                  <li><a href="U7.php">U7</a></li>
-                  <li><a href="U8A.php">U8A</a></li>
-                  <li><a href="U8B.php">U8B</a></li>
-                  <li><a href="U9A.php">U9A</a></li>
-                  <li><a href="U9B.php">U9B</a></li>
-                  <li><a href="U10A.php">U10A</a></li>
-                  <li><a href="U10B.php">U10B</a></li>
-                  <li><a href="U11A.php">U11A</a></li>
-                  <li><a href="U11B.php">U11B</a></li>
-                  <li><a href="U12A.php">U12A</a></li>
-                  <li><a href="U12B.php">U12B</a></li>
-                  <li><a href="U13A.php">U13A</a></li>
-                  <li><a href="U13B.php">U13B</a></li>
-                  <li><a href="U15A.php">U15A</a></li>
-                  <li><a href="U15B.php">U15B</a></li>
-                  <li><a href="U17.php">U17</a></li>
-                  <li><a href="U21.php">U21</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=1 ?>">U6</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=2 ?>">U7</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=3 ?>">U8A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=4 ?>">U8B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=5 ?>">U9A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=6 ?>">U9B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=7 ?>">U10A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=8 ?>">U10B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=9 ?>">U11A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=10 ?>">U11B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=11 ?>">U12A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=12 ?>">U12B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=13 ?>">U13A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=14 ?>">U13B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=15 ?>">U15A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=16 ?>">U15B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=17 ?>">U17</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=18 ?>">U21</a></li>
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>G-ploegen</span> <i class="bi bi-chevron-right"></i></a>
               <ul>
-                  <li><a href="G-Kids.php">G-kids</a></li>
-                  <li><a href="G-senioren.php">G-senioren</a></li>
+                  <li><a href="ploegen.phpp" value="<?php $ploegid=21 ?>">G-kids</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=22 ?>">G-senioren</a></li>
                 </ul>
               </li>
             </ul>

@@ -21,6 +21,19 @@
         echo"er zit een fout in de query: ".$mysqli->error;
     }
   }
+  function fetchGemeente($postcode, $mysqli){
+    $query = "SELECT gemeente FROM tblpostcode WHERE postcode = ?";
+    if ($stmt = $mysqli->prepare($query)) {
+    $stmt->bind_param("s", $postcode);
+        $stmt->execute();
+        $stmt->bind_result($gemeente);
+        $stmt->fetch();
+        $stmt->close();
+        return $gemeente;
+  }else{
+    return "Error fetching gemeente";
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,6 +133,16 @@
             <td><input type="text" name="postcode1" id="postcode1" value="<?php echo $postcode1;?>"readonly>
             <label id="postcode1Verplicht" class="fout"></label></td>
         </tr>
+        <tr>
+            <td><label>gemeente speler:</label></td>
+            <td>
+              <?php
+                $gemeente_speler = fetchGemeente($postcode1, $mysqli);
+              ?>
+              <input type="text" name="gemeente_speler" id="gemeente_speler" value="<?php echo $gemeente_speler;?>" readonly>
+              <label id="gemeenteVerplicht" class="fout"></label>
+            </td>
+        </tr>
         <!-- Contactgegevens speler -->
         <tr>
             <th colspan="2">Contactgegevens speler</th>
@@ -165,6 +188,16 @@
             <td><label>postcode moeder:</label></td>
             <td><input type="text" name="postcode2" id="postcode2" value="<?php echo $postcode2;?>"readonly>
             <label id="postcode2Verplicht" class="fout"></label></td>
+        </tr>
+        <tr>
+            <td><label>gemeente moeder:</label></td>
+            <td>
+              <?php
+                $gemeente_moeder = fetchGemeente($postcode2, $mysqli);
+              ?>
+              <input type="text" name="gemeente_moeder" id="gemeente_moeder" value="<?php echo $gemeente_moeder;?>" readonly>
+              <label id="gemeenteVerplicht" class="fout"></label>
+            </td>
         </tr>
         <tr>
             <th colspan="2">Vader</th>

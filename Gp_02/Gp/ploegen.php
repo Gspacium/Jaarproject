@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -129,13 +128,15 @@
     $mysqli= new MySQLi ("localhost","root","","voetbalclubphp");
     if(mysqli_connect_errno()) {trigger_error('Fout bij verbinding: '.$mysqli->error); }
     else{
-        if(isset($_GET['sortBy'])){
-          $sortBy = $_GET['sortBy'];
-        }else{
-          $sortBy = 'spelernr';
-        }
-        $sql= "SELECT s.* from tblspelers s , tblspelersperploeg p WHERE p.ploegID=$ploegid ORDER BY $sortBy ASC";
+        $sql= "SELECT s.* from tblspelers s , tblspelersperploeg p WHERE  s.spelernr= p.spelernr and p.ploegID=? ORDER BY ? ASC";
         if($stmt = $mysqli->prepare($sql)){
+          $stmt -> bind_param('is',$ploegid,$sortBy);
+          if(isset($_GET['sortBy'])){
+            $sortBy = $_GET['sortBy'];
+          }else{
+            $sortBy = 'spelernr';
+          }
+          $ploegid = "1";
             if(!$stmt->execute()){
                 echo "Het uitvoeren van de query is mislukt: '.$stmt->error.' in query: ".$sql;
             }else{

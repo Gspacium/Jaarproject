@@ -68,9 +68,9 @@
               </li>
               <li class="dropdown"><a href="#"><span>Jeugd</span> <i class="bi bi-chevron-right"></i></a>
               <ul>
-                  <li><a href="ploegen.php" value="<?php $ploegid=1 ?>" >U6</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=2 ?>">U7</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=3 ?>">U8A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid="1"; ?>" >U6</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid="2"; ?>">U7</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid="3"; ?>">U8A</a></li>
                   <li><a href="ploegen.php" value="<?php $ploegid=4 ?>">U8B</a></li>
                   <li><a href="ploegen.php" value="<?php $ploegid=5 ?>">U9A</a></li>
                   <li><a href="ploegen.php" value="<?php $ploegid=6 ?>">U9B</a></li>
@@ -136,7 +136,7 @@
           }else{
             $sortBy = 'spelernr';
           }
-          $ploegid = "1";
+          $ploegid = "";
             if(!$stmt->execute()){
                 echo "Het uitvoeren van de query is mislukt: '.$stmt->error.' in query: ".$sql;
             }else{

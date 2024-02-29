@@ -58,42 +58,42 @@
             <ul>
               <li class="dropdown"><a href="#"><span>Eerste elftallen</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="ploegen.php" value="<?php $ploegid=23 ?>">A-ploeg</A-ploeg></a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=24 ?>">B-ploeg</a></li>
+                  <li><a href="ploegen.php?ploegnr=23">A-ploeg</A-ploeg></a></li>
+                  <li><a href="ploegen.php?ploegnr=24">B-ploeg</a></li>
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>Reserven</span> <i class="bi bi-chevron-right"></i></a>
               <ul>
-                  <li><a href="ploegen.php" value="<?php $ploegid=19 ?>">Reserven-A</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=20 ?>">Reserven-B</a></li>
+                  <li><a href="ploegen.php?ploegnr=19">Reserven-A</a></li>
+                  <li><a href="ploegen.php?ploegnr=20">Reserven-B</a></li>
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>Jeugd</span> <i class="bi bi-chevron-right"></i></a>
               <ul>
-                  <li><a href="ploegen.php" value="<?php $ploegid=1 ?>">U6</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=2 ?>">U7</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=3 ?>">U8A</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=4 ?>">U8B</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=5 ?>">U9A</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=6 ?>">U9B</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=7 ?>">U10A</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=8 ?>">U10B</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=9 ?>">U11A</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=10 ?>">U11B</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=11 ?>">U12A</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=12 ?>">U12B</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=13 ?>">U13A</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=14 ?>">U13B</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=15 ?>">U15A</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=16 ?>">U15B</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=17 ?>">U17</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=18 ?>">U21</a></li>
+                  <li><a href="ploegen.php?ploegnr=1">U6</a></li>
+                  <li><a href="ploegen.php?ploegnr=2">U7</a></li>
+                  <li><a href="ploegen.php?ploegnr=3">U8A</a></li>
+                  <li><a href="ploegen.php?ploegnr=4">U8B</a></li>
+                  <li><a href="ploegen.php?ploegnr=5">U9A</a></li>
+                  <li><a href="ploegen.php?ploegnr=6">U9B</a></li>
+                  <li><a href="ploegen.php?ploegnr=7">U10A</a></li>
+                  <li><a href="ploegen.php?ploegnr=8">U10B</a></li>
+                  <li><a href="ploegen.php?ploegnr=9">U11A</a></li>
+                  <li><a href="ploegen.php?ploegnr=10">U11B</a></li>
+                  <li><a href="ploegen.php?ploegnr=11">U12A</a></li>
+                  <li><a href="ploegen.php?ploegnr=12">U12B</a></li>
+                  <li><a href="ploegen.php?ploegnr=13">U13A</a></li>
+                  <li><a href="ploegen.php?ploegnr=14">U13B</a></li>
+                  <li><a href="ploegen.php?ploegnr=15">U15A</a></li>
+                  <li><a href="ploegen.php?ploegnr=16">U15B</a></li>
+                  <li><a href="ploegen.php?ploegnr=17">U17</a></li>
+                  <li><a href="ploegen.php?ploegnr=18">U21</a></li>
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>G-ploegen</span> <i class="bi bi-chevron-right"></i></a>
               <ul>
-                  <li><a href="ploegen.phpp" value="<?php $ploegid=21 ?>">G-kids</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=22 ?>">G-senioren</a></li>
+                  <li><a href="ploegen.phpp?ploegnr=21">G-kids</a></li>
+                  <li><a href="ploegen.php?ploegnr=22">G-senioren</a></li>
                 </ul>
               </li>
             </ul>
@@ -168,14 +168,14 @@
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U6</a></h4>
+              <h4><a href="ploegen.php?ploegnr=1">U6</a></h4>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U7</a></h4>
+              <h4><a href="ploegen.php?ploegnr=2">U7</a></h4>
               
             </div>
           </div>
@@ -183,7 +183,7 @@
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U8A</a></h4>
+              <h4><a href="ploegen.php?ploegnr=3">U8A</a></h4>
               
             </div>
           </div>
@@ -191,156 +191,151 @@
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U8B</a></h4>
+              <h4><a href="ploegen.php?ploegnr=4">U8B</a></h4>
               </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U9A</a></h4>
+              <h4><a href="ploegen.php?ploegnr=5">U9A</a></h4>
               </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U9B</a></h4>
+              <h4><a href="ploegen.php?ploegnr=6">U9B</a></h4>
               </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U9B</a></h4>
-              </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U10A</a></h4>
+              <h4><a href="ploegen.php?ploegnr=7">U10A</a></h4>
               </div>
           </div>
           
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U10B</a></h4>
+              <h4><a href="ploegen.php?ploegnr=8">U10B</a></h4>
               </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U11A</a></h4>
+              <h4><a href="ploegen.php?ploegnr=9">U11A</a></h4>
               </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U11B</a></h4>
+              <h4><a href="ploegen.php?ploegnr=10">U11B</a></h4>
               </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U12A</a></h4>
+              <h4><a href="ploegen.php?ploegnr=11">U12A</a></h4>
               </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U12B</a></h4>
+              <h4><a href="ploegen.php?ploegnr=12">U12B</a></h4>
               </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U13A</a></h4>
+              <h4><a href="ploegen.php?ploegnr=13">U13A</a></h4>
               </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U13B</a></h4>
+              <h4><a href="ploegen.php?ploegnr=14">U13B</a></h4>
               </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bbx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U15A</a></h4>
+              <h4><a href="ploegen.php?ploegnr=15">U15A</a></h4>
               </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U15B</a></h4>
+              <h4><a href="ploegen.php?ploegnr=16">U15B</a></h4>
               </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U17</a></h4>
+              <h4><a href="ploegen.php?ploegnr=17">U17</a></h4>
               </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">U21</a></h4>
+              <h4><a href="ploegen.php?ploegnr=18">U21</a></h4>
               </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">Reserven-A</a></h4>
+              <h4><a href="ploegen.php?ploegnr=19">Reserven-A</a></h4>
               </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">Reserven-B</a></h4>
+              <h4><a href="ploegen.php?ploegnr=20">Reserven-B</a></h4>
               </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">A-ploeg</a></h4>
+              <h4><a href="ploegen.php?ploegnr=21">G-Kids</a></h4>
               </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">B-ploeg</a></h4>
+              <h4><a href="ploegen.php?ploegnr=22">G-senioren</a></h4>
+              </div>
+          </div>
+          
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="ploegen.php?ploegnr=23">A-ploeg</a></h4>
               </div>
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">G-Kids</a></h4>
+              <h4><a href="ploegen.php?ploegnr=24">B-ploeg</a></h4>
               </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="ploegen.php">G-senioren</a></h4>
-              </div>
-          </div>
+          
 
           
 

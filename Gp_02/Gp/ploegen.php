@@ -56,42 +56,42 @@
             <ul>
               <li class="dropdown"><a href="#"><span>Eerste elftallen</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="ploegen.php" value="<?php $ploegid=23 ?>">A-ploeg</A-ploeg></a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=24 ?>">B-ploeg</a></li>
+                  <li><a href="ploegen.php?ploegnr=23">A-ploeg</A-ploeg></a></li>
+                  <li><a href="ploegen.php?ploegnr=24">B-ploeg</a></li>
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>Reserven</span> <i class="bi bi-chevron-right"></i></a>
               <ul>
-                  <li><a href="ploegen.php" value="<?php $ploegid=19 ?>">Reserven-A</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=20 ?>">Reserven-B</a></li>
+                  <li><a href="ploegen.php?ploegnr=19">Reserven-A</a></li>
+                  <li><a href="ploegen.php?ploegnr=20">Reserven-B</a></li>
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>Jeugd</span> <i class="bi bi-chevron-right"></i></a>
               <ul>
-                  <li><a href="ploegen.php" value="<?php $ploegid="1"; ?>" >U6</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid="2"; ?>">U7</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid="3"; ?>">U8A</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=4 ?>">U8B</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=5 ?>">U9A</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=6 ?>">U9B</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=7 ?>">U10A</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=8 ?>">U10B</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=9 ?>">U11A</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=10 ?>">U11B</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=11 ?>">U12A</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=12 ?>">U12B</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=13 ?>">U13A</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=14 ?>">U13B</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=15 ?>">U15A</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=16 ?>">U15B</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=17 ?>">U17</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=18 ?>">U21</a></li>
+                  <li><a href="ploegen.php?ploegnr=1">U6</a></li>
+                  <li><a href="ploegen.php?ploegnr=2">U7</a></li>
+                  <li><a href="ploegen.php?ploegnr=3">U8A</a></li>
+                  <li><a href="ploegen.php?ploegnr=4">U8B</a></li>
+                  <li><a href="ploegen.php?ploegnr=5">U9A</a></li>
+                  <li><a href="ploegen.php?ploegnr=6">U9B</a></li>
+                  <li><a href="ploegen.php?ploegnr=7">U10A</a></li>
+                  <li><a href="ploegen.php?ploegnr=8">U10B</a></li>
+                  <li><a href="ploegen.php?ploegnr=9">U11A</a></li>
+                  <li><a href="ploegen.php?ploegnr=10">U11B</a></li>
+                  <li><a href="ploegen.php?ploegnr=11">U12A</a></li>
+                  <li><a href="ploegen.php?ploegnr=12">U12B</a></li>
+                  <li><a href="ploegen.php?ploegnr=13">U13A</a></li>
+                  <li><a href="ploegen.php?ploegnr=14">U13B</a></li>
+                  <li><a href="ploegen.php?ploegnr=15">U15A</a></li>
+                  <li><a href="ploegen.php?ploegnr=16">U15B</a></li>
+                  <li><a href="ploegen.php?ploegnr=17">U17</a></li>
+                  <li><a href="ploegen.php?ploegnr=18">U21</a></li>
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>G-ploegen</span> <i class="bi bi-chevron-right"></i></a>
               <ul>
-                  <li><a href="ploegen.phpp" value="<?php $ploegid=21 ?>">G-kids</a></li>
-                  <li><a href="ploegen.php" value="<?php $ploegid=22 ?>">G-senioren</a></li>
+                  <li><a href="ploegen.php?ploegnr=21">G-kids</a></li>
+                  <li><a href="ploegen.php?ploegnr=22">G-senioren</a></li>
                 </ul>
               </li>
             </ul>
@@ -124,19 +124,24 @@
                     <input type="submit" class="btn btn-primary" style="margin:0;"name="sorteer" id="sorteer" value="Sorteer">
       </form>
   <?php 
-  print_r($_POST);
     $mysqli= new MySQLi ("localhost","root","","voetbalclubphp");
     if(mysqli_connect_errno()) {trigger_error('Fout bij verbinding: '.$mysqli->error); }
     else{
-        $sql= "SELECT s.* from tblspelers s , tblspelersperploeg p WHERE  s.spelernr= p.spelernr and p.ploegID=? ORDER BY ? ASC";
+        if(isset($_GET["ploegnr"])){
+          $ploegnr = $_GET["ploegnr"];
+        }else{
+         echo "er zit geen persoon in deze ploeg";
+        }
+        $sql= "SELECT s.* from tblspelers s , tblspelersperploeg p WHERE  s.spelernr = p.spelernr and p.ploegID=? ORDER BY ? ASC";
         if($stmt = $mysqli->prepare($sql)){
-          $stmt -> bind_param('is',$ploegid,$sortBy);
+          $stmt -> bind_param('is',$ploegnr,$sortBy);
           if(isset($_GET['sortBy'])){
             $sortBy = $_GET['sortBy'];
           }else{
             $sortBy = 'spelernr';
           }
-          $ploegid = "";
+          
+          
             if(!$stmt->execute()){
                 echo "Het uitvoeren van de query is mislukt: '.$stmt->error.' in query: ".$sql;
             }else{
@@ -148,10 +153,10 @@
                   $id = $spelersnr;
                     echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode1 . "</td><td>" . $email1 . "</td><td>" . $tel1 . "</td><td style='text-align: center;'>";
                     ?>
-                    <form name='form1' method='post' action='meer_info.php?actiemeerinfo&spelerid=<?php echo $id;?>'><input style="margin: 10px;" type='submit' name='Meer' id='Meer' value='Meer'></form>
+                    <form name='form1' method='post' action='meer_info.php?actiemeerinfo&spelerid=<?php echo $id;?>'><input style="margin: auto;" type='submit' name='Meer' id='Meer' value='Meer'></form>
                     <?php echo "</td><td tyle='text-align: center;'>";
                     ?>
-                      <form name='form1' method='post' action='updatepage.php?actieverander&spelerid=<?php echo $id;?>'><input style="margin: 10px;"type='submit' name='update' id='update' value='Wijzig'></form>
+                      <form name='form1' method='post' action='updatepage.php?actieverander&spelerid=<?php echo $id;?>'><input style="margin: auto;"type='submit' name='update' id='update' value='Wijzig'></form>
                     <?php echo "</td></tr>";
                 }
                 echo "</table></div>"; 

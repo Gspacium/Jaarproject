@@ -25,7 +25,7 @@ print_r($_POST);
       else{
 
        
-        $sqlpostcode= "SELECT postcodeid , gemeente FROM tblpostcode WHERE postcode=?";
+        $sqlpostcode= "SELECT PostcodeId, gemeente FROM tblpostcode WHERE postcode=?";
 
         
         if($stmt1 = $mysqli->prepare($sqlpostcode)){
@@ -34,7 +34,7 @@ print_r($_POST);
           if(!$stmt1->execute()){
                 echo "Het uitvoeren van de query is mislukt: '.$stmt->error.' in query: ".$sql;
             }else{
-                $stmt1->bind_result($postcodeid);
+                $stmt1->bind_result($postcodeid, $gemeente);
 
               
                $stmt1->fetch();
@@ -44,37 +44,10 @@ print_r($_POST);
                 }
                 
         }
-    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        $sql = "INSERT INTO tblspelers(naam, voornaam, geboortedatum, adres_speler, postcodeid_speler, email, telefoonnummer_speler, wie_eerst_te_verwittigen,email_moeder, telefoonnummer_moeder, adres_moeder, postcodeid_moeder,email_vader,telefoonnummer_vader, adres_vader, postcodeid_vader, medische_toelichting, toelichting) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO tblspelers(naam, voornaam, geboortedatum, adres_speler, postcode_speler, email, telefoonnummer_speler, wie_eerst_te_verwittigen,email_moeder, telefoonnummer_moeder, adres_moeder, postcode_moeder,email_vader,telefoonnummer_vader, adres_vader, postcode_vader, medische_toelichting, toelichting) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         if($stmt = $mysqli->prepare($sql)){
-          $stmt ->bind_param("ssssissssssisssiss", $naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$contactfirst,$email2,$tel2, $adres2, $postcode2, $email3,$tel3, $adres3, $postcode3, $medische_toelichting, $toelichting);
+          
           $naam = $mysqli->real_escape_string($_POST["naam"]);
           $voornaam = $mysqli->real_escape_string($_POST["voornaam"]);
           $datum = $mysqli->real_escape_string($_POST["datum"]);
@@ -86,25 +59,25 @@ print_r($_POST);
           $email2 = $mysqli->real_escape_string($_POST["email2"]);
           $tel2 = $mysqli->real_escape_string($_POST["tel2"]);
           $adres2 = $mysqli->real_escape_string($_POST["adres2"]);
-          $postcode2 = $mysqli->real_escape_string($_POST["postcode2"]);
+          $postcode2 = $postcodeidtijdelijk;
           $email3 = $mysqli->real_escape_string($_POST["email3"]);
           $tel3 = $mysqli->real_escape_string($_POST["tel3"]);
           $adres3 = $mysqli->real_escape_string($_POST["adres3"]);
-          $postcode3 = $mysqli->real_escape_string($_POST["postcode3"]);
+          $postcode3 = $postcodeidtijdelijk;
           $medische_toelichting = $mysqli->real_escape_string($_POST["medische_toelichting"]);
           $toelichting = $mysqli->real_escape_string($_POST["toelichting"]);
-
+          $stmt ->bind_param("ssssissssssisssiss", $naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$contactfirst,$email2,$tel2, $adres2, $postcode2, $email3,$tel3, $adres3, $postcode3, $medische_toelichting, $toelichting);
             if(!$stmt->execute()){
               echo "het uitvoeren van de query is mislukt";
             }else{
                echo'<meta http-equiv="refresh" content="0;url=index.php">';
-             
             }
             $stmt->close();
         }
         else{
-          echo "er zit een fout in de query";
+          echo "Er is een fout in de query: " . $mysqli->error;
         }
+       
       }
   }
   

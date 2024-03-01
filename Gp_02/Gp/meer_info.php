@@ -223,6 +223,16 @@
             <td><input type="text" name="postcode3" id="postcode3" value="<?php echo $postcode3;?>"readonly></td>
             <label id="postcode3Verplicht" class="fout"></label>
         </tr>
+        <tr>
+            <td><label>gemeente vader:</label></td>
+            <td>
+              <?php
+                $gemeente_vader = fetchGemeente($postcode3, $mysqli);
+              ?>
+              <input type="text" name="gemeente_vader" id="gemeente_vader" value="<?php echo $gemeente_vader;?>" readonly>
+              <label id="gemeenteVerplicht" class="fout"></label>
+            </td>
+        </tr>
         <!-- Voeg hier de overige velden toe -->
         <tr>
             <th colspan="2">Andere</th>

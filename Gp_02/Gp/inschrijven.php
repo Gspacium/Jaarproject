@@ -25,25 +25,47 @@ print_r($_POST);
       else{
 
        
-        $sqlpostcode= "SELECT PostcodeId, gemeente FROM tblpostcode WHERE postcode=?";
+        $sqlpostcode= "SELECT postcode, gemeente FROM tblpostcode WHERE postcode=?";
 
-        
+        $postcode1 = null;
         if($stmt1 = $mysqli->prepare($sqlpostcode)){
-           $stmt1->bind_param('i',$postcodetijdelijk);
-           $postcodetijdelijk = $_POST["postcode1"];
+           $stmt1->bind_param('s',$_POST["postcode1"]);
           if(!$stmt1->execute()){
-                echo "Het uitvoeren van de query is mislukt: '.$stmt->error.' in query: ".$sql;
+                echo "Het uitvoeren van de query is mislukt: '.$stmt1->error.' in query: ".$sqlpostcode;
             }else{
-                $stmt1->bind_result($postcodeid, $gemeente);
-
-              
-               $stmt1->fetch();
-               
-               $postcodeidtijdelijk = $postcodeid;
-                    
-                }
-                
+               $stmt1->bind_result($postcode, $gemeente);
+               if($stmt1->fetch()){
+                $postcode1 = $postcode;
+               }
+            }
+          $stmt1->close();                
         }
+        $postcode2 = null;
+        if($stmt2 = $mysqli->prepare($sqlpostcode)){
+          $stmt2->bind_param('s',$_POST["postcode2"]);
+         if(!$stmt2->execute()){
+               echo "Het uitvoeren van de query is mislukt: '.$stmt2->error.' in query: ".$sqlpostcode;
+           }else{
+               $stmt2->bind_result($postcode, $gemeente);
+               if($stmt2->fetch()){
+                $postcode2 = $postcode; 
+               }               
+            }
+          $stmt2->close();                
+        }
+        $postcode3 = null;
+        if($stmt3 = $mysqli->prepare($sqlpostcode)){
+          $stmt3->bind_param('s',$_POST["postcode3"]);
+        if(!$stmt3->execute()){
+              echo "Het uitvoeren van de query is mislukt: '.$stmt3->error.' in query: ".$sqlpostcode;
+          }else{
+              $stmt3->bind_result($postcode, $gemeente);
+              if($stmt3->fetch()){
+                $postcode3 = $postcode; 
+              }        
+          }
+              $stmt3->close();                
+        }  
 
         $sql = "INSERT INTO tblspelers(naam, voornaam, geboortedatum, adres_speler, postcode_speler, email, telefoonnummer_speler, wie_eerst_te_verwittigen,email_moeder, telefoonnummer_moeder, adres_moeder, postcode_moeder,email_vader,telefoonnummer_vader, adres_vader, postcode_vader, medische_toelichting, toelichting) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         if($stmt = $mysqli->prepare($sql)){
@@ -52,18 +74,18 @@ print_r($_POST);
           $voornaam = $mysqli->real_escape_string($_POST["voornaam"]);
           $datum = $mysqli->real_escape_string($_POST["datum"]);
           $adres1 = $mysqli->real_escape_string($_POST["adres1"]);
-          $postcode1 =  $postcodeidtijdelijk;
+          $postcode1 =  $postcode1;
           $email1 = $mysqli->real_escape_string($_POST["email1"]);
           $tel1 = $mysqli->real_escape_string($_POST["tel1"]);
           $contactfirst = $mysqli->real_escape_string($_POST["contactfirst"]);
           $email2 = $mysqli->real_escape_string($_POST["email2"]);
           $tel2 = $mysqli->real_escape_string($_POST["tel2"]);
           $adres2 = $mysqli->real_escape_string($_POST["adres2"]);
-          $postcode2 = $postcodeidtijdelijk;
+          $postcode2 = $postcode2;
           $email3 = $mysqli->real_escape_string($_POST["email3"]);
           $tel3 = $mysqli->real_escape_string($_POST["tel3"]);
           $adres3 = $mysqli->real_escape_string($_POST["adres3"]);
-          $postcode3 = $postcodeidtijdelijk;
+          $postcode3 = $postcode3;
           $medische_toelichting = $mysqli->real_escape_string($_POST["medische_toelichting"]);
           $toelichting = $mysqli->real_escape_string($_POST["toelichting"]);
           $stmt ->bind_param("ssssissssssisssiss", $naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$contactfirst,$email2,$tel2, $adres2, $postcode2, $email3,$tel3, $adres3, $postcode3, $medische_toelichting, $toelichting);
@@ -81,7 +103,6 @@ print_r($_POST);
       }
   }
   
-    
   
   ?>
 <!DOCTYPE html>
@@ -392,7 +413,7 @@ print_r($_POST);
             <td><label>postcode moeder:</label></td>
             <td><select name="postcode2" id="postcode2" class="form-control">
               <?php
-                $mysqli = new mysqli("localhost","root","","voetbalclubphp");
+
                 $sql = "SELECT postcode, gemeente FROM tblpostcode  ORDER BY postcode";
                 if ($stmt = $mysqli -> prepare($sql)) {
                   if (!$stmt -> execute()) {
@@ -437,7 +458,7 @@ print_r($_POST);
         <td><label>postcode vader:</label></td>
             <td><select name="postcode3" id="postcode3" class="form-control">
               <?php
-                $mysqli = new mysqli("localhost","root","","voetbalclubphp");
+
                 $sql = "SELECT postcode, gemeente FROM tblpostcode  ORDER BY postcode";
                 if ($stmt = $mysqli -> prepare($sql)) {
                   if (!$stmt -> execute()) {

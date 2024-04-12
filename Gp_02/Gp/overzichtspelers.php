@@ -110,8 +110,8 @@
                       <form name='Wijzigen' method='post' action='updatepage.php?actieverander&spelerid=<?php echo $id;?>'><input style="margin: auto  ;"type='submit' name='update' id='update' value='Wijzig'></form>
                     <?php echo "</td></tr>";
                     ?>
-                    <form name='Verwijderen' method='post' action='meer_info.php?actiemeerinfo&spelerid=<?php echo $id;?>'><input style="margin: auto;" type='submit' name='Verwijderen' id='Verwijderen' value='Verwijderen'></form>
-                    <?php echo "</td><td tyle='text-align: center;'>";
+                      <form name='Verwijderen' method='post' action='verwijder.php?actiemeerinfo&spelerid=<?php echo $id;?>'><input style="margin: auto;" type='submit' name='Verwijderen' id='Verwijderen' value='Verwijderen'></form>
+                    <?php echo "</td><td>";
                     
                 }
                 echo "</table></div>"; 

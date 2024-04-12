@@ -6,19 +6,20 @@
   if(mysqli_connect_errno()){
     trigger_error("fout bij verbinding: ".$mysqli->error);
   }else{
-    $sql = "UPDATE tblspelers SET actief = 0 WHERE spelerid=? ";
+    $sql = "UPDATE tblspelers SET actief = '0' WHERE spelerid=? ";
     if($stmt = $mysqli->prepare($sql)){
+      
       if(!$stmt->execute()){
-        echo "het uitvoeren van de query is mislukt";
+        echo "Het uitvoeren van de query is mislukt";
       }else{
-        echo " Het upddaten is gelukt"; 
+        echo "Het updaten is gelukt"; 
       }
       $stmt->close();
-    }else{
-      echo "er zit een fout in de query"; 
     }
-      
-  }
+    else{
+      echo "Er zit een fout in de query". $stmt->error; 
+    }
+  } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,7 +96,7 @@
       </tr>  
     <tr>
         <td>
-          <buttons name="terug" id="terug" action="overzichtspelers.php">Terug</button>  
+          <"
         </td>
       </tr>
     </table>

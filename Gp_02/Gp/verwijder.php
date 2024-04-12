@@ -13,8 +13,11 @@
       }else{
         echo " Het upddaten is gelukt"; 
       }
-    }
       $stmt->close();
+    }else{
+      echo "er zit een fout in de query"; 
+    }
+      
   }
 ?>
 <!DOCTYPE html>

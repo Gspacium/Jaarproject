@@ -6,34 +6,18 @@
   if(mysqli_connect_errno()){
     trigger_error("fout bij verbinding: ".$mysqli->error);
   }else{
-    $sql="SELECT * FROM tblspelers WHERE spelernr = ?";
+    $sql = "UPDATE tblspelers SET actief = 0 WHERE spelerid=? ";
     if($stmt = $mysqli->prepare($sql)){
-      $stmt->bind_param("i",$id);
       if(!$stmt->execute()){
-        echo "Het uitvoeren van de query is mislukt:".$stmt->error."in query".$sql;
+        echo "het uitvoeren van de query is mislukt";
       }else{
-        $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting,$actief);
-        $stmt->fetch();
-        $id = $spelersnr;
+        echo " Het upddaten is gelukt"; 
       }
+    }
       $stmt->close();
     }else{
         echo"er zit een fout in de query: ".$mysqli->error;
     }
-  }
-  function fetchGemeente($postcode, $mysqli){
-    $query = "SELECT gemeente FROM tblpostcode WHERE postcode = ?";
-    if ($stmt = $mysqli->prepare($query)) {
-    $stmt->bind_param("s", $postcode);
-        $stmt->execute();
-        $stmt->bind_result($gemeente);
-        $stmt->fetch();
-        $stmt->close();
-        return $gemeente;
-  }else{
-    return "Error fetching gemeente";
-  }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -101,156 +85,18 @@
  
   <section>
   <div class="container">
-   <form id="inschrijven" name="inschrijven" method="post" action='updatepage.php?actieverander&spelerid=<?php echo $id;?>'>
+   <form id="inactief" name="inactief" method="post">
     <table class="mx-auto">
-        <!-- Persoonlijke gegevens speler -->
-        
-        <tr>
-            <th colspan="2">Persoonlijke gegevens speler</th>
-        </tr>
-        <tr>
-            <td><label>Naam:</label></td>
-            <td><input type="text" name="naam" id="naam" value="<?php echo $naam;?>" readonly>
-            <label id="naamVerplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>Voornaam:</label></td>
-            <td><input type="text" name="voornaam" id="voornaam" value="<?php echo $voornaam ;?> " readonly>
-            <label id="voornaamVerplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>Geboortedatum:</label></td>
-            <td><input type="date" name="datum" id="datum" value="<?php echo (new DateTime($datum))->format('Y-m-d'); ?>" readonly>
-            <label id="datumVerplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>Adres speler:</label></td>
-            <td><input type="text" name="adres1" id="adres1" value="<?php echo $adres1;?>"readonly>
-            <label id="adres1Verplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>postcode speler:</label></td>
-            <td><input type="text" name="postcode1" id="postcode1" value="<?php echo $postcode1;?>"readonly>
-            <label id="postcode1Verplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>gemeente speler:</label></td>
-            <td>
-              <?php
-                $gemeente_speler = fetchGemeente($postcode1, $mysqli);
-              ?>
-              <input type="text" name="gemeente_speler" id="gemeente_speler" value="<?php echo $gemeente_speler;?>" readonly>
-              <label id="gemeenteVerplicht" class="fout"></label>
-            </td>
-        </tr>
-        <!-- Contactgegevens speler -->
-        <tr>
-            <th colspan="2">Contactgegevens speler</th>
-        </tr>
-        <tr>
-            <td><label>E-mail speler:</label></td>
-            <td><input type="email" name="email1" id="email1" value="<?php echo $email1;?>"readonly>
-            <label id="email1Verplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>Telefoonnummer speler:</label></td>
-            <td><input type="tel" name="tel1" id="tel1" value="<?php echo $tel1;?>"readonly>
-            <label id="tel1Verplicht" class="fout"></label></td>
-        </tr>
-        <!-- Contactgegevens ouders -->
-        <tr>
-            <th colspan="2">Contactgegevens ouders</th>
-        </tr>
-        <tr>
-            <td><label>Wie eerst contacteren:</label></td>
-            <td><input type="text" name="contactfirst" id="contactfirst" value="<?php echo $contactfirst;?>"readonly>
-            <label id="contactVerplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <th colspan="2">Moeder</th>
-        </tr>
-        <tr>
-            <td><label>E-mail moeder:</label></td>
-            <td><input type="email" name="email2" id="email2" value="<?php echo $email2;?>"readonly>
-            <label id="email2Verplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>Telefoonnummer moeder:</label></td>
-            <td><input type="tel" name="tel2" id="tel2" value="<?php echo $tel2;?>"readonly>
-            <label id="tel2Verplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>Adres moeder:</label></td>
-            <td><input type="text" name="adres2" id="adres2" value="<?php echo $adres2;?>"readonly>
-            <label id="adres2Verplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>postcode moeder:</label></td>
-            <td><input type="text" name="postcode2" id="postcode2" value="<?php echo $postcode2;?>"readonly>
-            <label id="postcode2Verplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>gemeente moeder:</label></td>
-            <td>
-              <?php
-                $gemeente_moeder = fetchGemeente($postcode2, $mysqli);
-              ?>
-              <input type="text" name="gemeente_moeder" id="gemeente_moeder" value="<?php echo $gemeente_moeder;?>" readonly>
-              <label id="gemeenteVerplicht" class="fout"></label>
-            </td>
-        </tr>
-        <tr>
-            <th colspan="2">Vader</th>
-        </tr>
-        <tr>
-            <td><label>E-mail vader:</label></td>
-            <td><input type="email" name="email3" id="email3" value="<?php echo $email3;?>"readonly>
-            <label id="email3Verplicht" class="fout"></label></td>
-        </tr>
-        
-        <tr>
-            <td><label>Telefoonnummer vader:</label></td>
-            <td><input type="tel" name="tel3" id="tel3" value="<?php echo $tel3;?>"readonly>
-            <label id="tel3Verplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>Adres vader:</label></td>
-            <td><input type="text" name="adres3" id="adres3" value="<?php echo $adres3;?>" readonly>
-            <label id="adres3Verplicht" class="fout"></label></td>
-        </tr>
-        <tr>
-            <td><label>postcode vader:</label></td>
-            <td><input type="text" name="postcode3" id="postcode3" value="<?php echo $postcode3;?>"readonly></td>
-            <label id="postcode3Verplicht" class="fout"></label>
-        </tr>
-        <tr>
-            <td><label>gemeente vader:</label></td>
-            <td>
-              <?php
-                $gemeente_vader = fetchGemeente($postcode3, $mysqli);
-              ?>
-              <input type="text" name="gemeente_vader" id="gemeente_vader" value="<?php echo $gemeente_vader;?>" readonly>
-              <label id="gemeenteVerplicht" class="fout"></label>
-            </td>
-        </tr>
-        <!-- Voeg hier de overige velden toe -->
-        <tr>
-            <th colspan="2">Andere</th>
-        </tr>
-        <tr>
-            <td><label for="medische_toelichting">Medische toelichting:<br>Indien geen type "geen"</label></td>
-            <td><textarea class="center"id="medische_toelichting" name="medische_toelichting" rows="4" readonly><?php echo $medische_toelichting;?></textarea></td>
-
-        </tr>
-        <tr>
-            <td><label for="toelichting">Toelichting:</label></td>
-            <td><textarea class="center"id="toelichting" name="toelichting" rows="4" readonly><?php echo $toelichting;?></textarea></td>
-        </tr>
-        <tr>
-          <td colspan="2" style="text-align: center;">
-            <input style="margin: 0;" type='submit' name='update' id='update' value='Wijzig'>
-          </td>
-        </tr>
+    <tr>
+        <td>
+          <p>het verwijderen is gelukt</p>
+        </td>
+      </tr>  
+    <tr>
+        <td>
+          <buttons name="terug" id="terug" action="overzichtspelers.php">Terug</button>  
+        </td>
+      </tr>
     </table>
   </section>
   </form> 

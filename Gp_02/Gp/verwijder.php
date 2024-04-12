@@ -15,9 +15,6 @@
       }
     }
       $stmt->close();
-    else{
-        echo"er zit een fout in de query: ".$mysqli->error;
-    }
   }
 ?>
 <!DOCTYPE html>

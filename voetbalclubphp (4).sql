@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 26 feb 2024 om 11:09
+-- Gegenereerd op: 13 apr 2024 om 15:00
 -- Serverversie: 5.7.17
 -- PHP-versie: 5.6.30
 
@@ -3063,7 +3063,9 @@ INSERT INTO `tblspelers` (`spelernr`, `naam`, `voornaam`, `geboortedatum`, `adre
 (29, 'Kristel', 'Kaat', '2024-01-01', 'gentkasierstraat 79', 9999, 'kaatkristel@gmail.com', '0123456789', 'gentkasierstraat 79', 9999, 'JulieLink@gmail.com', '0123456789', 'gentkasierstraat 79', 9999, 'Lieven.Kristel@gmail.com', '0123456789', 'Moeder', 'Geen', NULL, 'geen toelichting', 1),
 (30, 'Lije', 'Lode', '2024-01-03', 'tarbotlaan 25', 9030, 'Lodelije@gmail.com', '0123456789', 'tarbotlaan 25', 9030, 'Isabelle@gmail.com', '0123456789', 'tarbotlaan 25', 9030, 'Kristoff.Lije@gmail.com', '0147852369', 'Vader', 'Scoliose', NULL, 'Geen toelichting', 1),
 (31, 'Martens', 'Miel', '2024-01-04', 'Genkstraat 28', 9762, 'Martensmiel@gmail.com', '0123789456', 'Genkstraat 28', 9762, 'Brigitte@gmail.com', '1594872630', 'Hasseltlaan 13', 7854, 'Jarno@gmail.com', '0326159487', 'Moeder', 'Neen', NULL, 'Moet van ver komen ', 1),
-(33, 'Klarijns', 'Kris', '2023-01-06', 'Kasteellaan 32', 5647, 'Klarijns.Kris@gmail.com', '0492096752', 'Kasteellaan 32', 8418, 'Ninke@gmail.com', '0326159489', 'Kasteellaan 32', 8418, 'Tomas@gmail.com', '09518476237', 'moeder', 'Geen toelichting', NULL, 'Geen toelichting', 1);
+(33, 'Klarijns', 'Kris', '2023-01-06', 'Kasteellaan 32', 5647, 'Klarijns.Kris@gmail.com', '0492096752', 'Kasteellaan 32', 8418, 'Ninke@gmail.com', '0326159489', 'Kasteellaan 32', 8418, 'Tomas@gmail.com', '09518476237', 'moeder', 'Geen toelichting', NULL, 'Geen toelichting', 1),
+(34, 'Sajah', 'Rayan', '2021-12-13', 'Kasteeldreef 68', 9920, 'Rayan.Sajah@gmail.com', '0492237624', 'Klampenstraat 14', 1000, 'Kristel@gmail.com', '0498765324', 'Loperstraat 35', 1000, 'Geert@gmail.com', '0465823152', 'moeder', 'gebroken vinger', NULL, NULL, NULL),
+(46, 'Jansens', 'Jonas', '2006-03-03', 'Elisabethlaan 15', 3200, 'Jansens.Jonas@gmail.com', '0492096752', 'Elisabethlaan 15', 3200, 'Trischa.Lijens@gmail.com', '0465328546', 'Elisabethlaan 15', 3200, 'Bert.Jansens@gmail.com', '0495600437', 'vader', 'geen', NULL, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -3077,6 +3079,18 @@ CREATE TABLE `tblspelersperploeg` (
   `begindatum` varchar(10) NOT NULL,
   `einddatum` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `tblspelersperploeg`
+--
+
+INSERT INTO `tblspelersperploeg` (`ploegID`, `spelernr`, `begindatum`, `einddatum`) VALUES
+(1, 19, '2024', '2025'),
+(2, 20, '2024', '2025'),
+(3, 21, '2024', '2025'),
+(4, 22, '2024', '2025'),
+(23, 24, '2023', '2025'),
+(24, 26, '2023', '2025');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -3135,7 +3149,7 @@ ALTER TABLE `tblpostcode`
 -- AUTO_INCREMENT voor een tabel `tblspelers`
 --
 ALTER TABLE `tblspelers`
-  MODIFY `spelernr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;COMMIT;
+  MODIFY `spelernr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

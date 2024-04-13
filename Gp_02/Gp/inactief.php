@@ -91,7 +91,7 @@
     <table class="mx-auto">
     <tr>
         <td>
-          <p>het verwijderen is gelukt</p>
+          <p>het inactief maken is gelukt</p>
         </td>
       </tr>  
     <tr>

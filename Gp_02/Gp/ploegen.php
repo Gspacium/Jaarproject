@@ -167,6 +167,8 @@
   }
 ?>
 <div>
+    <a href="toevoegen.php"><input type="button" value="toevoegen" id="toevoegen" style="background-color: #ffc451; margin: 0;"></a>
+<div>
     <a href="aangemeld.php"><input type="button"  value="terug" id="terug" style="background-color: #ffc451; margin: 0;"></a>
 </div>
 </div>

@@ -70,7 +70,7 @@
                         <option value="geboortedatum">geboortedatum</option>
                     </select>
                     <input type="submit" class="btn btn-primary" style="margin:0;"name="sorteer" id="sorteer" value="Sorteer">
-    </form>
+  </form>
     <?php 
     $mysqli= new MySQLi ("localhost","root","","voetbalclubphp");
     if(mysqli_connect_errno()) {trigger_error('Fout bij verbinding: '.$mysqli->error); }
@@ -97,6 +97,9 @@
                     <?php echo "</td><td tyle='text-align: center;'>";
                     ?>
                       <form name='form1' method='post' action='updatepage.php?actieverander&spelerid=<?php echo $id;?>'><input style="margin: 10px;"type='submit' name='update' id='update' value='Wijzig'></form>
+                    <?php echo "</td><td tyle='text-align: center;'>";
+                    ?>
+                    <form name='form1' method='post' action='updatepage.php?actieverander&spelerid=<?php echo $id;?>'><input style="margin: 10px;"type='submit' name='update' id='update' value='Wijzig'></form>
                     <?php echo "</td></tr>";
                 }
                 echo "</table></div>"; 

@@ -6,9 +6,9 @@
   if(mysqli_connect_errno()){
     trigger_error("fout bij verbinding: ".$mysqli->error);
   }else{
-    $sql = "UPDATE tblspelers SET actief = '0' WHERE spelerid=? ";
+    $sql = "UPDATE tblspelers SET actief = '0' WHERE spelernr=? ";
     if($stmt = $mysqli->prepare($sql)){
-      
+      $stmt->bind_param("i", $id);
       if(!$stmt->execute()){
         echo "Het uitvoeren van de query is mislukt";
       }else{
@@ -96,7 +96,7 @@
       </tr>  
     <tr>
         <td>
-          <"
+          <a href="aangemeld.php"><input type="button" value="terug" id="terug" name="terug" style="background-color: #ffc451; margin: 0;"></a>
         </td>
       </tr>
     </table>

@@ -102,7 +102,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="aangemeld.php" class="get-started-btn scrollto">Admin only</a>
+      <a href="inloggen.php" class="get-started-btn scrollto">Admin</a>
 
     </div>
   </header><!-- End Header -->

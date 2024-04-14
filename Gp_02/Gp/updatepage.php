@@ -54,22 +54,43 @@
         voornaam =?,
         geboortedatum =STR_TO_DATE(?, '%Y-%m-%d'),
         adres_speler =?,
-        postcode_speler =?,
+        postcodeid_speler =?,
         email =?,
         telefoonnummer_speler =?,
         wie_eerst_te_verwittigen =?,
         email_moeder =?,
         telefoonnummer_moeder =?,
         adres_moeder =?,
-        postcode_moeder =?,
+        postcodeid_moeder =?,
         email_vader =?,
         adres_vader =?,
         telefoonnummer_vader=?,
-        postcode_vader =?,
+        postcodeid_vader =?,
         medische_toelichting =?,
         toelichting =? 
         WHERE spelernr = $id";
 
+        $sqlpostcode= "SELECT PostcodeId, gemeente FROM tblpostcode WHERE postcode=?";
+        function getPostcodeId($mysqli, $sqlpostcode, $postcode){
+          $postcodeid = null;
+          if($stmt = $mysqli->prepare($sqlpostcode)){
+            $stmt->bind_param('s', $postcode);
+            if(!$stmt->execute()){
+              echo "Het uitvoeren van de query is mislukt: " . $stmt->error . " in query: " . $sqlpostcode;
+            }else{
+              $stmt->bind_result($postcodeid, $gemeente);
+              if ($stmt->fetch()) {
+                return $postcodeid;
+              }
+            }
+            $stmt->close();
+          }
+          return $postcodeid;
+        }
+
+        $postcodeid1 = getPostcodeId($mysqli, $sqlpostcode, $_POST["postcode1"]);
+        $postcodeid2 = getPostcodeId($mysqli, $sqlpostcode, $_POST["postcode2"]);
+        $postcodeid3 = getPostcodeId($mysqli, $sqlpostcode, $_POST["postcode3"]);
 
         if($stmt = $mysqli->prepare($sql)){
           
@@ -77,18 +98,15 @@
           $voornaam = $mysqli->real_escape_string($_POST["voornaam"]);
           $datum = date('Y-m-d', strtotime(str_replace('/', '-', $_POST["datum"])));
           $adres1 = $mysqli->real_escape_string($_POST["adres1"]);
-          $postcode1 = $mysqli->real_escape_string($_POST["postcode1"]);
           $email1 = $mysqli->real_escape_string($_POST["email1"]);
           $tel1 = $mysqli->real_escape_string($_POST["tel1"]);
           $contactfirst = $mysqli->real_escape_string($_POST["contactfirst"]);
           $email2 = $mysqli->real_escape_string($_POST["email2"]);
           $tel2 = $mysqli->real_escape_string($_POST["tel2"]);
           $adres2 = $mysqli->real_escape_string($_POST["adres2"]);
-          $postcode2 = $mysqli->real_escape_string($_POST["postcode2"]);
           $email3 = $mysqli->real_escape_string($_POST["email3"]);
           $tel3 = $mysqli->real_escape_string($_POST["tel3"]);
           $adres3 = $mysqli->real_escape_string($_POST["adres3"]);
-          $postcode3 = $mysqli->real_escape_string($_POST["postcode3"]);
           $medische_toelichting = $mysqli->real_escape_string($_POST["medische_toelichting"]);
           $toelichting = $mysqli->real_escape_string($_POST["toelichting"]);
           $stmt ->bind_param("ssisisissisissiiss", $naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$contactfirst,$email2,$tel2,$adres2,$postcode2,$email3,$adres3,$tel3,$postcode3,$medische_toelichting,$toelichting);
@@ -360,7 +378,7 @@
                     while ($stmt -> fetch()) {
                       $gem=htmlspecialchars($gemeente);
                       $gem=stripslashes($gemeente);
-                      echo '<option value="'. $postcode .'">' . $postcode."&nbsp;".$gem .  '</option>';
+                      echo '<option value="'. $postcode .'"data-postcode-id="'.$postcodeid1.'">' . $postcode."&nbsp;".$gem .  '</option>';
                     }
                   }
                     $stmt -> close();
@@ -419,7 +437,6 @@
             <td><label>postcode moeder:</label></td>
             <td><select name="postcode2" id="postcode2" class="form-control">
               <?php
-                $mysqli = new mysqli("localhost","root","","voetbalclubphp");
                 $sql = "SELECT postcode, gemeente FROM tblpostcode  ORDER BY postcode";
                 if ($stmt = $mysqli -> prepare($sql)) {
                   if (!$stmt -> execute()) {
@@ -429,7 +446,7 @@
                     while ($stmt -> fetch()) {
                       $gem=htmlspecialchars($gemeente);
                       $gem=stripslashes($gemeente);
-                      echo '<option value="'. $postcode .'">' . $postcode."&nbsp;".$gem .  '</option>';
+                      echo '<option value="'. $postcode .'"data-postcode-id="'.$postcodeid2.'">' . $postcode."&nbsp;".$gem .  '</option>';
                     }
                   }
                     $stmt -> close();
@@ -464,7 +481,6 @@
             <td><label>postcode vader:</label></td>
             <td><select name="postcode3" id="postcode3" class="form-control">
               <?php
-                $mysqli = new mysqli("localhost","root","","voetbalclubphp");
                 $sql = "SELECT postcode, gemeente FROM tblpostcode  ORDER BY postcode";
                 if ($stmt = $mysqli -> prepare($sql)) {
                   if (!$stmt -> execute()) {
@@ -474,7 +490,7 @@
                     while ($stmt -> fetch()) {
                       $gem=htmlspecialchars($gemeente);
                       $gem=stripslashes($gemeente);
-                      echo '<option value="'. $postcode .'">' . $postcode."&nbsp;".$gem .  '</option>';
+                      echo '<option value="'. $postcode .'"data-postcode-id="'.$postcodeid3.'">' . $postcode."&nbsp;".$gem .  '</option>';
                     }
                   }
                     $stmt -> close();

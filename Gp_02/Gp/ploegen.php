@@ -124,7 +124,6 @@
                     <input type="submit" class="btn btn-primary" style="margin:0;"name="sorteer" id="sorteer" value="Sorteer">
       </form>
   <?php 
-  
     $mysqli= new MySQLi ("localhost","root","","voetbalclubphp");
     if(mysqli_connect_errno()) {trigger_error('Fout bij verbinding: '.$mysqli->error); }
     else{
@@ -133,8 +132,8 @@
         }else{
          echo "er zit geen persoon in deze ploeg";
         }
-        $sql= "SELECT s.*,p.gemeente from tblspelers s INNER JOIN tblspelersperploeg ploeg ON s.spelernr = ploeg.spelernr 
-               INNER JOIN tblpostcode p ON s.postcode_speler = p.postcode
+        $sql= "SELECT s.*,p.gemeente, p.postcode from tblspelers s INNER JOIN tblspelersperploeg ploeg ON s.spelernr = ploeg.spelernr 
+               INNER JOIN tblpostcode p ON s.postcodeid_speler = p.PostcodeId
                and ploeg.ploegID=? ORDER BY ? ASC";
         if($stmt = $mysqli->prepare($sql)){
           $stmt -> bind_param('is',$ploegnr,$sortBy);
@@ -148,13 +147,13 @@
             if(!$stmt->execute()){
                 echo "Het uitvoeren van de query is mislukt: '.$stmt->error.' in query: ".$sql;
             }else{
-                $stmt->bind_result($spelersnr,$naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$adres2,$postcode2,$email2, $tel2, $adres3, $postcode3, $email3,$tel3, $contactfirst, $medische_toelichting,$bondsnummer, $toelichting,$actief,$gemeente);
+                $stmt->bind_result($spelersnr,$naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$adres2,$postcode2,$email2, $tel2, $adres3, $postcode3, $email3,$tel3, $contactfirst, $medische_toelichting,$bondsnummer, $toelichting,$actief,$gemeente, $postcode);
 
                 echo "<div><table border='1' style='margin-left: 50px'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboortedatum</th><th>Adres</th><th>Postcode</th><th>Gemeente</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th><th>Wijzig</th>
                 </tr>";
                 while ($stmt->fetch()) {
                   $id = $spelersnr;
-                    echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode1 . "</td><td>".$gemeente."</td><td>".$email1 . "</td><td>" . $tel1 . "</td><td style='text-align: center;'>";
+                    echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode . "</td><td>".$gemeente."</td><td>".$email1 . "</td><td>" . $tel1 . "</td><td style='text-align: center;'>";
                     ?>
                     <form name='form1' method='post' action='meer_info.php?actiemeerinfo&spelerid=<?php echo $id;?>'><input style="margin: auto;" type='submit' name='Meer' id='Meer' value='Meer'></form>
                     <?php echo "</td><td tyle='text-align: center;'>";

@@ -87,7 +87,7 @@
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>G-ploegen</span> <i class="bi bi-chevron-right"></i></a>
-              <ul>
+                <ul>
                   <li><a href="ploegen.phpp?ploegnr=21">G-kids</a></li>
                   <li><a href="ploegen.php?ploegnr=22">G-senioren</a></li>
                 </ul>
@@ -110,7 +110,7 @@
                     <option value="spelernr">Spelersnummer</option>
                     <option value="voornaam">Voornaam</option>
                     <option value="naam">Naam</option>          
-                    <option value="geboortedatum">Geboorte datum</option>
+                    <option value="geboortedatum">Geboortedatum</option>
                     <option value="adres_speler">adres</option>
                     <option value="postcode_speler">postcode</option>
                     <option value="email">email</option>
@@ -125,19 +125,19 @@
             if ((isset($_GET["zoekterm"])) && ($_GET["zoekterm"] != "")) {
                 $zoekterm = "%" . $_GET["zoekterm"] . "%";
                 $categorie = $_GET["categorie"];
-                $sql = "SELECT * FROM tblspelers WHERE $categorie LIKE ?";
+                $sql = "SELECT s.*,p.gemeente, p.postcode from tblspelers s INNER JOIN tblpostcode p ON s.postcodeid_speler = p.PostcodeId WHERE $categorie LIKE ?";
                 $stmt = $mysqli->prepare($sql);
                 if (!$stmt) {
                     die('Error in SQL query: ' . $mysqli->error);
                 };
                 $stmt->bind_param("s", $zoekterm);
                 $stmt->execute();
-                $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting,$actief);
-                echo "<div style='overflow-x:auto;'><table border='1' class='table-responsive'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboorte Datum</th><th>Adres</th><th>Postcode</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th><th>Wijzig</th>
+                $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting,$actief, $gemeente, $postcode);
+                echo "<div style='overflow-x:auto;'><table border='1' class='table-responsive'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboortedatum</th><th>Adres</th><th>Postcode</th><th>Gemeente</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th><th>Wijzig</th>
                 </tr>";
                 while ($stmt->fetch()) {
                   $id = $spelersnr;
-                    echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode1 . "</td><td>" . $email1 . "</td><td>" . $tel1 . "</td><td>";
+                    echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode . "</td><td>".$gemeente."</td><td>". $email1 . "</td><td>" . $tel1 . "</td><td>";
                     ?>
                     <form name='form1' method='post' action='meer_info.php?actiemeerinfo&spelerid=<?php echo $id;?>'><input type='submit' name='Meer' id='Meer' value='Meer'></form>
                     <?php echo "</td><td>";
@@ -151,17 +151,17 @@
                 if (mysqli_connect_errno()) {
                     trigger_error('Fout bij verbinding: ' . $mysqli->error);
                 } else {
-                    $sql = "SELECT * from tblspelers";
+                    $sql = "SELECT s.*,p.gemeente, p.postcode from tblspelers s INNER JOIN tblpostcode p ON s.postcodeid_speler = p.PostcodeId";
                     if ($stmt = $mysqli->prepare($sql)) {
                         if (!$stmt->execute()) {
                             echo "Het uitvoeren van de query is mislukt: ' . $stmt->error . ' in query: " . $sql;
                         } else {
-                            $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting,$actief);
-                            echo "<div style='overflow-x:auto;'><table border='1' class='table-responsive'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboorte  Datum</th><th>Adres</th><th>Postcode</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th><th>Wijzig</th>
+                            $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting,$actief,$gemeente, $postcode);
+                            echo "<div style='overflow-x:auto;'><table border='1' class='table-responsive'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboortedatum</th><th>Adres</th><th>Postcode</th><th>Gemeente</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th><th>Wijzig</th>
                             </tr>";
                             while ($stmt->fetch()) {
                               $id = $spelersnr;
-                                echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode1 . "</td><td>" . $email1 . "</td><td>" . $tel1 . "</td><td>";
+                                echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode . "</td><td>".$gemeente."</td><td>". $email1 . "</td><td>" . $tel1 . "</td><td>";
                                 ?> 
                                 <form name='form1' method='post' action='meer_info.php?actiemeerinfo&spelerid=<?php echo $id;?>'><input type='submit' name='Meer' id='Meer' value='Meer'></form>
                                 <?php echo "</td><td>";

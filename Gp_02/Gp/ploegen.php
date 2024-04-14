@@ -56,7 +56,7 @@
             <ul>
               <li class="dropdown"><a href="#"><span>Eerste elftallen</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="ploegen.php?ploegnr=23">A-ploeg</A-ploeg></a></li>
+                  <li><a href="ploegen.php?ploegnr=23">A-ploeg</a></li>
                   <li><a href="ploegen.php?ploegnr=24">B-ploeg</a></li>
                 </ul>
               </li>
@@ -124,6 +124,7 @@
                     <input type="submit" class="btn btn-primary" style="margin:0;"name="sorteer" id="sorteer" value="Sorteer">
       </form>
   <?php 
+  
     $mysqli= new MySQLi ("localhost","root","","voetbalclubphp");
     if(mysqli_connect_errno()) {trigger_error('Fout bij verbinding: '.$mysqli->error); }
     else{
@@ -167,7 +168,7 @@
   }
 ?>
 <div>
-    <a href="toevoegen.php"><input type="button" value="toevoegen" id="toevoegen" style="background-color: #ffc451; margin: 0;"></a>
+    <a href="toevoegen.php?ploegnr=<?php echo $ploegnr; ?>"><input type="button" value="toevoegen" id="toevoegen" style="background-color: #ffc451; margin: 0;"></a>
 <div>
     <a href="aangemeld.php"><input type="button"  value="terug" id="terug" style="background-color: #ffc451; margin: 0;"></a>
 </div>

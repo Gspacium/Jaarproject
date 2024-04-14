@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
+  <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Gp Bootstrap Template - Index</title>
+  <title>KVVE home</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -26,6 +27,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/styleoverzicht.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Gp
@@ -35,8 +37,10 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
+
 <body>
-    <!-- ======= Header ======= -->
+
+  <!-- ======= Header ======= -->
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
 
@@ -46,8 +50,8 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto" href="index.php">Home</a></li>
-          <li><a class="nav-link scrollto active" href="about.php">About</a></li>
+          <li><a class="nav-link scrollto active" href="index.php">Home</a></li>
+          <li><a class="nav-link scrollto" href="about.php">About</a></li>
           <li class="dropdown"><a href="#"><span>Ploegen</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li class="dropdown"><a href="#"><span>Eerste elftallen</span> <i class="bi bi-chevron-right"></i></a>
@@ -91,53 +95,89 @@
                 </ul>
               </li>
             </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="contact.php">Contact</a></li>
+          </li><a class="nav-link scrollto" href="contact.php">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="aangemeld.php" class="get-started-btn scrollto">Admin only</a>
+      <a href="aangemeld.php" class="get-started-btn scrollto">Admin Only</a>
 
     </div>
   </header><!-- End Header -->
+  
+  <main id="main">
+    <div class="container">
+      <p>
+      <br><br><br><br>
+      </p>
+
+      <form method="get" name="searchForm" action="<?php echo $_SERVER['PHP_SELF']; ?>"class="mx-auto text-center"> 
+        Order op: <select id="sortBy" name="sortBy">
+                      <option value="spelernr">spelersnr 1-9</option>
+                      <option value="naam">naam A-Z</option>
+                      <option value="voornaam">voornaam A-Z</option>
+                      <option value="geboortedatum">geboortedatum</option>
+                      <option value="postcode_speler">postcode 1-9</option>
+                      <option value="email">email A-Z</option>
+                      <option value="telefoonnummer_speler">telefoonnummer 1-9</option>
+                    </select>
+                    <input type="submit" class="btn btn-primary" style="margin:0;"name="sorteer" id="sorteer" value="Sorteer">
+      </form>
+  <?php 
+  
+    $mysqli= new MySQLi ("localhost","root","","voetbalclubphp");
+    if(mysqli_connect_errno()) {trigger_error('Fout bij verbinding: '.$mysqli->error); }
+    else{
+        if(isset($_GET["ploegnr"])){
+          $ploegnr = $_GET["ploegnr"];
+        }else{
+         echo "er zit geen persoon in deze ploeg";
+        }
+        $sql= "SELECT s.*,p.gemeente from tblspelers s INNER JOIN tblspelersperploeg ploeg ON s.spelernr = ploeg.spelernr 
+               INNER JOIN tblpostcode p ON s.postcode_speler = p.postcode
+               and ploeg.ploegID=? ORDER BY ? ASC";
+        if($stmt = $mysqli->prepare($sql)){
+          $stmt -> bind_param('is',$ploegnr,$sortBy);
+          if(isset($_GET['sortBy'])){
+            $sortBy = $_GET['sortBy'];
+          }else{
+            $sortBy = 'spelernr';
+          }
+          
+          
+            if(!$stmt->execute()){
+                echo "Het uitvoeren van de query is mislukt: '.$stmt->error.' in query: ".$sql;
+            }else{
+                $stmt->bind_result($spelersnr,$naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$adres2,$postcode2,$email2, $tel2, $adres3, $postcode3, $email3,$tel3, $contactfirst, $medische_toelichting,$bondsnummer, $toelichting,$actief,$gemeente);
+
+                echo "<div><table border='1' style='margin-left: 50px'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboortedatum</th><th>Adres</th><th>Postcode</th><th>Gemeente</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th>
+                </tr>";
+                while ($stmt->fetch()) {
+                  $id = $spelersnr;
+                    echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode1 . "</td><td>".$gemeente."</td><td>".$email1 . "</td><td>" . $tel1 . "</td><td style='text-align: center;'>";
+                    ?>
+                    <form name='form1' method='post' action='meer_infopubliek.php?actiemeerinfo&spelerid=<?php echo $id;?>'><input style="margin: auto;" type='submit' name='Meer' id='Meer' value='Meer'></form>
+                    <?php echo "</td></tr>";
+                    
+                }
+                echo "</table></div>"; 
+        }
+    }
+  }
+?>
+    <a href="aangemeld.php"><input type="button"  value="terug" id="terug" style="background-color: #ffc451; margin: 0;"></a>
+</div>
+</div>
+
+</main>
+
+
 
 
   
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center justify-content-center">
-    <div class="container" data-aos="fade-up">
-
-      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
-        <div class="col-xl-6 col-lg-8">
-          <h1>Welkom bij KVVE Massemen admin pagina<span>.</span></h1>
-        </div>
-      </div>
-
-      <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-bar-chart-box-line"></i>
-            <h3><a href="zoeken.php">Zoeken</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-calendar-todo-line"></i>
-            <h3><a href="overzichtspelers.php">Overzicht spelers</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-calendar-todo-line"></i>
-            <h3><a href="overzichtbericht.php">Overzicht berichten</a></h3>
-          </div>
-        </div>
-      </div>
-  </section>
-    
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
+  
+   <!-- ======= Footer ======= -->
+   <footer id="footer">
     <div class="footer-top">
       <div class="container">
         <div class="row">
@@ -214,5 +254,7 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
 </body>
+
 </html>

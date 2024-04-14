@@ -1,10 +1,40 @@
+
+<?php
+print_r($_POST);
+  if(isset($_GET["spelerid"])){
+    $id = $_GET["spelerid"];
+  }
+  if(isset($_GET["ploegnr"])){
+    $ploegnr = $_GET["ploegnr"];
+  }
+  $mysqli = new MySQLi("localhost","root","","voetbalclubphp");
+  if(mysqli_connect_errno()){
+    trigger_error("fout bij verbinding: ".$mysqli->error);
+  }else{
+    $sql = "INSERT INTO tblspelersperploeg (ploegID, spelernr, begindatum, einddatum) VALUES(?,?,2024,2025)";
+    if($stmt = $mysqli->prepare($sql)){
+      $stmt->bind_param("ii", $ploegnr,$id);
+      if(!$stmt->execute()){
+        echo "Het uitvoeren van de query is mislukt";
+      }else{
+        echo "Het updaten is gelukt"; 
+      }
+      $stmt->close();
+    }
+    else{
+      echo "Er zit een fout in de query". $stmt->error; 
+    }
+    
+  } 
+?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
+
+<head>   
+  <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Gp Bootstrap Template - Index</title>
+  <title>KVVE home</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -26,7 +56,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
+  <link href="assets/css/styleinschrijving.css" rel="stylesheet">
   <!-- =======================================================
   * Template Name: Gp
   * Updated: Nov 25 2023 with Bootstrap v5.3.2
@@ -34,10 +64,13 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
 </head>
 <body>
-    <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top ">
+  
+
+             <!-- ======= Header ======= -->
+             <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
 
       <h1 class="logo me-auto me-lg-0"><a href="index.php"><img src="assets/img/favicon.jpg"></a></h1>
@@ -45,53 +78,9 @@
       <!-- <a href="index.php" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto" href="index.php">Home</a></li>
-          <li><a class="nav-link scrollto active" href="about.php">About</a></li>
-          <li class="dropdown"><a href="#"><span>Ploegen</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li class="dropdown"><a href="#"><span>Eerste elftallen</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="ploegen.php?ploegnr=23">A-ploeg</a></li>
-                  <li><a href="ploegen.php?ploegnr=24">B-ploeg</a></li>
-                </ul>
-              </li>
-              <li class="dropdown"><a href="#"><span>Reserven</span> <i class="bi bi-chevron-right"></i></a>
-              <ul>
-                  <li><a href="ploegen.php?ploegnr=19">Reserven-A</a></li>
-                  <li><a href="ploegen.php?ploegnr=20">Reserven-B</a></li>
-                </ul>
-              </li>
-              <li class="dropdown"><a href="#"><span>Jeugd</span> <i class="bi bi-chevron-right"></i></a>
-              <ul>
-                  <li><a href="ploegen.php?ploegnr=1">U6</a></li>
-                  <li><a href="ploegen.php?ploegnr=2">U7</a></li>
-                  <li><a href="ploegen.php?ploegnr=3">U8A</a></li>
-                  <li><a href="ploegen.php?ploegnr=4">U8B</a></li>
-                  <li><a href="ploegen.php?ploegnr=5">U9A</a></li>
-                  <li><a href="ploegen.php?ploegnr=6">U9B</a></li>
-                  <li><a href="ploegen.php?ploegnr=7">U10A</a></li>
-                  <li><a href="ploegen.php?ploegnr=8">U10B</a></li>
-                  <li><a href="ploegen.php?ploegnr=9">U11A</a></li>
-                  <li><a href="ploegen.php?ploegnr=10">U11B</a></li>
-                  <li><a href="ploegen.php?ploegnr=11">U12A</a></li>
-                  <li><a href="ploegen.php?ploegnr=12">U12B</a></li>
-                  <li><a href="ploegen.php?ploegnr=13">U13A</a></li>
-                  <li><a href="ploegen.php?ploegnr=14">U13B</a></li>
-                  <li><a href="ploegen.php?ploegnr=15">U15A</a></li>
-                  <li><a href="ploegen.php?ploegnr=16">U15B</a></li>
-                  <li><a href="ploegen.php?ploegnr=17">U17</a></li>
-                  <li><a href="ploegen.php?ploegnr=18">U21</a></li>
-                </ul>
-              </li>
-              <li class="dropdown"><a href="#"><span>G-ploegen</span> <i class="bi bi-chevron-right"></i></a>
-              <ul>
-                  <li><a href="ploegen.php?ploegnr=21">G-kids</a></li>
-                  <li><a href="ploegen.php?ploegnr=22">G-senioren</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
+        <ul> 
+          <li><a class="nav-link scrollto active" href="index.php">Home</a></li>
+          <li><a class="nav-link scrollto" href="about.php">About</a></li>         
           <li><a class="nav-link scrollto" href="contact.php">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -101,41 +90,26 @@
 
     </div>
   </header><!-- End Header -->
-
-
-  
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center justify-content-center">
-    <div class="container" data-aos="fade-up">
-
-      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
-        <div class="col-xl-6 col-lg-8">
-          <h1>Welkom bij KVVE Massemen admin pagina<span>.</span></h1>
-        </div>
-      </div>
-
-      <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-bar-chart-box-line"></i>
-            <h3><a href="zoeken.php">Zoeken</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-calendar-todo-line"></i>
-            <h3><a href="overzichtspelers.php">Overzicht spelers</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-calendar-todo-line"></i>
-            <h3><a href="overzichtbericht.php">Overzicht berichten</a></h3>
-          </div>
-        </div>
-      </div>
+ 
+  <section>
+  <div class="container">
+   <form id="inactief" name="inactief" method="post">
+    <table class="mx-auto">
+    <tr>
+        <td>
+          <p>het toevoegen is gelukt</p>
+        </td>
+      </tr>  
+    <tr>
+        <td>
+          <a href="aangemeld.php"><input type="button" value="terug" id="terug" name="terug" style="background-color: #ffc451; margin: 0;"></a>
+        </td>
+      </tr>
+    </table>
   </section>
-    
+  </form> 
+  
+
   <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="footer-top">
@@ -214,5 +188,7 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
 </body>
+
 </html>

@@ -165,7 +165,7 @@
     }
   }
 ?>
-    <a href="aangemeld.php"><input type="button"  value="terug" id="terug" style="background-color: #ffc451; margin: 0;"></a>
+    <a href="index.php"><input type="button"  value="terug" id="terug" style="background-color: #ffc451; margin: 0;"></a>
 </div>
 </div>
 

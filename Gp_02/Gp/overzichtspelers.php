@@ -52,8 +52,8 @@
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto active" href="index.php">Home</a></li>
-          <li><a class="nav-link scrollto" href="about.php">About</a></li>
-          <li><a class="nav-link scrollto" href="contact.php">Contact</a></li>
+          <li><a class="nav-link scrollto active" href="aangemeld.php">Admin</a></li>
+
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -114,7 +114,7 @@
                     <?php echo "</td><td tyle='text-align: center;'>";
                     ?>
                     <form name='actief' method='post' action='actief.php?actiemeerinfo&spelerid=<?php echo $id;?>'><input style="margin: auto;" type='submit' name='actief' id='actief' value='actief'></form>
-                  <?php echo "</td><td tyle='text-align: center;'></tr>";
+                  <?php echo "</td></tr>";
                 }
                 echo "</table></div>"; 
         }

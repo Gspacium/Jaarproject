@@ -1,40 +1,12 @@
-
-<?php
-print_r($_POST);
-  if(isset($_GET["spelerid"])){
-    $id = $_GET["spelerid"];
-  }
-  if(isset($_GET["ploegnr"])){
-    $ploegnr = $_GET["ploegnr"];
-  }
-  $mysqli = new MySQLi("localhost","root","","voetbalclubphp");
-  if(mysqli_connect_errno()){
-    trigger_error("fout bij verbinding: ".$mysqli->error);
-  }else{
-    $sql = "INSERT INTO tblspelersperploeg (ploegID, spelernr, begindatum, einddatum) VALUES(?,?,2024,2025)";
-    if($stmt = $mysqli->prepare($sql)){
-      $stmt->bind_param("ii", $ploegnr,$id);
-      if(!$stmt->execute()){
-        echo "Het uitvoeren van de query is mislukt";
-      }else{
-        echo "Het updaten is gelukt"; 
-      }
-      $stmt->close();
-    }
-    else{
-      echo "Er zit een fout in de query". $stmt->error; 
-    }
-    
-  } 
-?>
 <!DOCTYPE html>
 <html lang="en">
+<head>
+<!-- javascript voor in te loggen -->
 
-<head>   
-  <meta charset="utf-8">
+    <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>KVVE home</title>
+  <title>Gp Bootstrap Template - Index</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -56,7 +28,7 @@ print_r($_POST);
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-  <link href="assets/css/styleinschrijving.css" rel="stylesheet">
+
   <!-- =======================================================
   * Template Name: Gp
   * Updated: Nov 25 2023 with Bootstrap v5.3.2
@@ -64,17 +36,10 @@ print_r($_POST);
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-
 </head>
-<?php
-    include 'session_check.php';   
-
-  ?>
 <body>
-  
-
-             <!-- ======= Header ======= -->
-             <header id="header" class="fixed-top ">
+    <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
 
       <h1 class="logo me-auto me-lg-0"><a href="index.php"><img src="assets/img/favicon.jpg"></a></h1>
@@ -82,45 +47,80 @@ print_r($_POST);
       <!-- <a href="index.php" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul> 
-          <li><a class="nav-link scrollto active" href="index.php">Home</a></li>
-          <li><a class="nav-link scrollto active" href="aangemeld.php">Admin</a></li>
+        <ul>
+          <li><a class="nav-link scrollto" href="index.php">Home</a></li>
+          <li><a class="nav-link scrollto active" href="about.php">About</a></li>
+          <li class="dropdown"><a href="#"><span>Ploegen</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li class="dropdown"><a href="#"><span>Eerste elftallen</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="ploegen.php" value="<?php $ploegid=23 ?>">A-ploeg</A-ploeg></a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=24 ?>">B-ploeg</a></li>
+                </ul>
+              </li>
+              <li class="dropdown"><a href="#"><span>Reserven</span> <i class="bi bi-chevron-right"></i></a>
+              <ul>
+                  <li><a href="ploegen.php" value="<?php $ploegid=19 ?>">Reserven-A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=20 ?>">Reserven-B</a></li>
+                </ul>
+              </li>
+              <li class="dropdown"><a href="#"><span>Jeugd</span> <i class="bi bi-chevron-right"></i></a>
+              <ul>
+              <li><a href="ploegen.php?ploegnr=1">U6</a></li>
+              <li><a href="ploegen.php" value="<?php $ploegid=1 ?>">U6</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=2 ?>">U7</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=3 ?>">U8A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=4 ?>">U8B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=5 ?>">U9A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=6 ?>">U9B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=7 ?>">U10A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=8 ?>">U10B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=9 ?>">U11A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=10 ?>">U11B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=11 ?>">U12A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=12 ?>">U12B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=13 ?>">U13A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=14 ?>">U13B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=15 ?>">U15A</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=16 ?>">U15B</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=17 ?>">U17</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=18 ?>">U21</a></li>
+                </ul>
+              </li>
+              <li class="dropdown"><a href="#"><span>G-ploegen</span> <i class="bi bi-chevron-right"></i></a>
+              <ul>
+                  <li><a href="ploegen.phpp" value="<?php $ploegid=21 ?>">G-kids</a></li>
+                  <li><a href="ploegen.php" value="<?php $ploegid=22 ?>">G-senioren</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="contact.php">Contact</a></li>
         </ul>
-        <?php if(!isset($_SESSION['spelernr'])): ?>
-          <li><a class="nav-link scrollto" href="inloggen.php">Login</a></li>
-          <?php endif; ?>
-          <?php if(isset($_SESSION['spelernr'])): ?>
-          <li><a class="nav-link scrollto" href="logout.php">Logout</a></li>
-          <?php endif; ?>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <?php if(isset($_SESSION['spelernr'])): ?>
-        <a href="aangemeld.php" class="get-started-btn scrollto">Admin</a>
-        <?php endif; ?>
+      <a href="#about" class="get-started-btn scrollto">Admin only</a>
 
     </div>
   </header><!-- End Header -->
- 
-  <section>
-  <div class="container">
-   <form id="inactief" name="inactief" method="post">
-    <table class="mx-auto">
-    <tr>
-        <td>
-          <p>het toevoegen is gelukt</p>
-        </td>
-      </tr>  
-    <tr>
-        <td>
-          <a href="aangemeld.php"><input type="button" value="terug" id="terug" name="terug" style="background-color: #ffc451; margin: 0;"></a>
-        </td>
-      </tr>
-    </table>
-  </section>
-  </form> 
-  
 
+
+
+
+
+
+<!-- form invoegen-->
+
+
+
+
+
+
+
+
+
+    
   <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="footer-top">
@@ -199,7 +199,5 @@ print_r($_POST);
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
 </body>
-
 </html>

@@ -37,7 +37,9 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
-
+<?php
+    include 'session_check.php';
+  ?>
 <body>
 
   <!-- ======= Header ======= -->
@@ -98,15 +100,21 @@
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="contact.php">Contact</a></li>
+          <?php if(!isset($_SESSION['spelernr'])): ?>
+          <li><a class="nav-link scrollto" href="inloggen.php">Login</a></li>
+          <?php endif; ?>
+          <?php if(isset($_SESSION['spelernr'])): ?>
+          <li><a class="nav-link scrollto" href="logout.php">Logout</a></li>
+          <?php endif; ?>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-
-      <a href="inloggen.php" class="get-started-btn scrollto">Admin</a>
-
+      <?php if(isset($_SESSION['spelernr'])): ?>
+        <a href="aangemeld.php" class="get-started-btn scrollto">Admin</a>
+        <?php endif; ?>
     </div>
   </header><!-- End Header -->
-
+  
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center justify-content-center">
     <div class="container" data-aos="fade-up">
@@ -120,7 +128,7 @@
 
       <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
         
-        
+          
           
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
@@ -131,7 +139,7 @@
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-database-2-line"></i>
-            <h3><a href="inschrijven.php">Inschrijvingen</a></h3>
+            <h3><a href="inschrijven.php">Inschrijven</a></h3>
           </div>
         </div>
       </div>

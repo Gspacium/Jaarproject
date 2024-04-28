@@ -1,40 +1,32 @@
 <?php
-session_start();
-
-
-$conn = new mysqli("localhost","root","","voetbalclubphp");
-
-// Controleren op verbinding
-if ($conn->connect_error) {
-    die("Verbinding mislukt: " . $conn->connect_error);
-}
-
-// Controleren of formulier is verzonden
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Gebruikersnaam en wachtwoord ophalen van formulier
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    // Voorbereiden van de SQL query
-    $sql = "SELECT * FROM tblgebruikers WHERE gebruikersnaam=$username , wachtwoord=$password";
-    $result = $conn->query($sql);
-
-    // Controleren of er een rij is gevonden
-    if ($result->num_rows == 1) {
-        // Inloggen geslaagd, sessievariabele instellen
-        $_SESSION['loggedin'] = true;
-        $_SESSION['username'] = $username;
-
-        // Doorverwijzen naar een beveiligde pagina
-        header("Location: beveiligde_pagina.php");
-        exit;
-    } else {
-        echo "Ongeldige gebruikersnaam of wachtwoord.";
+  if(isset($_POST['loginsubmit'])){
+    $mysqli = new MySQLi ("localhost","root","","voetbalclubphp");
+      if ($mysqli->connect_errno) {
+        echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+        exit();
     }
-}
+    $sql = "SELECT * FROM tblgebruikers WHERE gebruikersnaam = ?";
+        $stmt = $mysqli->prepare($sql);
+        $stmt = $mysqli->prepare($sql);
+        if ($stmt === false) {
+            die('prepare() failed: ' . htmlspecialchars($mysqli->error));
+        } 
+        $stmt->bind_param("s", $_POST['email']);
+        $stmt->execute();
 
-// Verbinding sluiten
-$conn->close();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        if ($_POST['password'] == $user['wachtwoord'] && $_POST['email'] == $user['gebruikersnaam']){
+          session_start();
+          $_SESSION['spelernr'] = $user['spelernr'];
+          $_SESSION['gebruikersnaam'] = $user['gebruikersnaam'];
+          header("Location: index.php");
+
+      } else {
+          echo "Invalid login or password";
+      }
+     }
+  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,12 +87,12 @@ $conn->close();
         <div class="container">
         
             <h2 class="mx-auto text-center">Inloggen</h2>
-                <form action="aangemeld.php" method="post" class="mx-auto text-center">
-                    <label for="username">Gebruikersnaam:</label><br>
-                    <input type="text" id="username" name="username" required><br>
+              <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                    <label for="email">email:</label><br>
+                    <input type="text" id="email" name="email" required><br>
                     <label for="password">Wachtwoord:</label><br>
                     <input type="password" id="password" name="password" required><br><br>
-                    <input type="submit" value="Inloggen">
+                    <button name="loginsubmit" id="loginsubmit" type="submit">Login</button>
                 </form>
         </div>
     </section> 

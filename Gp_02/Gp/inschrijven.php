@@ -261,7 +261,9 @@ print_r($_POST);
   ======================================================== -->
 
 </head>
-
+<?php
+    include 'session_check.php';
+?>
 <body>
   
   
@@ -279,10 +281,18 @@ print_r($_POST);
           <li><a class="nav-link scrollto" href="about.php">About</a></li>          
           <li><a class="nav-link scrollto" href="contact.php">Contact</a></li>
         </ul>
+        <?php if(!isset($_SESSION['spelernr'])): ?>
+          <li><a class="nav-link scrollto" href="inloggen.php">Login</a></li>
+          <?php endif; ?>
+          <?php if(isset($_SESSION['spelernr'])): ?>
+          <li><a class="nav-link scrollto" href="logout.php">Logout</a></li>
+          <?php endif; ?>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="aangemeld.php" class="get-started-btn scrollto">Admin only</a>
+      <?php if(isset($_SESSION['spelernr'])): ?>
+        <a href="aangemeld.php" class="get-started-btn scrollto">Admin</a>
+        <?php endif; ?>
 
     </div>
   </header><!-- End Header -->

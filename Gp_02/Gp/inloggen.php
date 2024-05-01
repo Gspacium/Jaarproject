@@ -56,6 +56,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/styleinloggen.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Gp
@@ -87,9 +88,9 @@
         <div class="container">
         
             <h2 class="mx-auto text-center">Inloggen</h2>
-              <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                    <label for="email">email:</label><br>
-                    <input type="text" id="email" name="email" required><br>
+              <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" style="text-align: center;">
+                    <label for="email">Gebruikersnaam:</label><br>
+                    <input type="text" id="email" name="email" required><br><br>
                     <label for="password">Wachtwoord:</label><br>
                     <input type="password" id="password" name="password" required><br><br>
                     <button name="loginsubmit" id="loginsubmit" type="submit">Login</button>

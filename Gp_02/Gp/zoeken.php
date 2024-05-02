@@ -45,14 +45,23 @@
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
 
-      <h1 class="logo me-auto me-lg-0"><a href="index.php"><img src="assets/img/favicon.jpg"></a></h1>
+    <?php if(isset($_SESSION['spelernr'])): ?>
+            <h1 class="logo me-auto me-lg-0"><a href="aangemeld.php"><img src="assets/img/favicon.jpg"></a></h1>
+          <?php endif; ?>
+          <?php if(!isset($_SESSION['spelernr'])): ?>
+            <h1 class="logo me-auto me-lg-0"><a href="index.php"><img src="assets/img/favicon.jpg"></a></h1>
+          <?php endif; ?>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.php" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto" href="index.php">Home</a></li>
-          <li><a class="nav-link scrollto active" href="aangemeld.php">Admin</a></li>
+        <?php if(isset($_SESSION['spelernr'])): ?>
+            <li><a class="nav-link scrollto" href="aangemeld.php">Home</a></li>
+          <?php endif; ?>
+          <?php if(!isset($_SESSION['spelernr'])): ?>
+            <li><a class="nav-link scrollto" href="index.php">Home</a></li>
+          <?php endif; ?>
           <li class="dropdown"><a href="#"><span>Ploegen</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li class="dropdown"><a href="#"><span>Eerste elftallen</span> <i class="bi bi-chevron-right"></i></a>

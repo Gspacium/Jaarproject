@@ -135,7 +135,6 @@
                       <option value="naam">naam A-Z</option>
                       <option value="voornaam">voornaam A-Z</option>
                       <option value="geboortedatum">geboortedatum</option>
-                      <option value="postcode_speler">postcode oplopend</option>
                       <option value="email">email A-Z</option>
                       <option value="telefoonnummer_speler">telefoonnummer oplopend</option>
                     </select>

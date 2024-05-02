@@ -268,7 +268,7 @@
         </tr>
         <tr>
           <td colspan="2" style="text-align: center;">
-            <input style="margin: 0;" type='submit' name='update' id='update' value='Wijzig'>
+          <a href="aangemeld.php" class="get-started-btn scrollto">Terug</a>
           </td>
         </tr>
     </table>

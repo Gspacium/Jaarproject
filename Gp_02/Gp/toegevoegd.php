@@ -1,31 +1,56 @@
 
 <?php
-print_r($_POST);
-  if(isset($_GET["spelerid"])){
-    $id = $_GET["spelerid"];
-  }
-  if(isset($_GET["ploegnr"])){
-    $ploegnr = $_GET["ploegnr"];
-  }
-  $mysqli = new MySQLi("localhost","root","","voetbalclubphp");
-  if(mysqli_connect_errno()){
-    trigger_error("fout bij verbinding: ".$mysqli->error);
-  }else{
-    $sql = "INSERT INTO tblspelersperploeg (ploegID, spelernr, begindatum, einddatum) VALUES(?,?,2024,2025)";
-    if($stmt = $mysqli->prepare($sql)){
-      $stmt->bind_param("ii", $ploegnr,$id);
-      if(!$stmt->execute()){
-        echo "Het uitvoeren van de query is mislukt";
-      }else{
-        echo "Het updaten is gelukt"; 
-      }
-      $stmt->close();
+if(isset($_GET["spelerid"]) && isset($_GET["ploegnr"])) {
+    $spelerId = $_GET["spelerid"];
+    $ploegNr = $_GET["ploegnr"];
+
+    // Verbinding maken met de database
+    $mysqli = new MySQLi("localhost", "root", "", "voetbalclubphp");
+
+    // Controleren op verbindingsfouten
+    if(mysqli_connect_errno()) {
+        trigger_error("Fout bij verbinding: ".$mysqli->error);
+    } else {
+        // Query om te controleren of de speler al in de ploeg zit
+        $checkQuery = "SELECT COUNT(*) AS count FROM tblspelersperploeg WHERE ploegID = ? AND spelernr = ?";
+        
+        if($checkStmt = $mysqli->prepare($checkQuery)) {
+            $checkStmt->bind_param("ii", $ploegNr, $spelerId);
+            $checkStmt->execute();
+            $checkStmt->bind_result($count);
+            $checkStmt->fetch();
+            $checkStmt->close();
+
+            if($count > 0) {
+                echo "De speler zit al in deze ploeg.";
+            } else {
+                // Als de speler nog niet in de ploeg zit, voeg deze dan toe
+                $insertQuery = "INSERT INTO tblspelersperploeg (ploegID, spelernr, begindatum, einddatum) VALUES (?, ?, 2024, 2025)";
+                
+                if($insertStmt = $mysqli->prepare($insertQuery)) {
+                    $insertStmt->bind_param("ii", $ploegNr, $spelerId);
+                    
+                    if($insertStmt->execute()) {
+                        echo "De speler is succesvol toegevoegd aan de ploeg.";
+                    } else {
+                        echo "Het toevoegen van de speler is mislukt.";
+                    }
+
+                    $insertStmt->close();
+                } else {
+                    echo "Er zit een fout in de query: " . $mysqli->error;
+                }
+            }
+        } else {
+            echo "Er zit een fout in de query: " . $mysqli->error;
+        }
+
+        // Verbinding met de database sluiten
+        $mysqli->close();
     }
-    else{
-      echo "Er zit een fout in de query". $stmt->error; 
-    }
-    
-  } 
+} else {
+    echo "Niet alle vereiste parameters zijn ingesteld.";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -122,7 +147,7 @@ print_r($_POST);
       </tr>  
     <tr>
         <td>
-          <a href="aangemeld.php"><input type="button" value="terug" id="terug" name="terug" style="background-color: #ffc451; margin: 0;"></a>
+        <a href="ploegen.php?ploegnr='<?php echo $ploegnr; ?>'"><input type="button" value="terug" id="terug" name="terug" style="background-color: #ffc451; margin: 0;"></a>
         </td>
       </tr>
     </table>

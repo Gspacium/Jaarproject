@@ -1,8 +1,31 @@
+<?php
+  if(isset($_GET["spelerid"])){
+    $id = $_GET["spelerid"];
+  }
+  $mysqli = new MySQLi("localhost","root","","voetbalclubphp");
+  if(mysqli_connect_errno()){
+    trigger_error("fout bij verbinding: ".$mysqli->error);
+  }else{
+    $sql = "DELETE from tblspelersperploeg WHERE spelernr=? ";
+    if($stmt = $mysqli->prepare($sql)){
+      $stmt->bind_param("i", $id);
+      if(!$stmt->execute()){
+        echo "Het uitvoeren van de query is mislukt";
+      }else{
+        echo "Het verwijderen is gelukt";
+        
+      }
+      $stmt->close();
+    }
+    else{
+      echo "Er zit een fout in de query". $stmt->error; 
+    }
+  } 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-
+<head>   
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -18,7 +41,6 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -29,8 +51,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-  <link href="assets/css/styleoverzicht.css" rel="stylesheet">
-  
+  <link href="assets/css/styleinschrijving.css" rel="stylesheet">
   <!-- =======================================================
   * Template Name: Gp
   * Updated: Nov 25 2023 with Bootstrap v5.3.2
@@ -38,14 +59,17 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
 </head>
 <?php
     include 'session_check.php';   
 
   ?>
 <body>
-<!-- ======= Header ======= -->
-<header id="header" class="fixed-top ">
+  
+
+             <!-- ======= Header ======= -->
+             <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
 
     <?php if(isset($_SESSION['spelernr'])): ?>
@@ -58,7 +82,7 @@
       <!-- <a href="index.php" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
+        <ul> 
         <?php if(isset($_SESSION['spelernr'])): ?>
             <li><a class="nav-link scrollto" href="aangemeld.php">Home</a></li>
           <?php endif; ?>
@@ -81,73 +105,28 @@
 
     </div>
   </header><!-- End Header -->
+ 
+  <section>
+  <div class="container">
+   <form id="inactief" name="inactief" method="post">
+    <table class="mx-auto">
+    <tr>
+        <td>
+          <p>het verwijderen is gelukt</p>
+        </td>
+      </tr>  
+    <tr>
+        <td>
+        <a href="ploegen.php?ploegnr=<?php echo $ploegnr; ?>"><input type="button" value="terug" id="terug" name="terug" style="background-color: #ffc451; margin: 0;"></a>
+        </td>
+      </tr>
+    </table>
+  </section>
+  </form> 
+  
 
-  <main id="main">
-    <div class="container">
-      <p>
-      <br><br><br><br>
-      </p>
-
-      <form method="get" name="searchForm" action="<?php echo $_SERVER['PHP_SELF']; ?>"class="mx-auto text-center"> 
-        Order op: <select id="sortBy" name="sortBy">
-                      <option value="spelernr">spelersnr oplopend</option>
-                      <option value="naam">naam A-Z</option>
-                      <option value="voornaam">voornaam A-Z</option>
-                      <option value="geboortedatum">geboortedatum</option>
-                      <option value="postcode_speler">postcode oplopend</option>
-                      <option value="email">email A-Z</option>
-                      <option value="telefoonnummer_speler">telefoonnummer oplopend</option>
-                    </select>
-                    <input type="submit" class="btn btn-primary" style="margin:0;"name="sorteer" id="sorteer" value="Sorteer">
-      </form>
-  <?php 
-    $mysqli= new MySQLi ("localhost","root","","voetbalclubphp");
-    if(mysqli_connect_errno()) {trigger_error('Fout bij verbinding: '.$mysqli->error); }
-    else{
-        if(isset($_GET['sortBy'])){
-          $sortBy = $_GET['sortBy'];
-        }else{
-          $sortBy = 'spelernr';
-        }
-        
-        $sql= "SELECT s.*,p.gemeente, p.postcode from tblspelers s INNER JOIN tblpostcode p ON s.postcodeid_speler = p.PostcodeId ORDER BY $sortBy ASC";
-        if($stmt = $mysqli->prepare($sql)){
-            if(!$stmt->execute()){
-                echo "Het uitvoeren van de query is mislukt: '.$stmt->error.' in query: ".$sql;
-            }else{
-                $stmt->bind_result($spelersnr,$naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$adres2,$postcode2,$email2, $tel2, $adres3, $postcode3, $email3,$tel3, $contactfirst, $medische_toelichting,$bondsnummer, $toelichting,$actief,$gemeente, $postcode);
-
-                echo "<div><table border='1' style='margin-left: 50px'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboortedatum</th><th>Adres</th><th>Postcode</th><th>Gemeente</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th><th>Wijzig</th><th>Voeg toe</th>
-                </tr>";
-                while ($stmt->fetch()) {
-                  $id = $spelersnr;
-                  $ploegnr = $_GET["ploegnr"];
-                    echo "<tr><td>" . $spelersnr . "</td><td>" . $voornaam . "</td><td>" . $naam . "</td><td>" . $datum . "</td><td>" . $adres1 . "</td><td>" . $postcode . "</td><td>".$gemeente."</td><td>". $email1 . "</td><td>" . $tel1 . "</td><td style='text-align: center;'>";
-                    ?>
-                    <form name='Meer' method='post' action='meer_info.php?actiemeerinfo&spelerid=<?php echo $id;?>'><input style="margin: auto;" type='submit' name='Meer' id='Meer' value='Meer'></form>
-                    <?php echo "</td><td tyle='text-align: center;'>";
-                    ?>
-                      <form name='Wijzigen' method='post' action='updatepage.php?actieverander&spelerid=<?php echo $id;?>'><input style="margin: auto  ;"type='submit' name='update' id='update' value='Wijzig'></form>
-                    <?php echo "</td><td tyle='text-align: center;'>";
-                    ?>
-                      <a href="toegevoegd.php"><form name='toevoegen' method='post'  action='toegevoegd.php?spelerid=<?php echo $id;?>&ploegnr=<?php echo $ploegnr?>'><input style="margin: auto;" type='submit' name='Toevoegen' id='Toevoegen' value='Toevoegen'></form>
-                </a>
-                    <?php echo "</td></tr>";
-                    
-                }
-                echo "</table></div>"; 
-        }
-    }
-  }
-?>
-<div>
-    <a href="aangemeld.php"><input type="button"  value="terug" id="terug" style="background-color: #ffc451; margin: 0;"></a>
-</div>
-</div>
-
-</main>
-   <!-- ======= Footer ======= -->
-   <footer id="footer">
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
     <div class="footer-top">
       <div class="container">
         <div class="row">
@@ -171,7 +150,7 @@
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>Nuttige links</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="index.php">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Over ons</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Diensten</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
@@ -190,7 +169,7 @@
             </ul>
           </div>
 
-
+          
 
         </div>
       </div>

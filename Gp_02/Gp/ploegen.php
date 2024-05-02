@@ -169,7 +169,7 @@
             }else{
                 $stmt->bind_result($spelersnr,$naam,$voornaam,$datum,$adres1,$postcode1,$email1,$tel1,$adres2,$postcode2,$email2, $tel2, $adres3, $postcode3, $email3,$tel3, $contactfirst, $medische_toelichting,$bondsnummer, $toelichting,$actief,$gemeente, $postcode);
 
-                echo "<div><table border='1' style='margin-left: 50px'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboortedatum</th><th>Adres</th><th>Postcode</th><th>Gemeente</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th><th>Wijzig</th>
+                echo "<div><table border='1' style='margin-left: 50px'> <tr><th>Spelernummer</th><th>Voornaam</th><th>Naam</th><th>Geboortedatum</th><th>Adres</th><th>Postcode</th><th>Gemeente</th><th>Email</th><th>Telefoonnummer</th><th>Meer</th><th>Wijzig</th><th>Verwijderen</th>
                 </tr>";
                 while ($stmt->fetch()) {
                   $id = $spelersnr;
@@ -179,6 +179,9 @@
                     <?php echo "</td><td tyle='text-align: center;'>";
                     ?>
                       <form name='form1' method='post' action='updatepage.php?actieverander&spelerid=<?php echo $id;?>'><input style="margin: auto;"type='submit' name='update' id='update' value='Wijzig'></form>
+                    <?php echo "</td><td>";
+                    ?>
+                    <form name='form1' method='post' action='verwijderen.php?actieverander&spelerid=<?php echo $id;?>&ploegnr=<?php echo $ploegnr;?>'><input style="margin: auto;"type='submit' name='delete' id='delete' value='Verwijderen'></form>
                     <?php echo "</td></tr>";
                 }
                 echo "</table></div>"; 

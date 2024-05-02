@@ -81,13 +81,13 @@
 
       <form method="get" name="searchForm" action="<?php echo $_SERVER['PHP_SELF']; ?>"class="mx-auto text-center"> 
         Order op: <select id="sortBy" name="sortBy">
-                      <option value="spelernr">spelersnr 1-9</option>
+                      <option value="spelernr">spelersnr oplopend</option>
                       <option value="naam">naam A-Z</option>
                       <option value="voornaam">voornaam A-Z</option>
                       <option value="geboortedatum">geboortedatum</option>
-                      <option value="postcode_speler">postcode 1-9</option>
+                      <option value="postcode_speler">postcode oplopend</option>
                       <option value="email">email A-Z</option>
-                      <option value="telefoonnummer_speler">telefoonnummer 1-9</option>
+                      <option value="telefoonnummer_speler">telefoonnummer oplopend</option>
                     </select>
                     <input type="submit" class="btn btn-primary" style="margin:0;"name="sorteer" id="sorteer" value="Sorteer">
       </form>

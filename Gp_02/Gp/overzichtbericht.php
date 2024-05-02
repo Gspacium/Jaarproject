@@ -75,7 +75,7 @@
             <p><br><br><br></p>
             <form method="get" name="searchForm" action="<?php echo $_SERVER['PHP_SELF']; ?>"class="mx-auto text-center">
                 Order op: <select id="sortBy" name="sortBy">
-                            <option value="BerichtID">BerichtID 1-9</option>
+                            <option value="BerichtID">BerichtID Oplopend</option>
                             <option value="naam">naam A-Z</option>
                             <option value="email">email A-Z</option>
                             <option value="onderwerp">onderwerp A-Z</option>

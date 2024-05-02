@@ -41,7 +41,12 @@
 </head>
 <?php
     include 'session_check.php';   
-
+    if(mysqli_connect_errno()) {trigger_error('Fout bij verbinding: '.$mysqli->error); }
+    else{
+        if(isset($_GET["ploegnr"])){
+          $ploegnr = $_GET["ploegnr"];
+        }
+      }
   ?>
 <body>
 <!-- ======= Header ======= -->

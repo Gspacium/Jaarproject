@@ -93,7 +93,12 @@ if(isset($_GET["spelerid"]) && isset($_GET["ploegnr"])) {
 </head>
 <?php
     include 'session_check.php';   
-
+    if(mysqli_connect_errno()) {trigger_error('Fout bij verbinding: '.$mysqli->error); }
+    else{
+        if(isset($_GET["ploegnr"])){
+          $ploegnr = $_GET["ploegnr"];
+        }
+      }
   ?>
 <body>
   
@@ -147,7 +152,7 @@ if(isset($_GET["spelerid"]) && isset($_GET["ploegnr"])) {
       </tr>  
     <tr>
         <td>
-        <a href="ploegen.php?ploegnr='<?php echo $ploegnr; ?>'"><input type="button" value="terug" id="terug" name="terug" style="background-color: #ffc451; margin: 0;"></a>
+        <a href="ploegen.php?ploegnr=<?php echo $ploegnr; ?>"><input type="button" value="terug" id="terug" name="terug" style="background-color: #ffc451; margin: 0;"></a>
         </td>
       </tr>
     </table>

@@ -133,7 +133,6 @@
                     <option value="naam">Naam</option>          
                     <option value="geboortedatum">Geboortedatum</option>
                     <option value="adres_speler">adres</option>
-                    <option value="postcode_speler">postcode</option>
                     <option value="email">email</option>
                     <option value="telefoonnummer_speler">Telefoonnummer</option>
                 </select>

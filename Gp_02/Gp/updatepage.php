@@ -1,4 +1,5 @@
 <?php
+include 'session_check.php';   
   if(isset($_GET["spelerid"])){
     $id = $_GET["spelerid"];
   }
@@ -309,10 +310,7 @@
   ======================================================== -->
 
 </head>
-<?php
-    include 'session_check.php';   
 
-  ?>
 <body>
 
 

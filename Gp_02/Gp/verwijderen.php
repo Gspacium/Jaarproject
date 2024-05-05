@@ -1,4 +1,5 @@
 <?php
+    include 'session_check.php';  
   if(isset($_GET["spelerid"])){
     $id = $_GET["spelerid"];
   }
@@ -62,7 +63,7 @@
 
 </head>
 <?php
-    include 'session_check.php';   
+ 
     if(mysqli_connect_errno()) {trigger_error('Fout bij verbinding: '.$mysqli->error); }
     else{
         if(isset($_GET["ploegnr"])){

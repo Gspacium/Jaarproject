@@ -1,5 +1,6 @@
 <?php
-print_r($_POST);
+include 'session_check.php';
+//print_r($_POST);
 
   if((isset($_POST["verzenden"]))&&(isset($_POST["naam"]))&& ($_POST["naam"]!= "")&&
     (isset($_POST["voornaam"]))&&($_POST["voornaam"]!="")&&
@@ -261,9 +262,7 @@ print_r($_POST);
   ======================================================== -->
 
 </head>
-<?php
-    include 'session_check.php';
-?>
+
 <body>
   
   

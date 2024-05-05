@@ -1,4 +1,5 @@
 <?php
+include 'session_check.php';  
             if((isset($_POST["Verzenden"])) && (isset($_POST["name"]))&&($_POST["name"]!="")&& isset($_POST["email"])&& $_POST["email"]!=""){
               $mysqli = new MySQLi("localhost","root","","voetbalclubphp");
               if(mysqli_connect_errno()){
@@ -75,10 +76,7 @@
     }
 </script>-->
 </head>
-<?php
-    include 'session_check.php';   
 
-  ?>
 <body>
  
     <!-- ======= Header ======= -->

@@ -1,4 +1,6 @@
 <?php
+
+include 'session_check.php';
   if(isset($_POST['loginsubmit'])){
     $mysqli = new MySQLi ("localhost","root","","voetbalclubphp");
       if ($mysqli->connect_errno) {
@@ -20,7 +22,7 @@
           session_start();
           $_SESSION['spelernr'] = $user['spelernr'];
           $_SESSION['gebruikersnaam'] = $user['gebruikersnaam'];
-          header("Location: index.php");
+          header("Location: aangemeld.php");
 
       } else {
           echo "Invalid login or password";

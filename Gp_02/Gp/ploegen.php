@@ -1,3 +1,7 @@
+<?php
+    include 'session_check.php';   
+
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,10 +41,7 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
-<?php
-    include 'session_check.php';   
 
-  ?>
 <body>
 
   <!-- ======= Header ======= -->

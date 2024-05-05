@@ -2,7 +2,7 @@
   if(isset($_GET["spelerid"])){
     $id = $_GET["spelerid"];
   }
-  $mysqli = new MySQLi("localhost","root","","voetbalclubphp");
+  $mysqli = new MySQLi("fdb1034.awardspace.net","4480785_kvvemassemen","jaarprojectTimenStef1","4480785_kvvemassemen");
   if(mysqli_connect_errno()){
     trigger_error("fout bij verbinding: ".$mysqli->error);
   }else{

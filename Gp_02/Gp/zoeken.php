@@ -140,7 +140,7 @@
                 <input type="submit" name="zoek" id="zoek" value="zoek"><br>
             </form>
             <?php
-        $mysqli = new MySQLi("localhost", "root", "", "voetbalclubphp");
+          $mysqli = new MySQLi("fdb1034.awardspace.net","4480785_kvvemassemen","jaarprojectTimenStef1","4480785_kvvemassemen");
         if (isset($_GET["zoek"])) {
             if ((isset($_GET["zoekterm"])) && ($_GET["zoekterm"] != "")) {
                 $zoekterm = "%" . $_GET["zoekterm"] . "%";

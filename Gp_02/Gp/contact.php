@@ -1,7 +1,7 @@
 <?php
 include 'session_check.php';  
             if((isset($_POST["Verzenden"])) && (isset($_POST["name"]))&&($_POST["name"]!="")&& isset($_POST["email"])&& $_POST["email"]!=""){
-              $mysqli = new MySQLi("localhost","root","","voetbalclubphp");
+              $mysqli = new MySQLi("fdb1034.awardspace.net","4480785_kvvemassemen","jaarprojectTimenStef1","4480785_kvvemassemen");
               if(mysqli_connect_errno()){
                 trigger_error("Fout bij de verbinding: ".$mysqli->error);
               }else{

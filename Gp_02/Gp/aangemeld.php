@@ -44,7 +44,7 @@
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
 
-      < <?php if(isset($_SESSION['spelernr'])): ?>
+       <?php if(isset($_SESSION['spelernr'])): ?>
             <h1 class="logo me-auto me-lg-0"><a href="aangemeld.php"><img src="assets/img/favicon.jpg"></a></h1>
           <?php endif; ?>
           <?php if(!isset($_SESSION['spelernr'])): ?>

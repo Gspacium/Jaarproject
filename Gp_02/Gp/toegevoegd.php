@@ -1,42 +1,61 @@
-
 <?php
+include 'session_check.php';  
 if(isset($_GET["spelerid"]) && isset($_GET["ploegnr"])) {
     $spelerId = $_GET["spelerid"];
     $ploegNr = $_GET["ploegnr"];
-
+   
     // Verbinding maken met de database
-    $mysqli = new MySQLi("localhost", "root", "", "voetbalclubphp");
+    $mysqli = new MySQLi("fdb1034.awardspace.net","4480785_kvvemassemen","jaarprojectTimenStef1","4480785_kvvemassemen");
 
     // Controleren op verbindingsfouten
     if(mysqli_connect_errno()) {
         trigger_error("Fout bij verbinding: ".$mysqli->error);
-    } else {
-        // Query om te controleren of de speler al in de ploeg zit
-        $checkQuery = "SELECT COUNT(*) AS count FROM tblspelersperploeg WHERE ploegID = ? AND spelernr = ?";
         
-        if($checkStmt = $mysqli->prepare($checkQuery)) {
-            $checkStmt->bind_param("ii", $ploegNr, $spelerId);
-            $checkStmt->execute();
-            $checkStmt->bind_result($count);
-            $checkStmt->fetch();
-            $checkStmt->close();
+    } else {
+      
+        // Query om te controleren of de speler al in een andere ploeg zit
+        $checkExistingQuery = "SELECT COUNT(*) AS count FROM tblspelersperploeg WHERE spelernr = ?";
+        
+        if($checkExistingStmt = $mysqli->prepare($checkExistingQuery)) {
+            $checkExistingStmt->bind_param("i", $spelerId);
+            $checkExistingStmt->execute();
+            $checkExistingStmt->bind_result($existingCount);
+            $checkExistingStmt->fetch();
+            $checkExistingStmt->close();
 
-            if($count > 0) {
-                echo "De speler zit al in deze ploeg.";
+            if($existingCount > 0) {
+                $returntext = "De speler zit al in een ploeg.";
             } else {
-                // Als de speler nog niet in de ploeg zit, voeg deze dan toe
-                $insertQuery = "INSERT INTO tblspelersperploeg (ploegID, spelernr, begindatum, einddatum) VALUES (?, ?, 2024, 2025)";
-                
-                if($insertStmt = $mysqli->prepare($insertQuery)) {
-                    $insertStmt->bind_param("ii", $ploegNr, $spelerId);
-                    
-                    if($insertStmt->execute()) {
-                        echo "De speler is succesvol toegevoegd aan de ploeg.";
-                    } else {
-                        echo "Het toevoegen van de speler is mislukt.";
-                    }
+                // Query om te controleren of de speler al in deze ploeg zit
+                $checkExistingTeamQuery = "SELECT COUNT(*) AS count FROM tblspelersperploeg WHERE ploegID = ? AND spelernr = ?";
+        
+                if($checkExistingTeamStmt = $mysqli->prepare($checkExistingTeamQuery)) {
+                    $checkExistingTeamStmt->bind_param("ii", $ploegNr, $spelerId);
+                    $checkExistingTeamStmt->execute();
+                    $checkExistingTeamStmt->bind_result($existingTeamCount);
+                    $checkExistingTeamStmt->fetch();
+                    $checkExistingTeamStmt->close();
 
-                    $insertStmt->close();
+                    if($existingTeamCount > 0) {
+                      $returntext = "De speler zit al in een ploeg.";
+                    } else {
+                        // Als de speler niet in een andere ploeg zit, voeg deze dan toe aan de nieuwe ploeg
+                        $insertQuery = "INSERT INTO tblspelersperploeg (ploegID, spelernr, begindatum, einddatum) VALUES (?, ?, 2024, 2025)";
+                        
+                        if($insertStmt = $mysqli->prepare($insertQuery)) {
+                            $insertStmt->bind_param("ii", $ploegNr, $spelerId);
+                            
+                            if($insertStmt->execute()) {
+                                $returntext = "De speler is succesvol toegevoegd aan de ploeg";
+                            } else {
+                              $returntext = "Het toevoegen van de speler is mislukt.";
+                            }
+
+                            $insertStmt->close();
+                        } else {
+                            echo "Er zit een fout in de query: " . $mysqli->error;
+                        }
+                    }
                 } else {
                     echo "Er zit een fout in de query: " . $mysqli->error;
                 }
@@ -92,7 +111,7 @@ if(isset($_GET["spelerid"]) && isset($_GET["ploegnr"])) {
 
 </head>
 <?php
-    include 'session_check.php';   
+ 
     if(mysqli_connect_errno()) {trigger_error('Fout bij verbinding: '.$mysqli->error); }
     else{
         if(isset($_GET["ploegnr"])){
@@ -147,7 +166,7 @@ if(isset($_GET["spelerid"]) && isset($_GET["ploegnr"])) {
     <table class="mx-auto">
     <tr>
         <td>
-          <p>het toevoegen is gelukt</p>
+           <?php echo $returntext ?>
         </td>
       </tr>  
     <tr>

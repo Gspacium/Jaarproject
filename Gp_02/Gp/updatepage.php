@@ -3,7 +3,7 @@ include 'session_check.php';
   if(isset($_GET["spelerid"])){
     $id = $_GET["spelerid"];
   }
-  $mysqli2 = new MySQLi("localhost","root","","voetbalclubphp");
+  $mysqli2 = new MySQLi("fdb1034.awardspace.net","4480785_kvvemassemen","jaarprojectTimenStef1","4480785_kvvemassemen");
   if(mysqli_connect_errno()){
     trigger_error("fout bij verbinding: ".$mysqli2->error);
   }else{
@@ -386,7 +386,7 @@ include 'session_check.php';
             <td><label>postcode speler:</label></td>
             <td><select name="postcode1" id="postcode1" class="form-control">
               <?php
-                $mysqli = new mysqli("localhost","root","","voetbalclubphp");
+                  $mysqli = new MySQLi("fdb1034.awardspace.net","4480785_kvvemassemen","jaarprojectTimenStef1","4480785_kvvemassemen");
                 $sql = "SELECT postcode, gemeente FROM tblpostcode  ORDER BY postcode";
                 if ($stmt = $mysqli -> prepare($sql)) {
                   if (!$stmt -> execute()) {

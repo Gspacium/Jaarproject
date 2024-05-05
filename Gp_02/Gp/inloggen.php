@@ -2,7 +2,7 @@
 
 include 'session_check.php';
   if(isset($_POST['loginsubmit'])){
-    $mysqli = new MySQLi ("localhost","root","","voetbalclubphp");
+    $mysqli = new MySQLi("fdb1034.awardspace.net","4480785_kvvemassemen","jaarprojectTimenStef1","4480785_kvvemassemen");
       if ($mysqli->connect_errno) {
         echo "Failed to connect to MySQL: " . $mysqli->connect_error;
         exit();

@@ -21,7 +21,7 @@ include 'session_check.php';
     (isset($_POST["medische_toelichting"]))&&($_POST["medische_toelichting"]!="")
     ){
 
-      $mysqli = new MySQLi ("localhost","root","","voetbalclubphp");
+      $mysqli = new MySQLi("fdb1034.awardspace.net","4480785_kvvemassemen","jaarprojectTimenStef1","4480785_kvvemassemen");
       if(mysqli_connect_errno()){trigger_error("fout my verbinden: ".$mysqli->error);}
       else{
         $sqlpostcode= "SELECT PostcodeId, gemeente FROM tblpostcode WHERE postcode=?";
@@ -339,7 +339,7 @@ include 'session_check.php';
             <td><label>postcode speler:</label></td>
             <td><select name="postcode1" id="postcode1" class="form-control">
               <?php
-                $mysqli = new mysqli("localhost","root","","voetbalclubphp");
+                  $mysqli = new MySQLi("fdb1034.awardspace.net","4480785_kvvemassemen","jaarprojectTimenStef1","4480785_kvvemassemen");
                 $sql = "SELECT postcode, gemeente FROM tblpostcode  ORDER BY postcode";
                 if ($stmt = $mysqli -> prepare($sql)) {
                   if (!$stmt -> execute()) {

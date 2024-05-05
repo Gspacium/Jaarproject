@@ -144,7 +144,7 @@
                     <input type="submit" class="btn btn-primary" style="margin:0;"name="sorteer" id="sorteer" value="Sorteer">
       </form>
   <?php 
-    $mysqli= new MySQLi ("localhost","root","","voetbalclubphp");
+      $mysqli = new MySQLi("fdb1034.awardspace.net","4480785_kvvemassemen","jaarprojectTimenStef1","4480785_kvvemassemen");
     if(mysqli_connect_errno()) {trigger_error('Fout bij verbinding: '.$mysqli->error); }
     else{
         if(isset($_GET["ploegnr"])){
@@ -152,17 +152,16 @@
         }else{
          echo "er zit geen persoon in deze ploeg";
         }
-        $sql= "SELECT s.*,p.gemeente, p.postcode from tblspelers s INNER JOIN tblspelersperploeg ploeg ON s.spelernr = ploeg.spelernr 
-               INNER JOIN tblpostcode p ON s.postcodeid_speler = p.PostcodeId
-               and ploeg.ploegID=? ORDER BY ? ASC";
-        if($stmt = $mysqli->prepare($sql)){
-          $stmt -> bind_param('is',$ploegnr,$sortBy);
-          if(isset($_GET['sortBy'])){
-            $sortBy = $_GET['sortBy'];
-          }else{
+        if(isset($_GET['sortBy'])){
+          $sortBy = $_GET['sortBy'];
+        } else {
             $sortBy = 'spelernr';
-          }
-          
+        }
+        $sql= "SELECT s.*,p.gemeente, p.postcode from tblspelers s INNER JOIN tblspelersperploeg ploeg ON s.spelernr = ploeg.spelernr 
+                INNER JOIN tblpostcode p ON s.postcodeid_speler = p.PostcodeId
+                and ploeg.ploegID=? ORDER BY $sortBy ASC";
+        if($stmt = $mysqli->prepare($sql)){
+          $stmt -> bind_param('i',$ploegnr);
           
             if(!$stmt->execute()){
                 echo "Het uitvoeren van de query is mislukt: '.$stmt->error.' in query: ".$sql;

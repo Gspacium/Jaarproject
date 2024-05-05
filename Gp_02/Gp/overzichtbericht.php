@@ -94,7 +94,7 @@
                           <input type="submit" class="btn btn-primary" style="margin:0;"name="sorteer" id="sorteer" value="Sorteer">
             </form>
             <?php
-                $mysqli= new MySQLi ("localhost","root","","voetbalclubphp");
+                  $mysqli = new MySQLi("fdb1034.awardspace.net","4480785_kvvemassemen","jaarprojectTimenStef1","4480785_kvvemassemen");
                 if(mysqli_connect_errno()) {trigger_error('Fout bij verbinding: '.$mysqli->error); }
                 else{
                   if(isset($_GET['sortBy'])){

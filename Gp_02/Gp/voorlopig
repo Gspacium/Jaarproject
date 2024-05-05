@@ -40,3 +40,6 @@ $stmt ->bind_param("ssssissssssisssiss", $naam,$voornaam,$datum,$adres1,$postcod
         medische_toelichting =?,
         toelichting =? 
         WHERE spelernr = $id
+
+
+

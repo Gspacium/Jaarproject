@@ -42,7 +42,7 @@
 
 <body>
     <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top ">
+    <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
 
     <?php if(isset($_SESSION['spelernr'])): ?>
@@ -56,17 +56,18 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
+
         <?php if(isset($_SESSION['spelernr'])): ?>
             <li><a class="nav-link scrollto" href="aangemeld.php">Home</a></li>
           <?php endif; ?>
           <?php if(!isset($_SESSION['spelernr'])): ?>
             <li><a class="nav-link scrollto" href="index.php">Home</a></li>
           <?php endif; ?>
-          <li><a class="nav-link scrollto active" href="about.php">About</a></li>
+          <li><a class="nav-link scrollto" href="about.php">About</a></li>
           <li class="dropdown"><a href="#"><span>Ploegen</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
+          <ul>
               <li class="dropdown"><a href="#"><span>Eerste elftallen</span> <i class="bi bi-chevron-right"></i></a>
-              <ul>
+                <ul>
                   <li><a href="ploegenpubliek.php?ploegnr=23">A-ploeg</a></li>
                   <li><a href="ploegenpubliek.php?ploegnr=24">B-ploeg</a></li>
                 </ul>
@@ -108,12 +109,18 @@
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="contact.php">Contact</a></li>
+          <?php if(!isset($_SESSION['spelernr'])): ?>
+          <li><a class="nav-link scrollto" href="inloggen.php">Login</a></li>
+          <?php endif; ?>
+          <?php if(isset($_SESSION['spelernr'])): ?>
+          <li><a class="nav-link scrollto" href="logout.php">Logout</a></li>
+          <?php endif; ?>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-
-      <a href="aangemeld.php" class="get-started-btn scrollto">Admin only</a>
-
+      <?php if(isset($_SESSION['spelernr'])): ?>
+        <a href="aangemeld.php" class="get-started-btn scrollto">Admin</a>
+        <?php endif; ?>
     </div>
   </header><!-- End Header -->
 

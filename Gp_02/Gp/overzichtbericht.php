@@ -89,7 +89,7 @@
                             <option value="naam">naam A-Z</option>
                             <option value="email">email A-Z</option>
                             <option value="onderwerp">onderwerp A-Z</option>
-                            <option value="Bericht">email A-Z</option>
+                            <option value="Bericht">inhoud A-Z</option>
                           </select>
                           <input type="submit" class="btn btn-primary" style="margin:0;"name="sorteer" id="sorteer" value="Sorteer">
             </form>

@@ -1,5 +1,5 @@
 <?php
-include "session_check.php";
+include 'session_check.php';   
   if(isset($_GET["spelerid"])){
     $id = $_GET["spelerid"];
   }
@@ -13,7 +13,7 @@ include "session_check.php";
       if(!$stmt->execute()){
         echo "Het uitvoeren van de query is mislukt:".$stmt->error."in query".$sql;
       }else{
-        $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcode1, $email1, $tel1, $adres2, $postcode2, $email2, $tel2, $adres3, $postcode3, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting,$actief);
+        $stmt->bind_result($spelersnr, $naam, $voornaam, $datum, $adres1, $postcodeid_speler, $email1, $tel1, $adres2, $postcodeid_moeder, $email2, $tel2, $adres3, $postcode_vader, $email3, $tel3, $contactfirst, $medische_toelichting, $bondsnummer, $toelichting,$actief);
         $stmt->fetch();
         $id = $spelersnr;
       }
@@ -22,19 +22,21 @@ include "session_check.php";
         echo"er zit een fout in de query: ".$mysqli->error;
     }
   }
-  function fetchGemeente($postcode, $mysqli){
-    $query = "SELECT gemeente FROM tblpostcode WHERE postcode = ?";
+  
+  function fetchGemeente($postcodeid, $mysqli){
+    $query = "SELECT gemeente, postcode FROM tblpostcode WHERE PostcodeId = ?";
     if ($stmt = $mysqli->prepare($query)) {
-    $stmt->bind_param("s", $postcode);
+        $stmt->bind_param("i", $postcodeid);
         $stmt->execute();
-        $stmt->bind_result($gemeente);
+        $stmt->bind_result($gemeente, $postcode);
         $stmt->fetch();
         $stmt->close();
-        return $gemeente;
-  }else{
-    return "Error fetching gemeente";
-  }
+        return array("gemeente" => $gemeente, "postcode" => $postcode);
+    } else {
+        return "Error fetching gemeente";
+    }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,8 +80,8 @@ include "session_check.php";
 <body>
   
 
-             <!-- ======= Header ======= -->
-             <header id="header" class="fixed-top ">
+              <!-- ======= Header ======= -->
+              <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
 
     <?php if(isset($_SESSION['spelernr'])): ?>
@@ -99,13 +101,19 @@ include "session_check.php";
           <?php if(!isset($_SESSION['spelernr'])): ?>
             <li><a class="nav-link scrollto" href="index.php">Home</a></li>
           <?php endif; ?>
-          <li><a class="nav-link scrollto" href="about.php">About</a></li>         
-          <li><a class="nav-link scrollto" href="contact.php">Contact</a></li>
         </ul>
+        <?php if(!isset($_SESSION['spelernr'])): ?>
+          <li><a class="nav-link scrollto" href="inloggen.php">Login</a></li>
+          <?php endif; ?>
+          <?php if(isset($_SESSION['spelernr'])): ?>
+          <li><a class="nav-link scrollto" href="logout.php">Logout</a></li>
+          <?php endif; ?>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="aangemeld.php" class="get-started-btn scrollto">Admin only</a>
+      <?php if(isset($_SESSION['spelernr'])): ?>
+        <a href="aangemeld.php" class="get-started-btn scrollto">Admin</a>
+        <?php endif; ?>
 
     </div>
   </header><!-- End Header -->
@@ -141,15 +149,19 @@ include "session_check.php";
         </tr>
         <tr>
             <td><label>postcode speler:</label></td>
-            <td><input type="text" name="postcode1" id="postcode1" value="<?php echo $postcode1;?>"readonly>
-            <label id="postcode1Verplicht" class="fout"></label></td>
+            <td>
+                <?php
+                  $gemeente_speler_info = fetchGemeente($postcodeid_speler, $mysqli);
+                  $gemeente_speler = $gemeente_speler_info["gemeente"];
+                  $postcode_speler = $gemeente_speler_info["postcode"];
+                ?>  
+              <input type="text" name="postcode1" id="postcode1" value="<?php echo $postcode_speler;?>"readonly>
+              <label id="postcode1Verplicht" class="fout"></label>
+            </td>
         </tr>
         <tr>
             <td><label>gemeente speler:</label></td>
             <td>
-              <?php
-                $gemeente_speler = fetchGemeente($postcode1, $mysqli);
-              ?>
               <input type="text" name="gemeente_speler" id="gemeente_speler" value="<?php echo $gemeente_speler;?>" readonly>
               <label id="gemeenteVerplicht" class="fout"></label>
             </td>
@@ -197,15 +209,19 @@ include "session_check.php";
         </tr>
         <tr>
             <td><label>postcode moeder:</label></td>
-            <td><input type="text" name="postcode2" id="postcode2" value="<?php echo $postcode2;?>"readonly>
-            <label id="postcode2Verplicht" class="fout"></label></td>
+            <td>
+                <?php
+                  $gemeente_moeder_info = fetchGemeente($postcodeid_moeder, $mysqli);
+                  $gemeente_moeder = $gemeente_moeder_info["gemeente"];
+                  $postcode_moeder = $gemeente_moeder_info["postcode"];
+                ?> 
+              <input type="text" name="postcode2" id="postcode2" value="<?php echo $postcode_moeder;?>"readonly>
+              <label id="postcode2Verplicht" class="fout"></label>
+            </td>
         </tr>
         <tr>
             <td><label>gemeente moeder:</label></td>
             <td>
-              <?php
-                $gemeente_moeder = fetchGemeente($postcode2, $mysqli);
-              ?>
               <input type="text" name="gemeente_moeder" id="gemeente_moeder" value="<?php echo $gemeente_moeder;?>" readonly>
               <label id="gemeenteVerplicht" class="fout"></label>
             </td>
@@ -231,15 +247,19 @@ include "session_check.php";
         </tr>
         <tr>
             <td><label>postcode vader:</label></td>
-            <td><input type="text" name="postcode3" id="postcode3" value="<?php echo $postcode3;?>"readonly></td>
+            <td>
+                <?php
+                  $gemeente_vader_info = fetchGemeente($postcodeid_moeder, $mysqli);
+                  $gemeente_vader = $gemeente_vader_info["gemeente"];
+                  $postcode_vader = $gemeente_vader_info["postcode"];
+                ?> 
+              <input type="text" name="postcode3" id="postcode3" value="<?php echo $postcode_vader;?>"readonly>
+            </td>
             <label id="postcode3Verplicht" class="fout"></label>
         </tr>
         <tr>
             <td><label>gemeente vader:</label></td>
             <td>
-              <?php
-                $gemeente_vader = fetchGemeente($postcode3, $mysqli);
-              ?>
               <input type="text" name="gemeente_vader" id="gemeente_vader" value="<?php echo $gemeente_vader;?>" readonly>
               <label id="gemeenteVerplicht" class="fout"></label>
             </td>
@@ -256,6 +276,11 @@ include "session_check.php";
         <tr>
             <td><label for="toelichting">Toelichting:</label></td>
             <td><textarea class="center"id="toelichting" name="toelichting" rows="4" readonly><?php echo $toelichting;?></textarea></td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align: center;">
+          <a href="aangemeld.php" class="get-started-btn scrollto">Terug</a>
+          </td>
         </tr>
     </table>
   </section>
